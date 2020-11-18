@@ -3,21 +3,22 @@
     <img src="~/assets/me.jpg" alt="profile picture" />
 
     <section class="titles">
-      <h1>Mohammad Ishfaque Jahan Rafee</h1>
-      <h2>Network and Web Developer</h2>
+      <h1>{{ name }}</h1>
+      <h2>{{ role }}</h2>
       <Menu />
     </section>
   </header>
 </template>
 
 <script>
-import Menu from '~/components/common/Menu.vue'
-
 export default {
-  components: {
-    Menu,
+  data() {
+    return {
+      name: "Mohammad Ishfaque Jahan Rafee",
+      role: "Network and Web developer",
+    };
   },
-}
+};
 </script>
 
 <style scoped>

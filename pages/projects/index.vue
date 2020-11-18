@@ -1,12 +1,5 @@
 <template>
   <section>
-    <Intro class="white bg-yellow">
-      Welcome to my blog !
-      <br />
-      Here you can find all the articles I've written so far. I hope you learn
-      something interesting :)
-    </Intro>
-
     <section class="articles">
       <div
         v-for="articleSummary of articlesSummaries"
@@ -25,7 +18,7 @@
 <script>
 export default {
   async asyncData({ $content }) {
-    const articlesSummaries = await $content("articles")
+    const articlesSummaries = await $content("data")
       .only(["title", "description", "img", "slug"])
       .sortBy("createdAt", "asc")
       .fetch();
@@ -34,12 +27,14 @@ export default {
   },
   methods: {
     goTo: function(slug) {
-      this.$router.push({ name: "blog-slug", params: { slug } });
+      this.$router.push({ name: "projects-slug", params: { slug } });
     },
   },
   data() {
+    var name = "Mohammad Ishfaque Jahan Rafee";
+    var pageName = "Projects";
     return {
-      title: "Mohammad Ishfaque Jahan Rafee | blog",
+      title: name + " | " + pageName,
     };
   },
   head() {
