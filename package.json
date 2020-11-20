@@ -13,7 +13,10 @@
     "post-update": "yarn upgrade --latest"
   },
   "dependencies": {
-    "@nuxt/content": "^1.10.0",
+    "@nuxt/content": "^1.11.0",
     "nuxt": "^2.14.7"
+  },
+  "devDependencies": {
+    "@nuxtjs/google-analytics": "^2.4.0"
   }
 }

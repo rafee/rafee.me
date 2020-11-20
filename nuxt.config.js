@@ -1,6 +1,6 @@
 export default {
   target: "static",
-  components:true,
+  components: true,
 
   /*
    ** Headers of the page
@@ -56,6 +56,12 @@ export default {
   //   // See https://http.nuxtjs.org/api/#options
   // },
 
+  buildModules: ["@nuxtjs/google-analytics"],
+
+  googleAnalytics: {
+    id: "G-8SWD1Q1S1F",
+  },
+
   /*
    ** Build configuration
    ** Doc: https://nuxtjs.org/api/configuration-build
@@ -68,7 +74,7 @@ export default {
   },
 
   generate: {
-    fallback:true
+    fallback: true,
     // routes: ['/blog/creating-personal-website-with-nuxt']
-  }
+  },
 };
