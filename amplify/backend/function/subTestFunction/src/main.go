@@ -6,9 +6,11 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambdacontext"
 )
 
-func HandleRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+// Handler handles the ProxyRequest and generates ProxyResponse
+func Handler(ctx lambdacontext.LambdaContext, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	b, err := json.MarshalIndent(req, "", "  ")
 	resp := events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
@@ -18,5 +20,5 @@ func HandleRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyRes
 }
 
 func main() {
-	lambda.Start(HandleRequest)
+	lambda.Start(Handler)
 }
