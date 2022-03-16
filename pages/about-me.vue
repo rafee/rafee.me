@@ -47,12 +47,14 @@
 
     <section class="story">
       <div class="story-content bg-blue white">
-        Now I am studying for MEng at the Information Systems Security at
-        Concordia University. While this may seem unconventional (following my
-        experience), it's a continuation of my enthusiasm for Cloud Computing
-        and Networks. In addition to academics, I have experience with AWS and
-        GCP. I am an AWS Certified Cloud Solution Architect - Associate and
-        Google Cloud Certified Associate Cloud Engineer.
+        While I had fun at the sales roles that I pursued, I felt that there's
+        quite a bit out there that I should know. I started my masters at
+        Concordia University in Information Systems Security. While this may
+        seem unconventional (following my experience), it's a continuation of my
+        enthusiasm for Cloud Computing, Networks and Security. In addition to
+        academics, I have experience with AWS, GCP and Oracle Cloud. I am an AWS
+        Certified Cloud Solution Architect - Associate, Google Cloud Certified
+        Associate Cloud Engineer and Oracle Certified Security Associate.
       </div>
 
       <div class="story-picture">
