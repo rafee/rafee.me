@@ -1,7 +1,7 @@
 theme = "hugo-theme-shell"
 [Params]
 # Note: This is for the meta description, which is different from the "description" displayed in the terminal.
-description = "Jane Doe's Portfolio!"
+description = "Rafee's Portfolio!"
 [Params.Terminal]
 # Note: color schema
 # Note: You can choose between
@@ -20,7 +20,7 @@ schema = "monokai"
 # ./[folderName]/
 # ...
 # Note: result of the tree command
-userName = "jane"
+userName = "rafee"
 pcName = "laptop"
 workDir = "mydir"
 profile = "profile.txt"
@@ -47,7 +47,8 @@ contentDelay = 0 # content speed : content in .md file
 # activityDelay = 5 : deprecated
 
 description = """
-  Hi I am Jane Doe!
+  Hi I am Mohammad Ishfaque Jahan Rafee!
+  I know that's a mouthful, so call me Rafee.
   Nice to meet you!
   
   """
@@ -62,23 +63,19 @@ folderName = "my_activity"
 # Note: ["ACTIVITY", "URL or PATH TO YOUR MARKDOWN FILE"]
 files = [
   [
-    "C/C++",
-    "https://www.example.com/",
+    "Programming",
+    "https://github.com/rafee",
   ],
   [
-    "Python",
-    "https://www.example.com/",
+    "Linkedin",
+    "https://www.linkedin.com/in/rafee1344/",
   ],
   [
-    "Go",
-    "https://golang.org/",
+    "Cloud",
+    "https://www.credential.net/1b0433d3-2ed6-4c4d-a7a4-12eab5d42e66?key=2c15ed7cd9ff1bfc197404d1645ccfd54d8bf7c0b8308b385f685310f3b34097",
   ],
   [
-    "Hugo",
-    "/post/some-activity.md",
-  ],
-  [
-    "Docker",
-    "/post/some-activity.md",
+    "Certifications",
+    "https://catalog-education.oracle.com/pls/certview/sharebadge?id=4FC148C040263C1B38B5DFDF309396CE194D01F7B8B92BABBC019DB9EE0B0DA0",
   ],
 ]
