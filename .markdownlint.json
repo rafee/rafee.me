@@ -1,6 +1,0 @@
-{
-    // Line length warning
-    "MD013": false,
-    // Warning for multiple titles
-    "MD025": false
-}
