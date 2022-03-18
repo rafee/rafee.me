@@ -65,7 +65,7 @@ folderName = "myself"
 files = [
   [
     "About Me",
-    "/about_me",
+    "/about_me/",
   ],
   [
     "My LinkedIn Profile",
@@ -76,7 +76,7 @@ files = [
     "/what_else/",
   ],
   [
-    "Certifications",
-    "https://catalog-education.oracle.com/pls/certview/sharebadge?id=4FC148C040263C1B38B5DFDF309396CE194D01F7B8B92BABBC019DB9EE0B0DA0",
+    "My Bragging Rights",
+    "/bragging_rights/",
   ],
 ]
