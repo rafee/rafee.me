@@ -65,15 +65,15 @@ folderName = "myself"
 files = [
   [
     "About Me",
-    "https://rafee.me/about_me",
+    "/about_me",
   ],
   [
-    "Linkedin",
+    "My LinkedIn Profile",
     "https://www.linkedin.com/in/rafee1344/",
   ],
   [
-    "Cloud",
-    "https://www.credential.net/1b0433d3-2ed6-4c4d-a7a4-12eab5d42e66?key=2c15ed7cd9ff1bfc197404d1645ccfd54d8bf7c0b8308b385f685310f3b34097",
+    "What Else?",
+    "/what_else/",
   ],
   [
     "Certifications",

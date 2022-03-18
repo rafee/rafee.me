@@ -4,7 +4,7 @@ date: 2022-03-17T17:48:26-06:00
 draft: false
 ---
 
-I am an aspiring cloud security professional working as a Security Analyst at CMiC. Previously, I worked on pre-sales for four years.
+I am a cloud security professional working as a Security Analyst at CMiC. Previously, I worked on pre-sales for four years.
 
 My story started in Bangladesh, a small country in South Asia with massive potential. From my childhood, I was fascinated by science and math. This fascination brought me to study engineering in the best engineering institution in Bangladesh, BUET.
 
