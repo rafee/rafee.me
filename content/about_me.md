@@ -4,7 +4,7 @@ date: 2022-03-17T17:48:26-06:00
 draft: false
 ---
 
-I am a cloud security professional working as a Security Analyst at CMiC. Previously, I worked on pre-sales for four years.
+I am a Security Analyst at CMiC. Previously, I worked on pre-sales for four years.
 
 My story started in Bangladesh, a small country in South Asia with massive potential. From my childhood, I was fascinated by science and math. This fascination brought me to study engineering in the best engineering institution in Bangladesh, BUET.
 
@@ -14,4 +14,4 @@ Following that, I switched over to a more sales-oriented role. There, I got the 
 
 Then I studied for MEng at the Information Systems Security at Concordia University. While this may seem unconventional (following my experience), it's a continuation of my enthusiasm for Cloud Computing and Networks.
 
-Now at CMiC I make sure our operations in AWS and OCI go smoothly, while following all the best practices in process management. I also analyze our cloud environment and propose changes, that have lasting impact for our company.
+Now at CMiC I make sure our operations in AWS and OCI go smoothly, while following all the best practices in process management. I also analyze our cloud environment and propose changes, that makes us more secure one step at a time.

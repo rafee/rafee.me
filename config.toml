@@ -76,6 +76,10 @@ files = [
     "/what_else/",
   ],
   [
+    "Blog",
+    "/blog/",
+  ],
+  [
     "My Bragging Rights",
     "/bragging_rights/",
   ],
