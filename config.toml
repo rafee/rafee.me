@@ -64,8 +64,8 @@ folderName = "myself"
 # Note: ["ACTIVITY", "URL or PATH TO YOUR MARKDOWN FILE"]
 files = [
   [
-    "Programming",
-    "https://github.com/rafee",
+    "About Me",
+    "https://rafee.me/about_me",
   ],
   [
     "Linkedin",
