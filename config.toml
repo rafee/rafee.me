@@ -60,7 +60,7 @@ description = """
 
 [Params.Tree]
 use = true
-folderName = "my_activity"
+folderName = "myself"
 # Note: ["ACTIVITY", "URL or PATH TO YOUR MARKDOWN FILE"]
 files = [
   [
