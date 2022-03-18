@@ -1,7 +1,7 @@
+theme = "hugo-theme-shell"
 [Params]
 # Note: This is for the meta description, which is different from the "description" displayed in the terminal.
 description = "Rafee's Portfolio!"
-theme = "hugo-theme-shell"
 # disqusShortname = "mohammadishfaquejahanrafee"
 [Params.Terminal]
 # Note: color schema
@@ -50,7 +50,7 @@ contentDelay = 0 # content speed : content in .md file
 description = """
   Hi I am Mohammad Ishfaque Jahan Rafee!
   I know that's a mouthful, so call me Rafee!
-  Nice to meet you!
+  Thanks for checking out on me!
   
   """
 
