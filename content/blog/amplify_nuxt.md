@@ -4,7 +4,7 @@ description: AWS Amplify, a faster, cheaper and better way to host your NUXT App
 date: 2022-03-18T02:21:06-06:00
 tags: ['AWS', 'Amplify', 'Nuxt', 'Vue']
 alt: Creating my personal website with nuxt
-draft: true
+draft: false
 ---
 
 ## Creating My Personal Website
