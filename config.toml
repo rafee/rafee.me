@@ -2,7 +2,7 @@ theme = "hugo-theme-shell"
 [Params]
 # Note: This is for the meta description, which is different from the "description" displayed in the terminal.
 description = "Rafee's Portfolio!"
-# disqusShortname = "mohammadishfaquejahanrafee"
+# disqusShortname = "rafee-me"
 [Params.Terminal]
 # Note: color schema
 # Note: You can choose between
