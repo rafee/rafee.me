@@ -1,8 +1,8 @@
-baseURL = "https://dev.rafee-me.pages.dev"
+baseURL = "https://rafee.me"
 languageCode = "en-us"
-title = "Archie"
+title = "Mohammad Ishfaque Jahan Rafee"
 theme="archie"
-copyright = "© Athul"
+copyright = "© Mohammad Ishfaque Jahan Rafee"
 # Code Highlight
 pygmentsstyle = "monokai"
 pygmentscodefences = true
@@ -14,8 +14,8 @@ paginate=3 # articles per page
 
 [params]
 	mode="auto" # color-mode → light,dark,toggle or auto
-	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
-	subtitle = "Minimal and Clean [blog theme for Hugo](https://github.com/athul/archie)"
+	# useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
+	subtitle = "Aspiring to be better everyday"
 	mathjax = true # enable MathJax support
 	katex = true # enable KaTeX support
 
@@ -44,7 +44,7 @@ url = "/posts"
 weight = 2
 
 [[menu.main]]
-name = "About"
+name = "About Me"
 url = "/about"
 weight = 3
 
