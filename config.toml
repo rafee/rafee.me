@@ -16,7 +16,7 @@ style = "github-dark"
 [services.disqus]
 shortname = "rafee-me"
 
-paginate = 20 # articles per page
+paginate = 8 # articles per page
 
 [params]
 author = "Mohammad Ishfaque Jahan Rafee"
