@@ -1,35 +1,69 @@
 baseURL = "https://rafee.me"
-languageCode = "en-us"
+defaultcontentlanguage = "en"
+languageCode = "en"
+theme = "hugo-coder"
 title = "Mohammad Ishfaque Jahan Rafee"
-theme="archie"
-copyright = "© Mohammad Ishfaque Jahan Rafee"
+# copyright = "© Mohammad Ishfaque Jahan Rafee"
+
 # Code Highlight
-pygmentsstyle = "monokai"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
+[markup.highlight]
+style = "github-dark"
+# pygmentsstyle = "monokai"
+# pygmentscodefences = true
+# pygmentscodefencesguesssyntax = true
 
 disqusShortname = "rafee-me"
 
-paginate=3 # articles per page
+paginate = 3 # articles per page
 
 [params]
-	mode="auto" # color-mode → light,dark,toggle or auto
-	# useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
-	subtitle = "Aspiring to be better everyday"
-	mathjax = true # enable MathJax support
-	katex = true # enable KaTeX support
+author = "Mohammad Ishfaque Jahan Rafee"
+avatarurl = "images/me.jpg"
+description = "Rafee's Personal Website"
+info = "Your Friendly Neighbourhood Security Guy"
+#gravatar = "john.doe@example.com"
+
+# faviconSVG = "/img/favicon.svg"
+# favicon_16 = "/img/favicon-16x16.png"
+# favicon_32 = "/img/favicon-32x32.png"
+
+# enableTwemoji = true
+
+colorScheme = "auto"
+hidecolorschemetoggle = false
+# mode = "auto" # color-mode → light,dark,toggle or auto
+# useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
+# katex = true # enable KaTeX support
+# mathjax = true # enable MathJax support
+subtitle = "Aspiring to be better everyday"
 
 # Social Tags
 
 [[params.social]]
+icon = "fa fa-github fa-2x"
 name = "GitHub"
-icon = "github"
 url = "https://github.com/rafee"
+weight = 1
 
 [[params.social]]
+icon = "fa fa-twitter fa-2x"
 name = "Twitter"
-icon = "twitter"
 url = "https://twitter.com/jahan_rafee"
+weight = 2
+
+[[params.social]]
+icon = "fa fa-linkedin fa-2x"
+name = "Linkedin"
+url = "https://www.linkedin.com/in/rafee1344/"
+weight = 3
+
+# Posts config
+
+[taxonomies]
+author = "authors"
+category = "categories"
+series = "series"
+tag = "tags"
 
 # Main menu Items
 
@@ -39,7 +73,7 @@ url = "/"
 weight = 1
 
 [[menu.main]]
-name = "All posts"
+name = "Blog"
 url = "/posts"
 weight = 2
 
@@ -48,7 +82,7 @@ name = "About Me"
 url = "/about"
 weight = 3
 
-[[menu.main]]
-name = "Tags"
-url = "/tags"
-weight = 4
+# [[menu.main]]
+# name = "Tags"
+# url = "/tags"
+# weight = 4
