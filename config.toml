@@ -12,7 +12,9 @@ style = "github-dark"
 # pygmentscodefences = true
 # pygmentscodefencesguesssyntax = true
 
-disqusShortname = "rafee-me"
+[services]
+[services.disqus]
+shortname = "rafee-me"
 
 paginate = 3 # articles per page
 
