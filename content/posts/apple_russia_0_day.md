@@ -15,7 +15,7 @@ technical details of how this exploit actually work as this link ([Most
 Sophisticated iPhone Hack Ever Exploited Apple's Hidden Hardware Feature
 (thehackernews.com)](https://thehackernews.com/2023/12/most-sophisticated-iphone-hack-ever.html))
 explains it quite well. Just for the sake of understanding how complicated the
-exploit is, I am going to include a diagram published in aforementioned article.
+exploit is, I am going to include the attack chain published in aforementioned article.
 
 ![Attack chain for full device access iPhone](/images/apple-spywre.webp)
 
@@ -49,11 +49,11 @@ realize that at the end of the day, there’s so much insight to be derived just
 from network flow logs, something that very often is either ignored, or partially
 monitored.
 
-While we common people can look at this and say, this is an APT level threat,
+Common people can look at this and say, this is an APT level threat,
 and there’s nothing we can do about it. Also, we are the small guy. No one is
 going to use such a sophisticated attack against us! Yet we ignore the most
-fundamental paradigm. An APT threat today is the script kiddy tool tomorrow.
+fundamental paradigm. An APT exploit today is the script kiddy tool tomorrow.
 Because this requires no input from user, there’s every possibility without
-proper updates, your device can be the victim of next ransomware/spyware. All in
-all, while you can never stop all attacks, proper hygiene will almost
-surely reduce its likelihood.
+proper updates, your device can be the victim of next ransomware/spyware through
+this. All in all, while you can never stop all attacks, proper hygiene will
+almost surely reduce its likelihood.
