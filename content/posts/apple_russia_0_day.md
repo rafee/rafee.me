@@ -12,9 +12,7 @@ incorporating four zero-day vulnerabilities, allowed attackers to gain complete
 access to a targeted device and retrieve user data. Notably, the attack was
 zero-click, requiring no user interaction, making any device capable of
 receiving an iMessage susceptible. I won’t go into the technical details of how
-this exploit actually work as this link ([Most Sophisticated iPhone Hack Ever
-Exploited Apple's Hidden Hardware Feature
-(thehackernews.com)](https://thehackernews.com/2023/12/most-sophisticated-iphone-hack-ever.html))
+this exploit actually work as [this link](https://thehackernews.com/2023/12/most-sophisticated-iphone-hack-ever.html)
 explains it quite well. Just for the sake of understanding how complicated the
 exploit is, I am going to include the attack chain published in aforementioned
 article.
