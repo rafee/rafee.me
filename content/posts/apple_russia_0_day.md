@@ -5,55 +5,55 @@ date: 2024-01-02
 tags: ['Apple', 'Russia', 'Kaspersky', '0-day', '0-click']
 draft: false
 ---
-On December 27, 2023, cybersecurity firm Kaspersky published an article that
-detailed, how 4 zero-day vulnerabilities were chained together to form an
-exploit that allows an attacker to gain complete access to target device and
-access user data. Not only the attack uses zero-day vulnerabilities, it’s also
-zero-click, meaning it requires no input from user. As long as the target can
-receive an iMessage, the exploit can be used. I won’t go into the
-technical details of how this exploit actually work as this link ([Most
-Sophisticated iPhone Hack Ever Exploited Apple's Hidden Hardware Feature
+
+On December 27, 2023, Kaspersky, a cybersecurity firm, released a detailed
+article exposing the intricacies of a significant security threat. This exploit,
+incorporating four zero-day vulnerabilities, allowed attackers to gain complete
+access to a targeted device and retrieve user data. Notably, the attack was
+zero-click, requiring no user interaction, making any device capable of
+receiving an iMessage susceptible. I won’t go into the technical details of how
+this exploit actually work as this link ([Most Sophisticated iPhone Hack Ever
+Exploited Apple's Hidden Hardware Feature
 (thehackernews.com)](https://thehackernews.com/2023/12/most-sophisticated-iphone-hack-ever.html))
 explains it quite well. Just for the sake of understanding how complicated the
-exploit is, I am going to include the attack chain published in aforementioned article.
+exploit is, I am going to include the attack chain published in aforementioned
+article.
 
 ![Attack chain for full device access iPhone](/images/apple-spywre.webp)
 
-Thehackernews dubbed this as the most sophisticated iPhone hack ever exploited
-(Even though this exploit works on all Apple hardware). This exploit not only
-relied on software vulnerability, but also vulnerability on a hardware
-component, that very few people outside Apple and maybe ARM knew even exists.
-Kaspersky has concluded that, while they had discovered this inside their
-network, they were not the only target. Rather, given the preponderance of this
-exploit in devices owned by Russian intelligence agency employees, it points
-this to be the work of an APT. While Russia has claimed Apple collaborated with
-NSA to hack iPhones, that’s purely speculation and philosophical discussion at
-this point. But what is not up for discussion is what we should do about this.
+The exploit, applicable to all Apple hardware, was dubbed by Thehackernews as
+the most sophisticated iPhone hack to date. Unlike typical software
+vulnerabilities, this exploit exploited both software and a rarely known
+hardware component, suggesting a high level of sophistication. Kaspersky
+discovered the exploit within its network but indicated that they were not the
+sole target. The prevalence of this exploit in devices owned by Russian
+intelligence agency employees points towards the involvement of an Advanced
+Persistent Threat (APT).
 
-The first thing that needs to be looked at is the importance of updating the
-software. This impacts iOS 15.7 and below. When this was first published the iOS
-version was 16.5. That means, if someone had their software up to date, this
-exploit wouldn’t work at the time of discovery. While that still leaves us with
-almost 2 years of open gates, it’s still better than endless exploitation.
+Despite speculations claiming Apple collaboration with the NSA by Russian
+authorities, the focus shifts to addressing the immediate concerns. Updating
+software is paramount, particularly for those using iOS 15.7 and below. At the
+time of discovery, iOS 16.5 was the latest version, emphasizing the importance
+of keeping software up to date. Although this still leaves a two-year window of
+vulnerability, timely updates remain a crucial defense.
 
-Secondly, the hardware security relied on ignorance of the attacker. While the
-software world has pretty much now all agreed that ‘Security through Obscurity’
-doesn’t work, unfortunately same can’t be said about hardware teams. I think
-it’s a good time for the hardware designers to realize this as well. Because at
-some point everything comes out in the open.
+The hardware security aspect highlights the flaw in relying on obscurity. While
+the software community has largely abandoned the concept of 'Security through
+Obscurity,' the hardware domain appears to be lagging behind. It is a timely
+reminder for hardware designers to reconsider their approach, as concealed
+vulnerabilities eventually come to light.
 
-Finally, the attack was discovered via the network logs in SIEM platform. This
-points to the importance of doing the basics right. We often hear so much about
-this new sophisticated technology that’ll make xyz completely obsolete. Yet, we
-realize that at the end of the day, there’s so much insight to be derived just
-from network flow logs, something that very often is either ignored, or partially
-monitored.
+The detection of the attack through network logs in a Security Information and
+Event Management (SIEM) platform underscores the importance of foundational
+cybersecurity practices. Amidst the hype surrounding advanced technologies, the
+significance of monitoring network flow logs is often overlooked. Basic security
+measures, such as maintaining comprehensive logs, prove to be instrumental in
+identifying and responding to threats.
 
-Common people can look at this and say, this is an APT level threat,
-and there’s nothing we can do about it. Also, we are the small guy. No one is
-going to use such a sophisticated attack against us! Yet we ignore the most
-fundamental paradigm. An APT exploit today is the script kiddy tool tomorrow.
-Because this requires no input from user, there’s every possibility without
-proper updates, your device can be the victim of next ransomware/spyware through
-this. All in all, while you can never stop all attacks, proper hygiene will
-almost surely reduce its likelihood.
+While some may dismiss this as an APT-level threat that does not concern the
+average user, the fundamental truth is often overlooked. An APT exploit today
+could become a tool for less sophisticated attackers tomorrow. Given the
+exploit's ability to operate without user input, the potential for future
+ransomware or spyware attacks looms large. While complete prevention of all
+attacks may be unattainable, adhering to proper cybersecurity hygiene
+significantly reduces the likelihood of falling victim to such threats.
