@@ -59,7 +59,7 @@ For `7436`, the output is:
 
 ![7436](/images/7436.jpg)
 
-With this analysis, we can confidently identify our malicious process ID as `6812`. The rationale behind this conclusion is that while `services.exe` is a common service responsible for launching `svchost.exe`, `explorer.exe` typically corresponds to the Windows File Explorer. Hence, `explorer.exe` stands out as the malicious process. Therefore, the answer to task 1 is:
+With this analysis, we can confidently identify our malicious process ID as `6812`. The rationale behind this conclusion is that while `services.exe` is a common service responsible for launching `svchost.exe`, `explorer.exe` typically corresponds to the Windows File Explorer. Hence, pid `6812` stands out as the malicious process. Therefore, the answer to task 1 is:
 
 `6812`
 
