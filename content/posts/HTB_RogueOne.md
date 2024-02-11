@@ -2,7 +2,7 @@
 title: "Hack The Box - RogueOne Solution"
 description: ""
 date: 2024-02-10
-tags: ['HTB', 'Hackthebox', 'rogueone', 'hacking', 'dfir', 'incident response']
+tags: ['HTB', 'Hackthebox', 'forensics', 'hacking', 'dfir', 'incident response', 'memory forensics', 'volatility3', 'malware']
 draft: false
 ---
 
