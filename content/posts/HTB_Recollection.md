@@ -3,7 +3,7 @@ title: "Hack The Box - Recollection Solution"
 description: ""
 date: 2024-02-11
 tags: ['HTB', 'Hackthebox', 'forensics', 'hacking', 'dfir', 'incident response', 'memory forensics', 'volatility3', 'malware', 'volatility2', 'volatility', 'recollection']
-draft: false
+draft: true
 ---
 
 This is my third attempt at Hack The Box and second attempt at write-up. So, still fishing for feedback as there's definitely room for improvement. I was able to solve two problems that I was having last time (Downloading the files directly to AWS and unzipping not working at linux). For first one I do know the answer and for second one I don't, but it works now. To download the files directly to EC2 instance, I grabbed the url from network tab in the developer tools. The command I used is as follows:

@@ -3,7 +3,7 @@ title: "Hack The Box - RogueOne Solution"
 description: ""
 date: 2024-02-10
 tags: ['HTB', 'Hackthebox', 'forensics', 'hacking', 'dfir', 'incident response', 'memory forensics', 'volatility3', 'malware']
-draft: false
+draft: true
 ---
 
 I've recently dedicated some time to delve deeper into the realms of hacking and incident response. While this field is expansive, and each individual has their preferred learning method, I've discovered that Hack The Box (HTB) aligns best with my learning style. My reasoning behind this preference is that, unlike many other platforms, HTB strives to simulate real-world issues more closely. By tackling challenges on HTB, one acquires skills directly applicable to real-life scenarios. This sets it apart from Capture The Flag (CTF) competitions, which often lean more towards resembling problems found on platforms like LeetCode.
