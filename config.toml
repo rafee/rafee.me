@@ -50,13 +50,13 @@ weight = 1
 [[params.social]]
 icon = "fa fa-twitter fa-2x"
 name = "Twitter"
-url = "https://twitter.com/jahan_rafee"
+url = "https://twitter.com/rafee_sec"
 weight = 2
 
 [[params.social]]
 icon = "fa fa-linkedin fa-2x"
 name = "Linkedin"
-url = "https://www.linkedin.com/in/rafee1344/"
+url = "https://www.linkedin.com/in/rafee-sec/"
 weight = 3
 
 # Posts config
