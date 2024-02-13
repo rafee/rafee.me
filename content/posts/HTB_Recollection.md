@@ -1,7 +1,7 @@
 ---
 title: "Hack The Box - Recollection Solution"
 description: ""
-date: 2024-02-10
+date: 2024-02-11
 tags: ['HTB', 'Hackthebox', 'forensics', 'hacking', 'dfir', 'incident response', 'memory forensics', 'volatility3', 'malware', 'volatility2', 'volatility', 'recollection']
 draft: false
 ---
