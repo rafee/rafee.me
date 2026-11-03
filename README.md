@@ -48,18 +48,28 @@ flowchart TD
 
 ---
 
-## Cloudflare Pages Configuration
+## Cloudflare Pages Build Configuration (Build System v3)
 
-If you ever need to inspect or adjust settings in the **Cloudflare Dashboard**:
+In the **Cloudflare Dashboard** (**Workers & Pages** $\rightarrow$ your project $\rightarrow$ **Settings**):
 
-- **Location**: Cloudflare Dashboard $\rightarrow$ **Workers & Pages** $\rightarrow$ **rafee-me** (or your site project name) $\rightarrow$ **Settings**
-- **Production Branch**: `master`
+### 1. Build System Version
+- Navigate to **Builds & deployments** $\rightarrow$ **Build system version** $\rightarrow$ Select **Version 3** (latest build image).
+
+### 2. Build Settings
 - **Framework Preset**: `Hugo`
-- **Build Command**: `hugo --gc --minify`
+- **Build Command**: `bash build.sh` *(or `git submodule update --init --recursive && hugo --gc --minify`)*
 - **Build Output Directory**: `public`
-- **Environment Variables**:
-  - `HUGO_VERSION`: `0.131.0` (or newer)
-  - `GIT_SUBMODULE_UPDATE`: `recursive`
+
+### 3. Environment Variables (Production & Preview)
+Under **Settings** $\rightarrow$ **Environment variables**:
+- `HUGO_VERSION`: `0.169.0` *(PaperMod requires a minimum of `0.158.0`)*
+- `GIT_SUBMODULE_UPDATE`: `1` (or `true`)
+
+> **Why Previous Builds Fail**:
+> 1. **Hugo Version Incompatibility**: PaperMod's latest release strictly requires `min_version = "0.158.0"`. Cloudflare Pages' default Hugo version is older (`0.54.0` on v1 or `0.96.0`/`0.118.0` on v2/v3). Without `HUGO_VERSION >= 0.158.0`, Hugo aborts with `ERROR theme "PaperMod" requires Hugo version 0.158.0 or newer`.
+> 2. **Submodule Cloning**: Because themes are Git submodules, if `GIT_SUBMODULE_UPDATE` is omitted, Cloudflare skips downloading `themes/PaperMod`, resulting in `module "PaperMod" not found`.
+>
+> **The Solution**: We added [`build.sh`](build.sh), an automated self-healing build script that fetches submodules and automatically installs Hugo Extended `v0.169.0` if the container's version is outdated.
 
 ---
 
