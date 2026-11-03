@@ -22,12 +22,12 @@ evolution of the infrastructure through time and from Git log, we can understand
 the reasons behind decisions taken.
 
 For IaC, the most popular tool is probably Terraform. In our organization, we
-primarily use OCI (Oracle Cloud Infrastrure) as our infrastructure platform.
+primarily use OCI (Oracle Cloud Infrastructure) as our infrastructure platform.
 Thankfully, Oracle decided to use Terraform as their IDL (Infrastructure
 Description Language), rather than reinventing the wheel like some other
 companies. While in our organization, we still didn't complete our transition to
 Terraform for all infrastructure, we are getting there. At least for me, all new
-infrastruture I create, I make it a point to use Terraform.
+infrastructure I create, I make it a point to use Terraform.
 
 While Oracle uses Terraform as a native IDL, they have their own way of handling
 and executing Terraform code. While up until this moment I like their approach,

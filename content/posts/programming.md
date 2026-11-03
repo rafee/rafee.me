@@ -6,11 +6,11 @@ draft: false
 
 While I'm not a software developer by profession, I do love programming. I
 solved more than 300 problems in LeetCode and have working proficiency in
-Python, Go, Java and C++. In my current workplace I wrote multiple python script
+Python, Go, Java and C++. In my current workplace I wrote multiple Python scripts
 to automate regular stuff, while saving countless man hours for me and anyone
 doing the same job as me in the future.
 
 You can take a look at my recent public works in
 [GitHub](https://github.com/rafee). For obvious reasons, what I do at workplace
 can't be made public. However, I do intend to write generic documentation about
-them time to time.
+them from time to time.
