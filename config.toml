@@ -24,6 +24,7 @@ subtitle = "Your Friendly Neighbourhood Security Guy • Aspiring to be better e
 
 colorScheme = "auto"
 hidecolorschemetoggle = false
+customCSS = ["css/custom.css"]
 
 # Social Tags
 
