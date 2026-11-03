@@ -79,3 +79,21 @@
   border-radius: 8px;
   border: 1px solid rgba(125, 125, 125, 0.15);
 }
+
+/* Mermaid Flowchart Diagrams */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: rgba(125, 125, 125, 0.04);
+  border-radius: 8px;
+  border: 1px solid rgba(150, 150, 150, 0.15);
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}

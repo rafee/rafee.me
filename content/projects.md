@@ -2,6 +2,7 @@
 title: "Projects & Highlights"
 date: 2026-11-03T13:40:00-06:00
 draft: false
+mermaid: true
 ---
 
 Here is a curated overview of my projects, active software engineering undertakings, security research, and technical experiments.
