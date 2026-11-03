@@ -4,7 +4,7 @@ date: 2026-11-03T09:00:00-06:00
 draft: false
 ---
 
-Hi, I'm **Mohammad Ishfaque Jahan Rafee** — a **Security Engineer** based in Edmonton, Canada. Most people know me as **Rafee** or online as **[@rafee_sec](https://twitter.com/rafee_sec)**.
+Hi, I'm **Mohammad Ishfaque Jahan Rafee** — a **Security Engineer** based in Edmonton, Canada. Most people know me as **Rafee** or online as **[@rafee_in_sec](https://twitter.com/rafee_in_sec)**.
 
 I specialize in **Cloud Security Architecture (AWS & OCI)**, **Infrastructure Defense**, **Digital Forensics & Incident Response (DFIR)**, and **Security Automation**. My professional philosophy centers on building pragmatic, robust defenses that empower development and operations rather than slowing them down.
 
@@ -74,5 +74,5 @@ I am always keen to exchange ideas with fellow security practitioners, cloud arc
 
 - **LinkedIn**: [linkedin.com/in/rafee-sec](https://www.linkedin.com/in/rafee-sec/)
 - **GitHub**: [github.com/rafee](https://github.com/rafee)
-- **X / Twitter**: [@rafee_sec](https://twitter.com/rafee_sec)
+- **X / Twitter**: [@rafee_in_sec](https://twitter.com/rafee_in_sec)
 - **Email**: [mij.rafee.1344@gmail.com](mailto:mij.rafee.1344@gmail.com)
