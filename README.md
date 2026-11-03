@@ -96,8 +96,8 @@ rafee.me/
 ├── themes/               # Registered Hugo themes (as Git submodules)
 │   └── PaperMod/         # Theme source repository (Git submodule)
 ├── .devcontainer/        # VS Code Dev Container definitions
+├── build.sh              # Automated build & dependency bootstrap script
 ├── config.toml           # Core Hugo site configuration, parameters, and navigation
-├── netlify.toml          # Legacy Netlify build configuration (reference)
 └── README.md             # Project & architecture documentation
 ```
 
