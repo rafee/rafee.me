@@ -30,6 +30,9 @@ Today, I work as a **Security Engineer at CMiC**, where I safeguard enterprise E
 - Analyzing SIEM telemetry, network flow logs, and infrastructure configurations to detect anomalies and strengthen defense-in-depth posture.
 - Championing **Infrastructure as Code (IaC)** with Terraform to ensure our cloud environments remain reproducible, auditable, and secure by default.
 
+#### Systems Engineering & Current Endeavors: Unhurried
+Beyond enterprise cloud security, I am actively architecting **[Unhurried](https://github.com/Unhurried-Careers)** — a distributed, cloud-native platform on Google Cloud (built with Go microservices, Cloud Run, API Gateway, Firestore, and React) engineered to replace AI application spam with deliberate, curated career research and high-intent candidate outreach.
+
 ---
 
 ### Technical Toolkit & Competencies
