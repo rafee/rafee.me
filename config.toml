@@ -17,9 +17,9 @@ paginate = 8 # articles per page
 [params]
 author = "Mohammad Ishfaque Jahan Rafee"
 avatarurl = "images/me.jpg"
-description = "Mohammad Ishfaque Jahan Rafee — Information Security Analyst specializing in Cloud Security (AWS & OCI), Infrastructure Defense, DFIR, and Security Automation."
-keywords = "Mohammad Ishfaque Jahan Rafee, rafee-sec, cybersecurity, information security analyst, cloud security, AWS, OCI, DFIR, incident response, python, go, edmonton"
-info = "Information Security Analyst | Cloud Security & Infrastructure"
+description = "Mohammad Ishfaque Jahan Rafee — Security Engineer specializing in Cloud Security (AWS & OCI), Infrastructure Defense, DFIR, and Security Automation."
+keywords = "Mohammad Ishfaque Jahan Rafee, rafee-sec, cybersecurity, security engineer, cloud security, AWS, OCI, DFIR, incident response, python, go, edmonton"
+info = "Security Engineer | Cloud Security & Infrastructure"
 subtitle = "Your Friendly Neighbourhood Security Guy • Aspiring to be better every day"
 
 colorScheme = "auto"

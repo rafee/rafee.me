@@ -4,7 +4,7 @@ date: 2026-11-03T09:00:00-06:00
 draft: false
 ---
 
-Hi, I'm **Mohammad Ishfaque Jahan Rafee** — an **Information Security Analyst** based in Edmonton, Canada. Most people know me as **Rafee** or online as **[@rafee_sec](https://twitter.com/rafee_sec)**.
+Hi, I'm **Mohammad Ishfaque Jahan Rafee** — a **Security Engineer** based in Edmonton, Canada. Most people know me as **Rafee** or online as **[@rafee_sec](https://twitter.com/rafee_sec)**.
 
 I specialize in **Cloud Security Architecture (AWS & OCI)**, **Infrastructure Defense**, **Digital Forensics & Incident Response (DFIR)**, and **Security Automation**. My professional philosophy centers on building pragmatic, robust defenses that empower development and operations rather than slowing them down.
 
@@ -23,8 +23,8 @@ Following graduation, I spent four formative years in telecommunications and ent
 #### Graduate Studies & Systems Security
 Driven by an enduring enthusiasm for cloud systems, networks, and cybersecurity, I moved to Canada to pursue my graduate degree at **Concordia University** in Montreal. I earned my **Master of Engineering (MEng) in Information Systems Security**, while also working as a Graduate Research Assistant investigating computer vision, projective geometry, and distributed systems.
 
-#### Cloud Security at CMiC
-Today, I work as an **Information Security Analyst at CMiC**, where I safeguard enterprise ERP cloud environments across **Amazon Web Services (AWS)** and **Oracle Cloud Infrastructure (OCI)**:
+#### Security Engineering at CMiC
+Today, I work as a **Security Engineer at CMiC**, where I safeguard enterprise ERP cloud environments across **Amazon Web Services (AWS)** and **Oracle Cloud Infrastructure (OCI)**:
 - Implementing continuous risk management, threat modeling, and proactive security guardrails.
 - Designing and implementing automated security auditing and compliance checks using **Python** and **Go**.
 - Analyzing SIEM telemetry, network flow logs, and infrastructure configurations to detect anomalies and strengthen defense-in-depth posture.

@@ -1,9 +1,9 @@
 ---
 title: "Hack The Box - RogueOne Solution"
-description: ""
+description: "Incident response and memory forensics walkthrough for the Hack The Box RogueOne Sherlock challenge using Volatility 3."
 date: 2024-02-10
 tags: ['HTB', 'Hackthebox', 'forensics', 'hacking', 'dfir', 'incident response', 'memory forensics', 'volatility3', 'malware']
-draft: true
+draft: false
 ---
 
 I've recently dedicated some time to delve deeper into the realms of hacking and incident response. While this field is expansive, and each individual has their preferred learning method, I've discovered that Hack The Box (HTB) aligns best with my learning style. My reasoning behind this preference is that, unlike many other platforms, HTB strives to simulate real-world issues more closely. By tackling challenges on HTB, one acquires skills directly applicable to real-life scenarios. This sets it apart from Capture The Flag (CTF) competitions, which often lean more towards resembling problems found on platforms like LeetCode.
@@ -117,4 +117,4 @@ For task 7, we were asked to submit it to virustotal and determine, when it was 
 
 `10/08/2023 11:58:10`
 
-And voilà, the problem is completed! 
+And voilà, the problem is completed!

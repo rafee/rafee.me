@@ -1,9 +1,9 @@
 ---
 title: "Hack The Box - Recollection Solution"
-description: ""
+description: "Walkthrough and digital forensics analysis for the Hack The Box Recollection Sherlock challenge using Volatility 2 and Volatility 3."
 date: 2024-02-11
 tags: ['HTB', 'Hackthebox', 'forensics', 'hacking', 'dfir', 'incident response', 'memory forensics', 'volatility3', 'malware', 'volatility2', 'volatility', 'recollection']
-draft: true
+draft: false
 ---
 
 This is my third attempt at Hack The Box and second attempt at write-up. So, still fishing for feedback as there's definitely room for improvement. I was able to solve two problems that I was having last time (Downloading the files directly to AWS and unzipping not working at linux). For first one I do know the answer and for second one I don't, but it works now. To download the files directly to EC2 instance, I grabbed the url from network tab in the developer tools. The command I used is as follows:
@@ -232,4 +232,4 @@ For this I referred to `consoles.txt` again. In the list of files, there was a f
 
 Answer to task 18: `csrsss.exe`
 
-And with that, the problem is completed! 
+And with that, the problem is completed!
