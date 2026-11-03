@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate, getPostSlug, getPublishedPosts } from '../utils/posts';
+
+const posts = await getPublishedPosts();
+
+const searchIndex = posts.map((post) => ({
+  title: post.data.title,
+  description: post.data.description,
+  date: formatDate(post.data.date),
+  slug: getPostSlug(post),
+  tags: post.data.tags,
+}));
+---
+
+<BaseLayout
+  title="Search"
+  description="Instant full-text search across all blog posts, DFIR writeups, and security articles."
+>
+  <header class="page-header">
+    <h1 class="page-title">Search</h1>
+    <p class="page-lead">Search across all articles, writeups, and technical tags.</p>
+  </header>
+
+  <div class="search-box">
+    <div class="search-input-wrapper">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Type to search (e.g. 'volatility', 'aws', 'iac', 'zero-day')..."
+        autocomplete="off"
+        autofocus
+      />
+    </div>
+    <div id="search-status" class="search-status">Showing all {posts.length} articles</div>
+  </div>
+
+  <div id="search-results" class="search-results-grid"></div>
+
+  <script id="search-data" type="application/json" set:html={JSON.stringify(searchIndex)} />
+
+  <script>
+    interface SearchItem {
+      title: string;
+      description: string;
+      date: string;
+      slug: string;
+      tags: string[];
+    }
+
+    const dataEl = document.getElementById('search-data');
+    const input = document.getElementById('search-input') as HTMLInputElement | null;
+    const resultsContainer = document.getElementById('search-results');
+    const statusEl = document.getElementById('search-status');
+
+    if (dataEl && input && resultsContainer && statusEl) {
+      const items: SearchItem[] = JSON.parse(dataEl.textContent || '[]');
+
+      function renderResults(filtered: SearchItem[], query = '') {
+        if (!filtered.length) {
+          statusEl.innerText = `No results found for "${query}"`;
+          resultsContainer.innerHTML = `
+            <div class="card no-results">
+              <p>No articles matched your query. Try searching for broader terms like <strong>AWS</strong>, <strong>DFIR</strong>, <strong>Python</strong>, or <strong>HTB</strong>.</p>
+            </div>
+          `;
+          return;
+        }
+
+        statusEl.innerText = query
+          ? `Found ${filtered.length} ${filtered.length === 1 ? 'result' : 'results'} for "${query}"`
+          : `Showing all ${filtered.length} articles`;
+
+        resultsContainer.innerHTML = filtered
+          .map((item) => `
+            <article class="card card-interactive search-result-card">
+              <div class="search-result-meta">${item.date}</div>
+              <h3 class="search-result-title">
+                <a href="/posts/${item.slug}/">${item.title}</a>
+              </h3>
+              ${item.description ? `<p class="search-result-desc">${item.description}</p>` : ''}
+              ${
+                item.tags.length
+                  ? `<div class="search-result-tags">
+                      ${item.tags.map((t) => `<span class="badge">#${t}</span>`).join('')}
+                    </div>`
+                  : ''
+              }
+            </article>
+          `)
+          .join('');
+      }
+
+      // Initial render
+      renderResults(items);
+
+      input.addEventListener('input', (e) => {
+        const query = (e.target as HTMLInputElement).value.trim().toLowerCase();
+        if (!query) {
+          renderResults(items);
+          return;
+        }
+
+        const filtered = items.filter((item) => {
+          const matchTitle = item.title.toLowerCase().includes(query);
+          const matchDesc = item.description.toLowerCase().includes(query);
+          const matchTags = item.tags.some((t) => t.toLowerCase().includes(query));
+          return matchTitle || matchDesc || matchTags;
+        });
+
+        renderResults(filtered, query);
+      });
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .search-box {
+    margin-bottom: 2rem;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  #search-input {
+    width: 100%;
+    padding: 0.95rem 1rem 0.95rem 2.85rem;
+    font-size: 1.05rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-elevated);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  #search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  .search-status {
+    margin-top: 0.55rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .search-results-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .search-results-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  :global(.search-result-card) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  :global(.search-result-meta) {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  :global(.search-result-title) {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  :global(.search-result-title a) {
+    color: var(--text);
+  }
+
+  :global(.search-result-title a:hover) {
+    color: var(--accent);
+  }
+
+  :global(.search-result-desc) {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  :global(.search-result-tags) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+  }
+
+  :global(.no-results) {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text-secondary);
+  }
+</style>

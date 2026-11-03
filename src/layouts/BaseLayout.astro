@@ -1,0 +1,155 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../consts';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: boolean;
+}
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  image = '/images/me.jpg',
+  article = false,
+} = Astro.props;
+
+const pageTitle = title === SITE.title ? title : `${title} · ${SITE.title}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://rafee.me');
+const socialImageURL = new URL(image, canonicalURL);
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
+
+    <title>{pageTitle}</title>
+    <meta name="title" content={pageTitle} />
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.title} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
+    <meta property="twitter:creator" content={SITE.socials.twitterHandle} />
+
+    <!-- Anti-FOUC Theme Initialization -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <Header />
+    <main class="container">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Global Client Scripts: Theme Toggle, Code Block Copy, Dynamic Mermaid -->
+    <script>
+      // 1. Theme Toggle
+      const toggle = document.getElementById('theme-toggle');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme') || 'dark';
+          const next = current === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: next } }));
+        });
+      }
+
+      // 2. Code Block Copy Buttons
+      document.querySelectorAll('pre').forEach((pre) => {
+        if (pre.classList.contains('mermaid')) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        pre.parentNode?.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-code-btn';
+        btn.innerText = 'Copy';
+        wrapper.appendChild(btn);
+
+        btn.addEventListener('click', async () => {
+          const code = pre.querySelector('code')?.innerText || pre.innerText;
+          try {
+            await navigator.clipboard.writeText(code);
+            btn.innerText = 'Copied!';
+            setTimeout(() => (btn.innerText = 'Copy'), 2000);
+          } catch (e) {
+            btn.innerText = 'Failed';
+          }
+        });
+      });
+
+      // 3. Dynamic Mermaid Initialization
+      async function renderMermaidDiagrams() {
+        const diagrams = document.querySelectorAll('pre.mermaid, .mermaid');
+        if (!diagrams.length) return;
+
+        try {
+          const { default: mermaid } = await import('mermaid');
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: isDark ? 'dark' : 'neutral',
+            securityLevel: 'loose',
+            fontFamily: 'Inter, -apple-system, sans-serif',
+          });
+
+          diagrams.forEach((el) => {
+            const src = el.getAttribute('data-mermaid-src');
+            if (src) {
+              el.innerHTML = src;
+              el.removeAttribute('data-processed');
+            }
+          });
+
+          await mermaid.run({
+            querySelector: 'pre.mermaid, .mermaid',
+          });
+        } catch (err) {
+          console.error('Mermaid render error:', err);
+        }
+      }
+
+      renderMermaidDiagrams();
+      window.addEventListener('theme-changed', () => {
+        renderMermaidDiagrams();
+      });
+    </script>
+  </body>
+</html>

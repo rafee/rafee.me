@@ -1,0 +1,291 @@
+---
+---
+
+<figure class="arch-diagram" aria-label="Unhurried Cloud-Native System Architecture Diagram">
+  <div class="arch-header">
+    <span class="arch-kicker">System Architecture Blueprint</span>
+    <span class="arch-meta">Google Cloud Platform · Multi-Repo Microservices · Terraform IaC</span>
+  </div>
+
+  <!-- Tier 1: Client -->
+  <div class="arch-tier">
+    <div class="tier-label">
+      <span class="tier-num">01</span>
+      <span>Client Tier</span>
+    </div>
+    <div class="tier-grid two-col">
+      <div class="arch-node node-client">
+        <div class="node-title">unhurried-web</div>
+        <div class="node-sub">React + TypeScript SPA · Firebase Hosting Global CDN</div>
+      </div>
+      <div class="arch-node node-client">
+        <div class="node-title">unhurried-extension</div>
+        <div class="node-sub">Chrome Extension (Manifest V3) · Intentional Apply Assistant</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div class="arch-connector" aria-hidden="true">
+    <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
+      <path d="M12 2v20m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="connector-pill">HTTPS · Firebase ID Token + App Check + API Key</span>
+  </div>
+
+  <!-- Tier 2: API Gateway -->
+  <div class="arch-tier">
+    <div class="tier-label">
+      <span class="tier-num">02</span>
+      <span>Edge &amp; Security Gateway Tier</span>
+    </div>
+    <div class="arch-node node-gateway">
+      <div class="node-title">Google Cloud API Gateway</div>
+      <div class="node-sub">Per-Service OpenAPI 2.0 Specs · JWT Verification · Per-Minute Quotas &amp; Rate Limiting</div>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div class="arch-connector" aria-hidden="true">
+    <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
+      <path d="M12 2v20m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="connector-pill">Zero-Trust Re-Verification · <code>unhurried-common</code> Go Hardening Middleware</span>
+  </div>
+
+  <!-- Tier 3: Go Microservices -->
+  <div class="arch-tier">
+    <div class="tier-label">
+      <span class="tier-num">03</span>
+      <span>Backend Microservices Tier (Go on Google Cloud Run)</span>
+    </div>
+    <div class="tier-grid services-grid">
+      <div class="arch-node node-service">
+        <div class="node-badge">Go Service</div>
+        <div class="node-title">job-search</div>
+        <div class="node-sub">Company watchlists &amp; Greenhouse / Lever / Ashby polling</div>
+      </div>
+      <div class="arch-node node-service">
+        <div class="node-badge">Go Service</div>
+        <div class="node-title">applications</div>
+        <div class="node-sub">Strict ≤5 shortlist cap, outreach kits &amp; conversation tracker</div>
+      </div>
+      <div class="arch-node node-service">
+        <div class="node-badge">Go Service</div>
+        <div class="node-title">resume</div>
+        <div class="node-sub">Resume Studio tailoring Google Docs to shortlisted role focus</div>
+      </div>
+      <div class="arch-node node-service">
+        <div class="node-badge">Go Service</div>
+        <div class="node-title">inbox</div>
+        <div class="node-sub">Read-only Gmail classification &amp; interview slot proposals</div>
+      </div>
+      <div class="arch-node node-service">
+        <div class="node-badge">Go Service</div>
+        <div class="node-title">notifications</div>
+        <div class="node-sub">Event-driven email &amp; SMS match alerts</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div class="arch-connector" aria-hidden="true">
+    <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
+      <path d="M12 2v20m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="connector-pill">Least-Privilege GCP IAM · Provisioned via <code>unhurried-infra</code> (Terraform)</span>
+  </div>
+
+  <!-- Tier 4: Data & Platform -->
+  <div class="arch-tier">
+    <div class="tier-label">
+      <span class="tier-num">04</span>
+      <span>Data, Messaging &amp; Delivery Tier</span>
+    </div>
+    <div class="tier-grid three-col">
+      <div class="arch-node node-data">
+        <div class="node-title">Cloud Firestore</div>
+        <div class="node-sub">Native Mode NoSQL document persistence (<code>STORE=memory</code> offline parity)</div>
+      </div>
+      <div class="arch-node node-data">
+        <div class="node-title">Pub/Sub &amp; Scheduler</div>
+        <div class="node-sub">Decoupled async event bus &amp; scheduled ATS board sync</div>
+      </div>
+      <div class="arch-node node-data">
+        <div class="node-title">Cloud Build &amp; Deploy</div>
+        <div class="node-sub">Artifact Registry containers w/ verified SLSA provenance</div>
+      </div>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .arch-diagram {
+    margin: 1.75rem 0 2.25rem;
+    padding: 1.4rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .arch-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.15rem;
+    border-bottom: 1px dashed var(--border-strong);
+  }
+
+  .arch-kicker {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .arch-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: "JetBrains Mono", Consolas, monospace;
+  }
+
+  .arch-tier {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.1rem 1.1rem;
+  }
+
+  .tier-label {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .tier-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem 0.45rem;
+    border-radius: 5px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.72rem;
+  }
+
+  .tier-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .two-col {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+
+  .three-col {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .arch-node {
+    padding: 0.85rem 0.95rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+
+  .arch-node:hover {
+    border-color: var(--accent-border);
+    transform: translateY(-1px);
+  }
+
+  .node-gateway {
+    border-left: 3px solid var(--accent);
+    text-align: center;
+  }
+
+  .node-service {
+    border-top: 2px solid var(--emerald);
+  }
+
+  .node-client {
+    border-left: 3px solid var(--accent);
+  }
+
+  .node-data {
+    border-left: 3px solid var(--emerald);
+  }
+
+  .node-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--emerald);
+    margin-bottom: 0.25rem;
+  }
+
+  .node-title {
+    font-weight: 700;
+    font-size: 0.94rem;
+    color: var(--text);
+    font-family: "JetBrains Mono", Consolas, monospace;
+    margin-bottom: 0.25rem;
+  }
+
+  .node-sub {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+  }
+
+  .arch-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    margin: 0.45rem 0;
+    color: var(--accent);
+  }
+
+  .connector-pill {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+    text-align: center;
+  }
+
+  .connector-pill code {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.73rem;
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .arch-diagram {
+      padding: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts, slugifyTag } from '../../utils/posts';
+
+const posts = await getPublishedPosts();
+
+const tagMap = new Map<string, { label: string; count: number }>();
+posts.forEach((p) => {
+  p.data.tags.forEach((t) => {
+    const slug = slugifyTag(t);
+    const existing = tagMap.get(slug);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      tagMap.set(slug, { label: t, count: 1 });
+    }
+  });
+});
+
+const allTags = Array.from(tagMap.entries()).sort((a, b) => b[1].count - a[1].count);
+---
+
+<BaseLayout
+  title="All Tags"
+  description="Browse articles, security writeups, and projects by category and tag."
+>
+  <header class="page-header">
+    <h1 class="page-title">Tags &amp; Topics</h1>
+    <p class="page-lead">Browse all technical articles and writeups by subject.</p>
+  </header>
+
+  <div class="tags-directory">
+    {allTags.map(([slug, { label, count }]) => (
+      <a href={`/tags/${slug}/`} class="card card-interactive tag-card">
+        <span class="tag-title">#{label}</span>
+        <span class="tag-posts-count">{count} {count === 1 ? 'post' : 'posts'}</span>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .tags-directory {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  .tag-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.95rem 1.15rem;
+    text-decoration: none;
+  }
+
+  .tag-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+
+  .tag-posts-count {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+</style>

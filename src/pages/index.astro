@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import SocialIcons from '../components/SocialIcons.astro';
+import { SITE } from '../consts';
+import { getPublishedPosts } from '../utils/posts';
+
+const allPosts = await getPublishedPosts();
+const recentPosts = allPosts.slice(0, 4);
+---
+
+<BaseLayout>
+  <!-- Hero / Profile Section -->
+  <section class="hero-section">
+    <div class="avatar-wrapper">
+      <img
+        src={SITE.avatar}
+        alt={SITE.title}
+        width="150"
+        height="150"
+        class="profile-avatar"
+        loading="eager"
+      />
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge-row">
+        <span class="badge badge-emerald">Available for Collaboration</span>
+        <span class="location-badge">📍 {SITE.location}</span>
+      </div>
+
+      <h1 class="hero-name">{SITE.title}</h1>
+      <p class="hero-role">{SITE.role} · {SITE.tagline}</p>
+      <p class="hero-bio">
+        Securing enterprise cloud infrastructure across <strong>AWS</strong> and <strong>OCI</strong>, building detection &amp; forensics pipelines, and architecting mindful systems like <strong>Unhurried</strong>.
+      </p>
+
+      <div class="hero-actions">
+        <a href="/about/" class="btn btn-primary">About Me</a>
+        <a href="/projects/" class="btn">Projects &amp; Systems</a>
+        <a href="/posts/" class="btn">Technical Blog</a>
+        <a href="/search/" class="btn">Search Site</a>
+      </div>
+
+      <div class="hero-socials">
+        <SocialIcons />
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Spotlight: Unhurried -->
+  <section class="spotlight-section">
+    <div class="card spotlight-card">
+      <div class="spotlight-header">
+        <div>
+          <span class="spotlight-kicker">Featured Project</span>
+          <h2 class="spotlight-title">Unhurried — The Intentional Career Platform</h2>
+        </div>
+        <a
+          href="https://github.com/Unhurried-Careers"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="badge"
+        >
+          github.com/Unhurried-Careers ↗
+        </a>
+      </div>
+
+      <p class="spotlight-desc">
+        A cloud-native distributed platform designed to replace AI application spam with deliberate, research-driven outreach. Features a strict 5-role shortlist constraint, Google Cloud Run Go microservices, and React + TypeScript frontend.
+      </p>
+
+      <div class="spotlight-footer">
+        <div class="spotlight-tags">
+          <span class="badge">Go</span>
+          <span class="badge">Cloud Run</span>
+          <span class="badge">API Gateway</span>
+          <span class="badge">Firestore</span>
+          <span class="badge">Terraform</span>
+          <span class="badge">React + TS</span>
+        </div>
+        <a href="/projects/#unhurried" class="btn btn-primary btn-sm">
+          View Architecture Blueprint &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Writing -->
+  <section class="recent-section">
+    <div class="section-heading">
+      <h2>Recent Blog Posts &amp; Writeups</h2>
+      <a href="/posts/" class="btn btn-sm">View all ({allPosts.length}) &rarr;</a>
+    </div>
+
+    <div class="post-grid">
+      {recentPosts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 0 3rem;
+    gap: 1.5rem;
+  }
+
+  .profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(14, 165, 233, 0.45);
+    box-shadow: var(--shadow-glow);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .profile-avatar:hover {
+    transform: scale(1.04);
+    border-color: var(--accent);
+  }
+
+  .hero-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .location-badge {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .hero-name {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+  }
+
+  .hero-role {
+    margin: 0.5rem 0 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .hero-bio {
+    max-width: 38rem;
+    margin: 0.9rem auto 0;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .hero-socials {
+    margin-top: 1.25rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Spotlight Card */
+  .spotlight-section {
+    margin: 2rem 0 3.5rem;
+  }
+
+  .spotlight-card {
+    border-left: 4px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .spotlight-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .spotlight-kicker {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .spotlight-title {
+    margin: 0.2rem 0 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .spotlight-desc {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .spotlight-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.35rem;
+  }
+
+  .spotlight-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .btn-sm {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.84rem;
+  }
+
+  /* Recent Writing Grid */
+  .post-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .post-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

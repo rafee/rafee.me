@@ -1,0 +1,134 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getPostSlug, getReadingStats, slugifyTag } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: getPostSlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { minutes, words } = getReadingStats(post.body);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description || post.data.title}
+  article={true}
+>
+  <article class="post-single">
+    <nav class="back-nav" aria-label="Breadcrumb">
+      <a href="/posts/" class="back-link">&larr; Back to all posts</a>
+    </nav>
+
+    <header class="post-header">
+      <div class="post-meta-row">
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{minutes} min read ({words.toLocaleString()} words)</span>
+      </div>
+
+      <h1 class="post-title">{post.data.title}</h1>
+
+      {post.data.description && <p class="post-lead">{post.data.description}</p>}
+
+      {post.data.tags.length > 0 && (
+        <div class="post-tags-row">
+          {post.data.tags.map((tag) => (
+            <a href={`/tags/${slugifyTag(tag)}/`} class="badge">
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <footer class="post-footer">
+      <div class="post-footer-actions">
+        <a href="/posts/" class="btn">&larr; Back to blog</a>
+        <a href="#top" class="btn">Back to top &uarr;</a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-single {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .back-nav {
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .post-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .post-title {
+    margin: 0;
+    font-size: clamp(2rem, 4.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .post-lead {
+    margin: 0.85rem 0 0;
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .post-tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.15rem;
+  }
+
+  .post-footer {
+    margin-top: 3.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .post-footer-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

@@ -2,7 +2,7 @@
 
 Welcome to the source repository for **[rafee.me](https://rafee.me)**, the personal website and technical blog of **Mohammad Ishfaque Jahan Rafee** (Security Engineer).
 
-The site is built as a fast, secure, minimalist static site using **[Hugo](https://gohugo.io/)** and continuously deployed to the global edge network via **[Cloudflare Pages](https://pages.cloudflare.com/)**.
+The site is built with **[Astro](https://astro.build/)** (v5) — leveraging zero-JS by default, strict content collections, Vite-powered builds, Shiki syntax highlighting, and responsive client-rendered Mermaid diagrams. It is continuously deployed to the global edge network via **[Cloudflare Pages](https://pages.cloudflare.com/)**.
 
 ---
 
@@ -10,66 +10,48 @@ The site is built as a fast, secure, minimalist static site using **[Hugo](https
 
 | Component | Technology | Description |
 | :--- | :--- | :--- |
-| **Static Site Generator (SSG)** | Hugo (`v0.131.0+`) | Generates static HTML/CSS from Markdown in milliseconds. |
-| **Theme** | [`PaperMod`](https://github.com/adityatelange/hugo-PaperMod) | Modern, responsive portfolio theme with light/dark mode and Fuse.js search. |
+| **Framework / SSG** | [Astro](https://astro.build/) (`v5`) | Island architecture with static HTML generation, zero client runtime by default. |
+| **Content Engine** | Astro Content Collections (`glob` loader) | Strictly typed Markdown/MDX collections with Zod schema validation. |
+| **Styling & Theme** | Modern CSS Variables | Dark / Light theme system with instant anti-FOUC script and OS preference detection. |
+| **Diagrams** | Mermaid.js & SVG Components | Interactive system architecture diagrams for projects like **Unhurried**. |
+| **Search** | Client-Side Instant Search | Lightweight, dependency-free client search across titles, descriptions, and tags. |
+| **Feeds & SEO** | `@astrojs/rss` + `@astrojs/sitemap` | Auto-generated RSS 2.0 feed (`/rss.xml`) and XML sitemap (`/sitemap-index.xml`). |
 | **Hosting & CDN** | Cloudflare Pages | Automated CI/CD pipeline, edge compute, and global asset distribution. |
 | **DNS & Security** | Cloudflare DNS & Edge | Automated SSL/TLS certificates, HTTP/3, DDoS mitigation, and edge caching. |
-| **Version Control** | GitHub (`rafee/rafee.me`) | Source code and submodule management. |
 
 ---
 
-## How the Deployment Pipeline Works
+## Deployment Pipeline (Cloudflare Pages)
 
-The website uses Cloudflare Pages' native Git integration. Every push to the `master` branch triggers an automated, containerized build and instant global deployment.
+The website uses Cloudflare Pages' native Git integration. Every push to the `master` branch triggers an automated build and global edge deployment.
 
 ```mermaid
 flowchart TD
     A["Developer commits code<br/><code>git push origin master</code>"] --> B["GitHub Webhook triggers<br/>Cloudflare Pages"]
-    B --> C["Cloudflare Build Runner spins up<br/>(Linux Build Environment)"]
-    C --> D["Fetch Submodules<br/><code>git submodule update --init --recursive</code>"]
-    D --> E["Run Hugo Build<br/><code>hugo --gc --minify</code>"]
-    E --> F["Deploy <code>public/</code> folder to<br/>Cloudflare Global Edge Network"]
-    F --> G["Live on https://rafee.me<br/>(Cache Purged & Instant SSL)"]
+    B --> C["Cloudflare Build Runner spins up<br/>(Node.js 20+ Environment)"]
+    C --> D["Install Dependencies<br/><code>npm ci</code>"]
+    D --> E["Run Astro Build<br/><code>npm run build</code>"]
+    E --> F["Deploy <code>dist/</code> folder to<br/>Cloudflare Global Edge Network"]
+    F --> G["Live on https://rafee.me<br/>(Instant Cache Invalidation & Global SSL)"]
 ```
 
-### Pipeline Lifecycle Steps
+### Cloudflare Pages Dashboard Settings
 
-1. **Trigger**: When you execute `git push origin master`, GitHub issues an authorized webhook event to Cloudflare Pages.
-2. **Build Environment**: Cloudflare initializes an isolated container pre-configured with Hugo and Node.js.
-3. **Submodule Initialization**: Cloudflare automatically fetches registered Git submodules (`themes/PaperMod`) using `git submodule update --init --recursive`.
-4. **Build Execution**: Cloudflare executes the configured build command:
-   ```bash
-   hugo --gc --minify
-   ```
-   - `--gc`: Cleans up unused cache items to keep builds lean.
-   - `--minify`: Compresses HTML, XML, CSS, and JS files for maximum load speeds.
-5. **Asset Distribution**: The generated static output in `public/` is copied across Cloudflare's 300+ edge locations worldwide.
-6. **Edge Caching & DNS**: Cloudflare automatically purges cached assets and serves the latest version with zero downtime.
+In the **Cloudflare Dashboard** (**Workers & Pages** $\rightarrow$ your project `rafee-me` $\rightarrow$ **Settings**):
 
----
+#### 1. Build & Deployment Settings
+- **Framework Preset**: `Astro` (or `None`)
+- **Build Command**: `npm run build` *(or `bash build.sh`)*
+- **Build Output Directory**: `dist`
+- **Root Directory**: `/`
 
-## Cloudflare Pages Build Configuration (Build System v3)
-
-In the **Cloudflare Dashboard** (**Workers & Pages** $\rightarrow$ your project $\rightarrow$ **Settings**):
-
-### 1. Build System Version
-- Navigate to **Builds & deployments** $\rightarrow$ **Build system version** $\rightarrow$ Select **Version 3** (latest build image).
-
-### 2. Build Settings
-- **Framework Preset**: `Hugo`
-- **Build Command**: `bash build.sh` *(or `git submodule update --init --recursive && hugo --gc --minify`)*
-- **Build Output Directory**: `public`
-
-### 3. Environment Variables (Production & Preview)
+#### 2. Environment Variables (Production & Preview)
 Under **Settings** $\rightarrow$ **Environment variables**:
-- `HUGO_VERSION`: `0.169.0` *(PaperMod requires a minimum of `0.158.0`)*
-- `GIT_SUBMODULE_UPDATE`: `1` (or `true`)
+- `NODE_VERSION`: `22` (or `20`)
+- `ASTRO_TELEMETRY_DISABLED`: `1`
 
-> **Why Previous Builds Fail**:
-> 1. **Hugo Version Incompatibility**: PaperMod's latest release strictly requires `min_version = "0.158.0"`. Cloudflare Pages' default Hugo version is older (`0.54.0` on v1 or `0.96.0`/`0.118.0` on v2/v3). Without `HUGO_VERSION >= 0.158.0`, Hugo aborts with `ERROR theme "PaperMod" requires Hugo version 0.158.0 or newer`.
-> 2. **Submodule Cloning**: Because themes are Git submodules, if `GIT_SUBMODULE_UPDATE` is omitted, Cloudflare skips downloading `themes/PaperMod`, resulting in `module "PaperMod" not found`.
->
-> **The Solution**: We added [`build.sh`](build.sh), an automated self-healing build script that fetches submodules and automatically installs Hugo Extended `v0.169.0` if the container's version is outdated.
+> [!NOTE]
+> Unlike previous Hugo setups, Astro has **no Git submodule requirements** (`themes/` is eliminated). All styling, components, and layouts reside directly within `src/`.
 
 ---
 
@@ -77,28 +59,50 @@ Under **Settings** $\rightarrow$ **Environment variables**:
 
 ```text
 rafee.me/
-├── archetypes/           # Hugo content templates (default.md)
-├── assets/               # Assets processed by Hugo Pipes (custom CSS/SCSS/JS)
-│   └── css/
-│       └── custom.css    # Custom design layers (badges, card styling, typography)
-├── content/              # Site pages and blog posts (Markdown)
-│   ├── about.md          # About Me page (bio, career, publications, competencies)
-│   ├── projects.md       # Projects & Highlights page
-│   └── posts/            # Technical write-ups and blog articles
-│       ├── HTB_Recollection.md
-│       ├── HTB_RogueOne.md
-│       ├── apple_russia_0_day.md
-│       ├── amplify_nuxt.md
-│       ├── iac.md
-│       └── programming.md
-├── static/               # Static assets copied directly to build output without processing
-│   └── images/           # Photos, post screenshots, diagrams, and avatar (me.jpg)
-├── themes/               # Registered Hugo themes (as Git submodules)
-│   └── PaperMod/         # Theme source repository (Git submodule)
-├── .devcontainer/        # VS Code Dev Container definitions
-├── build.sh              # Automated build & dependency bootstrap script
-├── config.toml           # Core Hugo site configuration, parameters, and navigation
-└── README.md             # Project & architecture documentation
+├── public/                 # Static public assets (copied directly to dist/)
+│   ├── images/             # Post screenshots, photos, diagrams, and avatar (me.jpg)
+│   ├── favicon.svg         # SVG site favicon
+│   └── robots.txt          # Search engine crawl directives
+├── src/
+│   ├── components/         # Reusable Astro components
+│   │   ├── Header.astro    # Navigation bar and theme switcher
+│   │   ├── Footer.astro    # Footer with copyright and social links
+│   │   ├── PostCard.astro  # Blog post preview card
+│   │   ├── SocialIcons.astro # GitHub, X/Twitter, LinkedIn, Email, RSS icons
+│   │   └── UnhurriedArchitecture.astro # Interactive SVG system architecture diagram
+│   ├── content/
+│   │   └── posts/          # Markdown blog posts and security write-ups
+│   │       ├── HTB_Recollection.md
+│   │       ├── HTB_RogueOne.md
+│   │       ├── amplify_nuxt.md
+│   │       ├── apple_russia_0_day.md
+│   │       ├── iac.md
+│   │       ├── programming.md
+│   │       └── zoning_bylaw.md
+│   ├── layouts/
+│   │   └── BaseLayout.astro # Base HTML shell, metadata, theme script & Mermaid runner
+│   ├── pages/              # File-based routing
+│   │   ├── index.astro     # Homepage profile, Unhurried spotlight, recent articles
+│   │   ├── about.astro     # About Me: bio, career milestones, certifications
+│   │   ├── projects.astro  # Highlights: Unhurried, cloud security, forensics
+│   │   ├── archives.astro  # Chronological post timeline
+│   │   ├── search.astro    # Instant search interface
+│   │   ├── 404.astro       # Custom 404 error page
+│   │   ├── rss.xml.ts      # Dynamic RSS feed generator
+│   │   ├── posts/          # Blog post list and dynamic [...slug].astro post route
+│   │   └── tags/           # Tag directory and dynamic [tag].astro filtered views
+│   ├── styles/
+│   │   └── global.css      # Core design system, CSS variables, typography, dark/light theme
+│   ├── utils/              # Helper utilities
+│   │   ├── posts.ts        # Reading time calculation, sorting, and tag extraction
+│   │   └── remarkMermaid.mjs # Remark AST processor for Mermaid code fences
+│   ├── consts.ts           # Site-wide constants, social links, and author info
+│   └── content.config.ts   # Astro v5 Content Collection schema (Zod)
+├── astro.config.mjs        # Astro configuration (MDX, Sitemap, Shiki themes)
+├── build.sh                # Cloudflare Pages bootstrap script
+├── package.json            # Node.js dependencies and build scripts
+├── tsconfig.json           # Strict TypeScript configuration
+└── README.md               # Project documentation
 ```
 
 ---
@@ -106,83 +110,72 @@ rafee.me/
 ## Local Development Workflow
 
 ### 1. Prerequisites
-- **Git** (`>= 2.30`)
-- **Hugo Extended** (`>= 0.130.0`): Install via Chocolatey (`choco install hugo-extended -confirm`) or Winget (`winget install Hugo.Hugo.Extended`).
+- **Node.js** (`>= 18.17.1` or `20+` / `22+`)
+- **npm** (`>= 9.0`)
 
-### 2. Clone Repository (With Submodules)
-Because themes are stored as submodules, clone with `--recursive`:
+### 2. Installation
+Clone the repository and install dependencies:
 ```bash
-git clone --recursive https://github.com/rafee/rafee.me.git
+git clone https://github.com/rafee/rafee.me.git
 cd rafee.me
+npm install
 ```
 
-If already cloned without submodules:
+### 3. Development Server
+Start the local development server with hot-module reloading:
 ```bash
-git submodule update --init --recursive
+npm run dev
 ```
+Open [http://localhost:4321](http://localhost:4321) in your browser.
 
-### 3. Start Local Development Server
+### 4. Production Build & Preview
+Build the static site into `dist/` and preview it locally:
 ```bash
-hugo server -D
+npm run build
+npm run preview
 ```
-- `-D` builds posts marked with `draft: true`.
-- Access the site locally at `http://localhost:1313/`.
-- Hugo provides instant hot-reloading upon saving any Markdown or configuration file.
 
 ---
 
-## Publishing Content
+## Content Management
 
 ### Adding a New Blog Post
-Create a new file in `content/posts/`:
-```bash
-hugo new posts/your-post-title.md
-```
-Or manually create `content/posts/your-post-title.md` with standard frontmatter:
-```yaml
+Create a Markdown (`.md`) or MDX (`.mdx`) file in `src/content/posts/`:
+
+```markdown
 ---
-title: "Your Post Title"
-description: "A short, engaging description for previews and SEO"
-date: 2026-11-03T10:00:00-06:00
-tags: ['cloud-security', 'aws', 'dfir', 'python']
+title: "Securing Cloud Workloads with Ephemeral Credentials"
+description: "A deep dive into IAM role assumption, OIDC federation, and short-lived tokens in multi-cloud environments."
+pubDate: 2026-11-03
+tags: ["cloud-security", "aws", "iam", "automation"]
 draft: false
 ---
 
-Write your content in Markdown here...
+Your markdown content goes here...
 ```
 
-### Deploying Changes
-Simply push to `master`:
-```bash
-git add .
-git commit -m "Add new post: Your Post Title"
-git push origin master
-```
-Cloudflare Pages automatically detects the commit and deploys the update.
+### Supported Markdown Features
+- **Code Highlighting**: Syntax highlighting powered by Shiki (dual light/dark theme).
+- **Mermaid Diagrams**: Fenced code blocks with ````mermaid` are automatically rendered into client-side diagrams.
+- **Reading Time**: Calculated dynamically at build time.
+- **Tags & Taxonomies**: Automatically aggregated under `/tags/` and `/tags/[tag]/`.
 
 ---
 
-## Portfolio Themes & Modernization Guide
+## Unhurried Project Spotlight
 
-The site currently runs **[`PaperMod`](https://github.com/adityatelange/hugo-PaperMod)** with profile mode and custom design enhancements in `assets/css/extended/custom.css`. 
+The website features **[Unhurried](https://github.com/Unhurried-Careers)**, an open-source, resilient career navigation and skills-matching platform designed around privacy-preserving microservices, event-driven queues, and containerized cloud workloads.
 
-### Recommended Themes for Security & Tech Portfolios
-
-If you would like to explore alternative themes in the future, these are the best-in-class options for technical portfolios:
-
-| Theme | Best For | Standout Features |
-| :--- | :--- | :--- |
-| **[`hugo-coder`](https://github.com/luizdepra/hugo-coder)** *(Current)* | Minimalist, distraction-free, terminal-inspired | Ultra-fast load times, low complexity, clean typography, dark/light toggle. |
-| **[`PaperMod`](https://github.com/adityatelange/hugo-PaperMod)** | Modern tech blogs & portfolios | Profile mode with interactive action buttons, built-in Fuse.js search, cover images, reading time, code copy buttons. |
-| **[`Congo`](https://github.com/jpanther/congo)** | Visually rich showcases | Tailwind CSS architecture, modular card grids, article hero images, multi-author support. |
-| **[`Terminal`](https://github.com/panr/hugo-theme-terminal)** | Cyber/Hacker aesthetic | Monospaced fonts, retro green/amber accents, CTF feel. |
+You can explore the live architecture breakdown and interactive diagram on the [Projects Page](https://rafee.me/projects/) or directly on the homepage.
 
 ---
 
-## Maintenance & Incident Rollback
+## Author & Social Handles
 
-If a bad commit ever causes a build error on Cloudflare Pages:
-1. Log in to **Cloudflare Dashboard** $\rightarrow$ **Workers & Pages** $\rightarrow$ **rafee-me** $\rightarrow$ **Deployments**.
-2. Locate the last successful build.
-3. Click the three dots `...` next to that build and select **Rollback to this deployment**.
-4. The edge CDN instantly reverts traffic to the known-good version while you fix the issue locally.
+- **Name**: Mohammad Ishfaque Jahan Rafee
+- **Role**: Security Engineer
+- **Location**: Edmonton, AB, Canada
+- **Website**: [rafee.me](https://rafee.me)
+- **GitHub**: [@rafee](https://github.com/rafee)
+- **X (Twitter)**: [@rafee_in_sec](https://twitter.com/rafee_in_sec)
+- **LinkedIn**: [rafee-sec](https://linkedin.com/in/rafee-sec)

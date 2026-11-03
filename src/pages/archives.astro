@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate, getPostSlug, getPublishedPosts } from '../utils/posts';
+
+const posts = await getPublishedPosts();
+
+// Group by year
+const postsByYear = new Map<number, typeof posts>();
+posts.forEach((post) => {
+  const year = post.data.date.getUTCFullYear();
+  const list = postsByYear.get(year) || [];
+  list.push(post);
+  postsByYear.set(year, list);
+});
+
+const sortedYears = Array.from(postsByYear.keys()).sort((a, b) => b - a);
+---
+
+<BaseLayout
+  title="Archive"
+  description="Chronological archive of all technical writeups and articles published on rafee.me."
+>
+  <header class="page-header">
+    <h1 class="page-title">Chronological Archive</h1>
+    <p class="page-lead">A timeline of all {posts.length} published articles and technical notes.</p>
+  </header>
+
+  <div class="archive-timeline">
+    {sortedYears.map((year) => {
+      const yearPosts = postsByYear.get(year) || [];
+      return (
+        <section class="year-block">
+          <h2 class="year-heading">{year} <span class="year-count">({yearPosts.length})</span></h2>
+          <ul class="archive-list">
+            {yearPosts.map((post) => {
+              const slug = getPostSlug(post);
+              return (
+                <li class="archive-item">
+                  <time datetime={post.data.date.toISOString()} class="archive-date">
+                    {formatDate(post.data.date)}
+                  </time>
+                  <a href={`/posts/${slug}/`} class="archive-title">
+                    {post.data.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      );
+    })}
+  </div>
+</BaseLayout>
+
+<style>
+  .archive-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .year-heading {
+    margin: 0 0 1rem;
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+
+  .year-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .archive-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .archive-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 0.4rem 0;
+    flex-wrap: wrap;
+  }
+
+  .archive-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: "JetBrains Mono", Consolas, monospace;
+    min-width: 6.8rem;
+    flex-shrink: 0;
+  }
+
+  .archive-title {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .archive-title:hover {
+    color: var(--accent);
+  }
+</style>

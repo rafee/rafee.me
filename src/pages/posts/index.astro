@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts, slugifyTag } from '../../utils/posts';
+
+const posts = await getPublishedPosts();
+
+// Collect all unique tags with count
+const tagCounts = new Map<string, number>();
+posts.forEach((p) => {
+  p.data.tags.forEach((t) => {
+    tagCounts.set(t, (tagCounts.get(t) || 0) + 1);
+  });
+});
+
+const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1]);
+---
+
+<BaseLayout
+  title="Technical Blog"
+  description="Security writeups, DFIR walkthroughs, cloud defense notes, and automation experiments by Mohammad Ishfaque Jahan Rafee."
+>
+  <header class="page-header">
+    <h1 class="page-title">Technical Blog &amp; Writeups</h1>
+    <p class="page-lead">
+      Deep-dive investigations into memory forensics, incident response, zero-day threat analysis, cloud defense, and programming automation.
+    </p>
+  </header>
+
+  {sortedTags.length > 0 && (
+    <div class="tags-filter-bar">
+      <span class="tags-filter-label">Filter by Tag:</span>
+      <div class="tags-filter-list">
+        {sortedTags.map(([tag, count]) => (
+          <a href={`/tags/${slugifyTag(tag)}/`} class="badge">
+            #{tag} <span class="tag-count">({count})</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="post-grid">
+    {posts.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .tags-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    padding: 1rem 1.15rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .tags-filter-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .tags-filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag-count {
+    opacity: 0.75;
+    font-size: 0.72rem;
+    margin-left: 0.15rem;
+  }
+
+  .post-grid {
+    display: grid;
+    gap: 1.15rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .post-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

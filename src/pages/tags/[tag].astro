@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts, slugifyTag, type PostEntry } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const tagMap = new Map<string, { label: string; posts: PostEntry[] }>();
+
+  posts.forEach((post) => {
+    post.data.tags.forEach((tag) => {
+      const slug = slugifyTag(tag);
+      const existing = tagMap.get(slug);
+      if (existing) {
+        existing.posts.push(post);
+      } else {
+        tagMap.set(slug, { label: tag, posts: [post] });
+      }
+    });
+  });
+
+  return Array.from(tagMap.entries()).map(([slug, { label, posts }]) => ({
+    params: { tag: slug },
+    props: { label, posts },
+  }));
+}
+
+const { label, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`Posts tagged #${label}`}
+  description={`Articles, tutorials, and security writeups tagged with #${label}.`}
+>
+  <nav class="back-nav" aria-label="Breadcrumb">
+    <a href="/tags/" class="back-link">&larr; All tags</a>
+  </nav>
+
+  <header class="page-header">
+    <h1 class="page-title">Tag: #{label}</h1>
+    <p class="page-lead">
+      Showing {posts.length} {posts.length === 1 ? 'post' : 'posts'} filed under #{label}.
+    </p>
+  </header>
+
+  <div class="post-grid">
+    {posts.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .back-nav {
+    margin-bottom: 1.25rem;
+  }
+
+  .back-link {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .post-grid {
+    display: grid;
+    gap: 1.15rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .post-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
