@@ -11,11 +11,10 @@ The site is built as a fast, secure, minimalist static site using **[Hugo](https
 | Component | Technology | Description |
 | :--- | :--- | :--- |
 | **Static Site Generator (SSG)** | Hugo (`v0.131.0+`) | Generates static HTML/CSS from Markdown in milliseconds. |
-| **Theme** | [`hugo-coder`](https://github.com/luizdepra/hugo-coder) | Minimalist, responsive, distraction-free developer/security theme. |
+| **Theme** | [`PaperMod`](https://github.com/adityatelange/hugo-PaperMod) | Modern, responsive portfolio theme with light/dark mode and Fuse.js search. |
 | **Hosting & CDN** | Cloudflare Pages | Automated CI/CD pipeline, edge compute, and global asset distribution. |
 | **DNS & Security** | Cloudflare DNS & Edge | Automated SSL/TLS certificates, HTTP/3, DDoS mitigation, and edge caching. |
 | **Version Control** | GitHub (`rafee/rafee.me`) | Source code and submodule management. |
-| **Comments** | Disqus (`rafee-me`) | Lightweight comment integration. |
 
 ---
 
@@ -37,7 +36,7 @@ flowchart TD
 
 1. **Trigger**: When you execute `git push origin master`, GitHub issues an authorized webhook event to Cloudflare Pages.
 2. **Build Environment**: Cloudflare initializes an isolated container pre-configured with Hugo and Node.js.
-3. **Submodule Initialization**: Cloudflare automatically fetches registered Git submodules (`themes/hugo-coder`) using `git submodule update --init --recursive`.
+3. **Submodule Initialization**: Cloudflare automatically fetches registered Git submodules (`themes/PaperMod`) using `git submodule update --init --recursive`.
 4. **Build Execution**: Cloudflare executes the configured build command:
    ```bash
    hugo --gc --minify
@@ -85,7 +84,7 @@ rafee.me/
 ├── static/               # Static assets copied directly to build output without processing
 │   └── images/           # Photos, post screenshots, diagrams, and avatar (me.jpg)
 ├── themes/               # Registered Hugo themes (as Git submodules)
-│   └── hugo-coder/       # Theme source repository
+│   └── PaperMod/         # Theme source repository (Git submodule)
 ├── .devcontainer/        # VS Code Dev Container definitions
 ├── config.toml           # Core Hugo site configuration, parameters, and navigation
 ├── netlify.toml          # Legacy Netlify build configuration (reference)
@@ -155,7 +154,7 @@ Cloudflare Pages automatically detects the commit and deploys the update.
 
 ## Portfolio Themes & Modernization Guide
 
-The site currently runs **[`hugo-coder`](https://github.com/luizdepra/hugo-coder)** with custom design enhancements in `assets/css/custom.css`. 
+The site currently runs **[`PaperMod`](https://github.com/adityatelange/hugo-PaperMod)** with profile mode and custom design enhancements in `assets/css/extended/custom.css`. 
 
 ### Recommended Themes for Security & Tech Portfolios
 

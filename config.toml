@@ -1,77 +1,113 @@
 baseURL = "https://rafee.me"
-defaultcontentlanguage = "en"
-languageCode = "en"
-theme = "hugo-coder"
 title = "Mohammad Ishfaque Jahan Rafee"
+languageCode = "en"
+defaultContentLanguage = "en"
+theme = "PaperMod"
 
-# Code Highlight
-[markup.highlight]
-style = "github-dark"
+paginate = 8
 
-[services]
-[services.disqus]
-shortname = "rafee-me"
+[outputs]
+home = ["HTML", "RSS", "JSON"]
 
-paginate = 8 # articles per page
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "github-dark"
 
 [params]
-author = "Mohammad Ishfaque Jahan Rafee"
-avatarurl = "images/me.jpg"
+env = "production"
+title = "Mohammad Ishfaque Jahan Rafee"
 description = "Mohammad Ishfaque Jahan Rafee — Security Engineer specializing in Cloud Security (AWS & OCI), Infrastructure Defense, DFIR, and Security Automation."
-keywords = "Mohammad Ishfaque Jahan Rafee, rafee-sec, cybersecurity, security engineer, cloud security, AWS, OCI, DFIR, incident response, python, go, edmonton"
-info = "Security Engineer | Cloud Security & Infrastructure"
-subtitle = "Your Friendly Neighbourhood Security Guy • Aspiring to be better every day"
+keywords = ["Mohammad Ishfaque Jahan Rafee", "rafee-sec", "cybersecurity", "security engineer", "cloud security", "AWS", "OCI", "DFIR", "incident response", "python", "go", "edmonton"]
+author = "Mohammad Ishfaque Jahan Rafee"
 
-colorScheme = "auto"
-hidecolorschemetoggle = false
-customCSS = ["css/custom.css"]
+# Light & Dark Theme Configuration
+defaultTheme = "auto"
+disableThemeToggle = false
 
-# Social Tags
+# Reading and Navigation Features
+ShowReadingTime = true
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+ShowRssButtonInSectionTermList = true
+UseHugoToc = true
+disableSpecial1stPost = true
+disableScrollToTop = false
 
-[[params.social]]
-icon = "fa fa-github fa-2x"
-name = "GitHub"
-url = "https://github.com/rafee"
-weight = 1
+# Profile Landing Page Layout
+[params.profileMode]
+enabled = true
+title = "Mohammad Ishfaque Jahan Rafee"
+subtitle = "Security Engineer • Cloud Defense (AWS & OCI) • DFIR • Automation"
+imageUrl = "images/me.jpg"
+imageTitle = "Mohammad Ishfaque Jahan Rafee"
+imageWidth = 140
+imageHeight = 140
 
-[[params.social]]
-icon = "fa fa-twitter fa-2x"
-name = "Twitter"
-url = "https://twitter.com/rafee_sec"
-weight = 2
-
-[[params.social]]
-icon = "fa fa-linkedin fa-2x"
-name = "Linkedin"
-url = "https://www.linkedin.com/in/rafee-sec/"
-weight = 3
-
-# Posts config
-
-[taxonomies]
-author = "authors"
-category = "categories"
-series = "series"
-tag = "tags"
-
-# Main menu Items
-
-[[menu.main]]
-name = "Home"
-url = "/"
-weight = 1
-
-[[menu.main]]
-name = "About"
+[[params.profileMode.buttons]]
+name = "About Me"
 url = "/about"
-weight = 2
 
-[[menu.main]]
+[[params.profileMode.buttons]]
 name = "Projects"
 url = "/projects"
-weight = 3
 
-[[menu.main]]
+[[params.profileMode.buttons]]
 name = "Blog"
 url = "/posts"
-weight = 4
+
+[[params.profileMode.buttons]]
+name = "Search"
+url = "/search"
+
+# Social Links
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/rafee"
+
+[[params.socialIcons]]
+name = "twitter"
+url = "https://twitter.com/rafee_sec"
+
+[[params.socialIcons]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/rafee-sec/"
+
+[[params.socialIcons]]
+name = "email"
+url = "mailto:mij.rafee.1344@gmail.com"
+
+# Main Navigation
+[menu]
+  [[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about"
+  weight = 10
+
+  [[menu.main]]
+  identifier = "projects"
+  name = "Projects"
+  url = "/projects"
+  weight = 20
+
+  [[menu.main]]
+  identifier = "posts"
+  name = "Blog"
+  url = "/posts"
+  weight = 30
+
+  [[menu.main]]
+  identifier = "archives"
+  name = "Archive"
+  url = "/archives"
+  weight = 40
+
+  [[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search"
+  weight = 50
