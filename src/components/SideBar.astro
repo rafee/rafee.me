@@ -12,10 +12,10 @@ const { sideBarActiveItemID } = Astro.props;
 
 <div class="drawer-side z-40">
   <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-  <aside class="px-2 pt-2 h-auto min-h-full w-[19rem] bg-base-200 text-base-content flex flex-col justify-between">
-    <div class="top-content">
+  <aside class="px-2 pt-2 h-screen max-h-screen w-[19rem] bg-base-200 text-base-content flex flex-col justify-between overflow-hidden">
+    <div class="top-content flex-1 flex flex-col overflow-y-auto">
       <!-- Profile Avatar / Brand -->
-      <div class="avatar flex justify-center pt-6 pb-3">
+      <div class="avatar flex justify-center pt-6 pb-3 shrink-0">
         <div class="w-28 h-28 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-2 transition-transform duration-200 hover:scale-105 overflow-hidden shadow-md">
           <a href="/" aria-label="Home">
             <img src={SITE.avatar} alt={SITE.title} class="w-full h-full object-cover" width="112" height="112" />
@@ -23,23 +23,25 @@ const { sideBarActiveItemID } = Astro.props;
         </div>
       </div>
 
-      <div class="text-center px-4 mb-2">
+      <div class="text-center px-4 mb-2 shrink-0">
         <a href="/" class="text-lg font-bold hover:text-primary transition-colors block">
           {SITE.shortName}
         </a>
         <p class="text-xs opacity-75 font-medium mt-0.5">{SITE.role}</p>
         <div class="flex items-center justify-center gap-1 text-[11px] opacity-60 mt-1">
-          <span>📍 {SITE.location}</span>
+          <span>📍 {SITE.cityState}</span>
         </div>
       </div>
 
-      <div class="divider my-1 px-4 opacity-40"></div>
+      <div class="divider my-1 px-4 opacity-40 shrink-0"></div>
 
       <!-- Navigation Menu -->
       <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     </div>
 
     <!-- Persistent Bottom Bar -->
-    <SideBarFooter />
+    <div class="shrink-0">
+      <SideBarFooter />
+    </div>
   </aside>
 </div>

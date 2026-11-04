@@ -119,3 +119,18 @@ pre.astro-code {
   border-color: var(--color-primary);
   opacity: 1;
 }
+
+/* Immediate theme icon rendering before JS hydration */
+html[data-theme='cupcake'] .theme-icon-cupcake {
+  display: inline-block !important;
+}
+html[data-theme='cupcake'] .theme-icon-dark {
+  display: none !important;
+}
+
+html[data-theme='dark'] .theme-icon-dark {
+  display: inline-block !important;
+}
+html[data-theme='dark'] .theme-icon-cupcake {
+  display: none !important;
+}

@@ -3,11 +3,18 @@ import { SITE } from '../consts';
 const today = new Date();
 ---
 
-<footer class="footer footer-center block mb-5 pt-10 text-base-content opacity-75 border-t border-base-200 mt-12">
-  <div class="pb-2 text-xs">
-    &copy; {today.getFullYear()} <span class="font-semibold">{SITE.title}</span>. Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="font-bold hover:text-primary transition-colors">Astro</a> &amp; <a href="https://github.com/manuelernestog/astrofy" target="_blank" rel="noopener noreferrer" class="font-bold hover:text-primary transition-colors">Astrofy</a>.
-  </div>
-  <div class="inline opacity-70 text-[11px] font-mono">
-    Theme: <span class="badge badge-sm badge-outline">Cupcake</span> for light &bull; <span class="badge badge-sm badge-outline">Dark</span> for dark &bull; Synced with system
+<footer class="w-full border-t border-base-200 mt-16 py-8 px-6 text-center text-base-content/75 bg-base-100">
+  <div class="max-w-[960px] mx-auto flex flex-col items-center justify-center gap-2">
+    <div class="text-xs sm:text-sm">
+      &copy; {today.getFullYear()} <span class="font-semibold text-base-content">{SITE.title}</span>. Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="font-bold text-primary hover:underline">Astro</a> &amp; <a href="https://github.com/manuelernestog/astrofy" target="_blank" rel="noopener noreferrer" class="font-bold text-primary hover:underline">Astrofy</a>.
+    </div>
+    <div class="flex items-center gap-2 text-xs font-mono opacity-70 flex-wrap justify-center">
+      <span>Theme:</span>
+      <span class="badge badge-sm badge-outline">🧁 Cupcake (Light)</span>
+      <span>&bull;</span>
+      <span class="badge badge-sm badge-outline">🌙 Dark</span>
+      <span>&bull;</span>
+      <span>Auto-synced with system</span>
+    </div>
   </div>
 </footer>
