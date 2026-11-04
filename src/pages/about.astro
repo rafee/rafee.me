@@ -5,140 +5,266 @@ import { SITE } from '../consts';
 
 <BaseLayout
   title="About & CV"
-  description="Background, career journey, security competencies, and academic research of Mohammad Ishfaque Jahan Rafee."
+  description="Resume, career history, enterprise security architecture, and cloud engineering background of Ishfaque Jahan Rafee."
   sideBarActiveItemID="about"
 >
+  <!-- Resume Header & Contact Card -->
   <div class="mb-8">
-    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">About &amp; CV</h1>
-    <p class="text-base sm:text-lg opacity-80 leading-relaxed max-w-2xl">
-      Hi, I'm <strong>{SITE.title}</strong> — a <strong>{SITE.role}</strong> based in {SITE.location}. Online, I write and build as <a href={SITE.socials.twitter} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{SITE.socials.twitterHandle}</a>.
-    </p>
-  </div>
-
-  <div class="prose lg:prose-lg max-w-none text-base-content">
-    <p>
-      I specialize in <strong>Cloud Security Architecture (AWS &amp; OCI)</strong>, <strong>Infrastructure Defense</strong>, <strong>Digital Forensics &amp; Incident Response (DFIR)</strong>, and <strong>Security Automation</strong>. My engineering philosophy centers on building pragmatic, robust defenses that empower development and operations rather than slowing them down.
-    </p>
-
-    <div class="divider my-6"></div>
-
-    <h2 class="text-2xl font-bold mb-4">Professional Experience</h2>
-
-    <div class="space-y-6 not-prose my-6">
-      <!-- CMiC -->
-      <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm">
-        <div class="flex items-start justify-between flex-wrap gap-2 mb-2">
-          <div>
-            <h3 class="text-lg font-bold">Security Engineer</h3>
-            <p class="text-sm font-semibold text-primary">CMiC &bull; Cloud ERP Security</p>
-          </div>
-          <span class="badge badge-outline text-xs font-mono">Present</span>
-        </div>
-        <p class="text-sm opacity-80 mb-3">
-          Safeguarding enterprise ERP cloud environments across <strong>Amazon Web Services (AWS)</strong> and <strong>Oracle Cloud Infrastructure (OCI)</strong>:
+    <div class="flex items-start justify-between flex-wrap gap-4 mb-3">
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-1 text-base-content">
+          {SITE.title}
+        </h1>
+        <p class="text-lg sm:text-xl font-bold text-primary">
+          Security Engineer &amp; Enterprise Security Architect
         </p>
-        <ul class="list-disc pl-5 text-sm opacity-80 space-y-1">
-          <li><strong>Cloud Security Architecture</strong>: Designed multi-account isolation, landing zones, transit network segmentation, and IAM least-privilege boundary policies.</li>
-          <li><strong>Detection Engineering &amp; Incident Response</strong>: Spearheaded security telemetry pipelines aggregating VPC Flow Logs, CloudTrail, GuardDuty, and audit trails into automated alerting.</li>
-          <li><strong>DevSecOps &amp; Infrastructure as Code</strong>: Embedded security guardrails into Terraform IaC pipelines, enforcing drift detection and pre-deployment policy checks.</li>
-        </ul>
       </div>
 
-      <!-- ZTE -->
-      <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm">
-        <div class="flex items-start justify-between flex-wrap gap-2 mb-2">
-          <div>
-            <h3 class="text-lg font-bold">Technical Account Manager / Pre-Sales</h3>
-            <p class="text-sm font-semibold text-primary">ZTE Corporation</p>
-          </div>
-          <span class="badge badge-outline text-xs font-mono">2017 – 2019</span>
-        </div>
-        <p class="text-sm opacity-80 mb-3">
-          Led technical consulting and account management for high-stakes telecommunications and government infrastructure projects, including a multi-vendor project valued near <strong>USD $200M</strong>.
-        </p>
-        <ul class="list-disc pl-5 text-sm opacity-80 space-y-1">
-          <li>Coordinated multi-stakeholder security governance and compliance reviews.</li>
-          <li>Bridged engineering teams and C-suite leadership on mission-critical system migrations.</li>
-        </ul>
-      </div>
-
-      <!-- Huawei -->
-      <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm">
-        <div class="flex items-start justify-between flex-wrap gap-2 mb-2">
-          <div>
-            <h3 class="text-lg font-bold">Solutions Engineer</h3>
-            <p class="text-sm font-semibold text-primary">Huawei Technologies</p>
-          </div>
-          <span class="badge badge-outline text-xs font-mono">2015 – 2017</span>
-        </div>
-        <p class="text-sm opacity-80 mb-3">
-          Communicated across the entire organizational spectrum, collaborating with seasoned technical teams on granular technical details while articulating business impact, ROI, and risk posture to CXO executives.
-        </p>
+      <div class="flex flex-wrap gap-2">
+        <a href={`mailto:${SITE.email}`} class="btn btn-primary btn-sm gap-1.5">
+          <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Email Me
+        </a>
+        <a href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm gap-1.5">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.6a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/></svg>
+          LinkedIn
+        </a>
       </div>
     </div>
 
-    <div class="divider my-6"></div>
+    <!-- Quick Meta Pills -->
+    <div class="flex flex-wrap items-center gap-2 text-xs font-mono opacity-80 mb-4">
+      <span class="badge badge-ghost badge-sm">📍 {SITE.location}</span>
+      <span class="badge badge-ghost badge-sm">✉️ {SITE.email}</span>
+      <span class="badge badge-ghost badge-sm">📞 {SITE.phone}</span>
+      <span class="badge badge-ghost badge-sm">🔗 <a href={SITE.socials.twitter} target="_blank" rel="noopener noreferrer" class="hover:underline">{SITE.socials.twitterHandle}</a></span>
+    </div>
 
-    <h2 class="text-2xl font-bold mb-4">Education</h2>
+    <!-- Professional Summary Card -->
+    <div class="card bg-base-100 border border-base-300 p-6 rounded-2xl shadow-sm mb-8">
+      <div class="text-xs uppercase font-mono tracking-wider text-primary font-bold mb-2">
+        Professional Summary
+      </div>
+      <p class="text-base leading-relaxed opacity-90">
+        <strong>CISSP</strong> and <strong>AWS-certified Security Architect</strong> with <strong>9+ years of experience</strong>, with 4 years in technical pre-sales and the remainder in enterprise security architecture and security engineering. Experienced in conducting <strong>Proof of Value (PoV)</strong> evaluations both as vendor and customer. <em>Employee #4 at CMiC security team, #2 at Huawei Cloud Solutions team.</em>
+      </p>
+    </div>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose my-6">
+  <!-- Certifications Banner -->
+  <section class="mb-10">
+    <h2 class="text-xl sm:text-2xl font-bold tracking-tight mb-4 flex items-center gap-2">
+      <span>Certifications</span>
+      <span class="badge badge-primary badge-sm">Industry Credentials</span>
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl shadow-xs hover:border-primary/50 transition-colors">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-lg">🛡️</span>
+          <span class="font-bold text-sm">CISSP</span>
+        </div>
+        <p class="text-xs font-semibold text-primary">Certified Information Systems Security Professional</p>
+        <p class="text-[11px] opacity-60 font-mono mt-1">(ISC)²</p>
+      </div>
+
+      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl shadow-xs hover:border-primary/50 transition-colors">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-lg">☁️</span>
+          <span class="font-bold text-sm">Solutions Architect Pro</span>
+        </div>
+        <p class="text-xs font-semibold text-primary">AWS Certified Solutions Architect – Professional</p>
+        <p class="text-[11px] opacity-60 font-mono mt-1">Amazon Web Services (AWS)</p>
+      </div>
+
+      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl shadow-xs hover:border-primary/50 transition-colors">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-lg">🔒</span>
+          <span class="font-bold text-sm">Security Specialty</span>
+        </div>
+        <p class="text-xs font-semibold text-primary">AWS Certified Security – Specialty</p>
+        <p class="text-[11px] opacity-60 font-mono mt-1">Amazon Web Services (AWS)</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider my-8"></div>
+
+  <!-- Professional Experience -->
+  <section class="mb-10">
+    <h2 class="text-xl sm:text-2xl font-bold tracking-tight mb-6">
+      Professional Experience
+    </h2>
+
+    <div class="space-y-6">
+      <!-- CMiC -->
+      <div class="card bg-base-100 border border-base-200 p-6 rounded-2xl shadow-sm hover:border-primary/30 transition-all">
+        <div class="flex items-start justify-between flex-wrap gap-2 mb-3 pb-3 border-b border-base-200">
+          <div>
+            <h3 class="text-xl font-bold">Security Engineer</h3>
+            <p class="text-sm font-semibold text-primary">CMiC &bull; Remote, Canada</p>
+          </div>
+          <span class="badge badge-primary font-mono text-xs py-2.5 px-3">May 2021 – Present</span>
+        </div>
+
+        <div class="space-y-3.5 text-sm leading-relaxed opacity-90">
+          <div>
+            <strong class="text-base-content font-bold">• Strategic Platform Evaluation &amp; PoV Leadership:</strong> Orchestrated competitive Proof-of-Value (PoV) engagements and technical validation assessments evaluating major enterprise platforms, including <strong>Palo Alto Networks, SentinelOne, and CrowdStrike</strong>. Aligned technical solutions to business needs, architecting designs that balanced security and operational efficiency to drive a minimum of <strong>$200K CAD in annual savings</strong> (a <strong>45% budget reduction</strong> for enterprise workloads).
+          </div>
+
+          <div>
+            <strong class="text-base-content font-bold">• SecOps &amp; Incident Response:</strong> Managed <strong>Sentinel SIEM</strong> and <strong>Defender EDR</strong> across <strong>1,400+ endpoints</strong>, enforcing CIS baselines and vulnerability patching. Led end-to-end incident response via the <strong>MITRE ATT&amp;CK</strong> framework and optimized log ingestion to reduce annual SIEM costs by <strong>25%</strong>.
+          </div>
+
+          <div>
+            <strong class="text-base-content font-bold">• Cloud Security Architecture:</strong> Acted as the enterprise security architect to design and manage complex, multi-cloud environments (<strong>AWS, Azure, OCI</strong>). Implemented <strong>AWS Control Tower</strong> to simplify implementation of compliance controls such as <strong>SOC2, ISO 27001, and ISO 42001</strong>.
+          </div>
+
+          <div>
+            <strong class="text-base-content font-bold">• Automation &amp; Engineering:</strong> Developed custom automation using <strong>Python</strong> and APIs for change management, achieving a <strong>70% reduction in operational overhead</strong>.
+          </div>
+
+          <div>
+            <strong class="text-base-content font-bold">• SASE &amp; Zero-Trust Network Design:</strong> Positioned and implemented comprehensive SASE and ZTNA (<strong>Cloudflare One</strong>) architectures to drive secure, identity-centric environments. Partnered with IT to gain buy-in for IAM strategies, encompassing SSO, <strong>Microsoft Entra ID conditional access</strong>, and phishing-resistant MFA to maximize security posture.
+          </div>
+
+          <div>
+            <strong class="text-base-content font-bold">• Penetration Testing Program:</strong> Owned annual scoping, vendor selection, and remediation follow-through. Reconstructed multiple years of engagement history into a year-over-year findings analysis, isolating shared local administrator credentials as the persistent root cause behind an earlier full Active Directory compromise.
+          </div>
+
+          <div>
+            <strong class="text-base-content font-bold">• Application Security (AppSec):</strong> Led PoV engagements across seven different vendors to implement the organization's first DAST solution. Fully owned the application vulnerability management program from discovery, confirmation and remediation using <strong>Escape DAST</strong> and Jira tracking. Improved operational flexibility and security by transitioning to risk-based traffic scoring, successfully reducing WAF exceptions by <strong>100%</strong>.
+          </div>
+
+          <div>
+            <strong class="text-base-content font-bold">• Data Security &amp; DLP:</strong> Architected Data Loss Prevention (DLP) strategy for <strong>50TB+ of sensitive data</strong>. Organized PoV to consolidate tools into a single platform and applied Information Rights Management (IRM) policies to address compliance and security requirements.
+          </div>
+        </div>
+      </div>
+
+      <!-- Concordia University -->
+      <div class="card bg-base-100 border border-base-200 p-6 rounded-2xl shadow-sm hover:border-primary/30 transition-all">
+        <div class="flex items-start justify-between flex-wrap gap-2 mb-3 pb-3 border-b border-base-200">
+          <div>
+            <h3 class="text-lg font-bold">Graduate Research Assistant</h3>
+            <p class="text-sm font-semibold text-primary">Concordia University &bull; Montreal, QC</p>
+          </div>
+          <span class="badge badge-outline font-mono text-xs">Sep 2018 – Oct 2020</span>
+        </div>
+
+        <div class="space-y-2.5 text-sm leading-relaxed opacity-90">
+          <div>
+            <strong class="text-base-content font-bold">• Advanced Protocol Engineering:</strong> Developed a video streaming server leveraging experimental QUIC multicast using native UDP multicast over HTTP, writing robust, production-ready code.
+          </div>
+          <div>
+            <strong class="text-base-content font-bold">• Performance Evaluation:</strong> Designed experimental frameworks to evaluate network architectures, benchmarking Golang-based networking libraries against C++ and Java codebases.
+          </div>
+        </div>
+      </div>
+
+      <!-- ZTE Corporation -->
+      <div class="card bg-base-100 border border-base-200 p-6 rounded-2xl shadow-sm hover:border-primary/30 transition-all">
+        <div class="flex items-start justify-between flex-wrap gap-2 mb-3 pb-3 border-b border-base-200">
+          <div>
+            <h3 class="text-lg font-bold">Technical Account Manager</h3>
+            <p class="text-sm font-semibold text-primary">ZTE Corporation &bull; Dhaka, Bangladesh</p>
+          </div>
+          <span class="badge badge-outline font-mono text-xs">Nov 2017 – Aug 2018</span>
+        </div>
+
+        <div class="space-y-2.5 text-sm leading-relaxed opacity-90">
+          <div>
+            <strong class="text-base-content font-bold">• Strategic Account &amp; Technical Sales:</strong> Acted as lead technical advisor to secure and expand a major telecommunications account, driving the executive sales cycle from discovery to close for a high-value enterprise deployment.
+          </div>
+          <div>
+            <strong class="text-base-content font-bold">• Team Orchestration &amp; Delivery:</strong> Managed delivery for <strong>$194M Tier-4 National Data Center</strong>. Shaped proposals, orchestrated delivery teams, and partnered cross-functionally to ensure implementations met strict standards and long-term adoption metrics.
+          </div>
+        </div>
+      </div>
+
+      <!-- Huawei Technologies -->
+      <div class="card bg-base-100 border border-base-200 p-6 rounded-2xl shadow-sm hover:border-primary/30 transition-all">
+        <div class="flex items-start justify-between flex-wrap gap-2 mb-3 pb-3 border-b border-base-200">
+          <div>
+            <h3 class="text-lg font-bold">Solutions Engineer</h3>
+            <p class="text-sm font-semibold text-primary">Huawei Technologies Limited &bull; Dhaka, Bangladesh</p>
+          </div>
+          <span class="badge badge-outline font-mono text-xs">Sep 2014 – Nov 2017</span>
+        </div>
+
+        <div class="space-y-2.5 text-sm leading-relaxed opacity-90">
+          <div>
+            <strong class="text-base-content font-bold">• Pre-Sales &amp; Solutions Engineering:</strong> Acted as primary technical advisor, designing data centers and disaster recovery solutions. Led end-to-end technical evaluations and proofs of concept (PoC) demonstrating RTO/RPO advantages and technical value.
+          </div>
+          <div>
+            <strong class="text-base-content font-bold">• Technical Demonstrations &amp; Discovery:</strong> Conducted discovery meetings and delivered product demos translating business challenges into technical solutions. Attended multiple roadshows as part of Huawei's newly formed Cloud Solutions team.
+          </div>
+          <div>
+            <strong class="text-base-content font-bold">• Infrastructure Modernization:</strong> Consolidated complex environments into unified solutions, successfully achieving an <strong>80% footprint reduction</strong> and <strong>60% TCO reduction</strong> through strategic guidance.
+          </div>
+          <div>
+            <strong class="text-base-content font-bold">• Startup Growth &amp; Market Penetration:</strong> Joined directly out of college as <strong>employee #2</strong> for the Cloud Solution Sales team. Partnered closely with management to break into 100% of regional telecom operators via direct negotiation and RFI/RFP processes within the first year of business.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider my-8"></div>
+
+  <!-- Community Leadership & Volunteer Experience -->
+  <section class="mb-10">
+    <h2 class="text-xl sm:text-2xl font-bold tracking-tight mb-6 flex items-center gap-2">
+      <span>Community Leadership &amp; Volunteer Experience</span>
+    </h2>
+
+    <div class="card bg-base-100 border border-base-200 p-6 rounded-2xl shadow-sm">
+      <div class="flex items-start justify-between flex-wrap gap-2 mb-3 pb-3 border-b border-base-200">
+        <div>
+          <h3 class="text-lg font-bold">Staff, Organizing Committee</h3>
+          <p class="text-sm font-semibold text-primary">BSides Edmonton &bull; Edmonton, AB</p>
+        </div>
+        <span class="badge badge-primary font-mono text-xs py-2 px-3">May 2024 – Present</span>
+      </div>
+
+      <div class="space-y-2.5 text-sm leading-relaxed opacity-90">
+        <div>
+          <strong class="text-base-content font-bold">• Technical Curation &amp; CFP Review:</strong> Served on the Call for Papers (CFP) review board, evaluating and selecting security presentations. Assessed submissions for technical merit, relevance to modern threat landscapes, and value to the cybersecurity community.
+        </div>
+        <div>
+          <strong class="text-base-content font-bold">• Program Architecture:</strong> Curated and designed the conference schedule, balancing technical tracks and sessions to optimize the educational experience for attendees.
+        </div>
+        <div>
+          <strong class="text-base-content font-bold">• Event Operations Leadership:</strong> Directed on-site operations as primary Event Coordinator. Managed speaker logistics, cross-functional volunteer teams, and real-time troubleshooting to ensure seamless conference execution.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider my-8"></div>
+
+  <!-- Education -->
+  <section class="mb-8">
+    <h2 class="text-xl sm:text-2xl font-bold tracking-tight mb-4">
+      Education
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
-        <span class="badge badge-primary badge-sm font-mono mb-2">Graduate Degree</span>
-        <h3 class="text-base font-bold">Master of Engineering (MEng)</h3>
-        <p class="text-sm text-primary font-medium">Information Systems Security</p>
-        <p class="text-xs opacity-75 mt-1">Concordia University &bull; Montreal, Canada</p>
+        <span class="badge badge-primary badge-sm font-mono mb-2">Master of Engineering</span>
+        <h3 class="text-base font-bold">MEng, Information Systems Security</h3>
+        <p class="text-sm text-primary font-medium">Concordia University</p>
+        <p class="text-xs opacity-75 mt-1">Montreal, QC, Canada</p>
         <p class="text-xs opacity-60 mt-2">Specialization: Network Security, Cryptography, Distributed Systems, Software Verification.</p>
       </div>
 
       <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
-        <span class="badge badge-secondary badge-sm font-mono mb-2">Undergraduate</span>
-        <h3 class="text-base font-bold">Bachelor of Science (BSc)</h3>
-        <p class="text-sm text-primary font-medium">Electrical &amp; Electronic Engineering</p>
-        <p class="text-xs opacity-75 mt-1">Bangladesh University of Engineering and Technology (BUET)</p>
-        <p class="text-xs opacity-60 mt-2">Rigorous foundational engineering, signal processing, mathematics, and embedded systems.</p>
+        <span class="badge badge-secondary badge-sm font-mono mb-2">Bachelor of Science</span>
+        <h3 class="text-base font-bold">BSc, Electrical &amp; Electronic Engineering</h3>
+        <p class="text-sm text-primary font-medium">Bangladesh University of Engineering &amp; Technology (BUET)</p>
+        <p class="text-xs opacity-75 mt-1">Dhaka, Bangladesh</p>
+        <p class="text-xs opacity-60 mt-2">Foundational engineering, signals &amp; systems, computational mathematics, embedded logic.</p>
       </div>
     </div>
-
-    <div class="divider my-6"></div>
-
-    <h2 class="text-2xl font-bold mb-4">Core Competencies</h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose my-6">
-      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl">
-        <h4 class="font-bold text-sm mb-2 text-primary font-mono">Cloud Security &amp; Defense</h4>
-        <div class="flex flex-wrap gap-1">
-          <span class="badge badge-sm badge-ghost">AWS</span>
-          <span class="badge badge-sm badge-ghost">OCI</span>
-          <span class="badge badge-sm badge-ghost">IAM / Least-Privilege</span>
-          <span class="badge badge-sm badge-ghost">CloudTrail / GuardDuty</span>
-          <span class="badge badge-sm badge-ghost">KMS</span>
-          <span class="badge badge-sm badge-ghost">Zero Trust</span>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl">
-        <h4 class="font-bold text-sm mb-2 text-primary font-mono">DFIR &amp; SecOps</h4>
-        <div class="flex flex-wrap gap-1">
-          <span class="badge badge-sm badge-ghost">Volatility 2 &amp; 3</span>
-          <span class="badge badge-sm badge-ghost">Memory Forensics</span>
-          <span class="badge badge-sm badge-ghost">Malware Triage</span>
-          <span class="badge badge-sm badge-ghost">Incident Response</span>
-          <span class="badge badge-sm badge-ghost">Linux Auditing</span>
-          <span class="badge badge-sm badge-ghost">SIEM</span>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl">
-        <h4 class="font-bold text-sm mb-2 text-primary font-mono">DevSecOps &amp; Code</h4>
-        <div class="flex flex-wrap gap-1">
-          <span class="badge badge-sm badge-ghost">Python</span>
-          <span class="badge badge-sm badge-ghost">Go</span>
-          <span class="badge badge-sm badge-ghost">Terraform (IaC)</span>
-          <span class="badge badge-sm badge-ghost">CI/CD Security</span>
-          <span class="badge badge-sm badge-ghost">Docker</span>
-          <span class="badge badge-sm badge-ghost">Bash</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
 </BaseLayout>

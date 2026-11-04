@@ -140,9 +140,11 @@ npm run preview
 
 ## Author & Social Handles
 
-- **Name**: Mohammad Ishfaque Jahan Rafee
-- **Role**: Security Engineer
-- **Location**: Edmonton, AB, Canada
+- **Name**: Ishfaque Jahan Rafee
+- **Role**: Security Engineer & Enterprise Security Architect (CISSP, AWS Certified Solutions Architect Pro)
+- **Location**: Vancouver, BC, Canada
+- **Email**: [hire@rafee.me](mailto:hire@rafee.me)
+- **Phone**: +1 (780) 920-7797
 - **Website**: [rafee.me](https://rafee.me)
 - **GitHub**: [@rafee](https://github.com/rafee)
 - **X (Twitter)**: [@rafee_in_sec](https://twitter.com/rafee_in_sec)

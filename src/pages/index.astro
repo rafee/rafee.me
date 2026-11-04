@@ -12,14 +12,21 @@ const latestPosts = posts.slice(0, 4);
 <BaseLayout sideBarActiveItemID="home">
   <!-- Hero Section -->
   <div class="pb-10 pt-2">
-    <div class="text-xl py-1 opacity-80">Hey there 👋</div>
-    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{SITE.title}</h1>
-    <h2 class="text-2xl sm:text-3xl py-3 font-bold text-primary">
-      {SITE.role} &amp; Cloud Security Builder
+    <div class="flex items-center gap-2 flex-wrap mb-2">
+      <span class="text-xl opacity-80">Hey there 👋</span>
+      <span class="badge badge-primary badge-outline text-xs font-mono font-bold">CISSP &bull; AWS Solutions Architect Pro</span>
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-1 text-base-content">
+      {SITE.title}
+    </h1>
+    <h2 class="text-2xl sm:text-3xl py-2 font-bold text-primary">
+      {SITE.role} &amp; Enterprise Security Architect
     </h2>
+
     <div class="py-2">
       <p class="text-base sm:text-lg opacity-85 leading-relaxed max-w-2xl">
-        Specializing in multi-cloud security architecture (<strong>AWS &amp; OCI</strong>), incident response &amp; memory forensics (DFIR), and resilient distributed systems. Currently engineering <strong>Unhurried</strong> — an intentional, privacy-first career platform.
+        With <strong>9+ years of experience</strong> across enterprise cloud security architecture (<strong>AWS, Azure, OCI</strong>), SecOps &amp; DFIR, and technical pre-sales. Employee #4 at CMiC security team, #2 at Huawei Cloud Solutions team. Currently engineering <strong>Unhurried</strong> — an intentional, privacy-first career platform.
       </p>
     </div>
     
@@ -27,14 +34,14 @@ const latestPosts = posts.slice(0, 4);
       <a class="btn btn-primary" href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer">
         Let's Connect
       </a>
+      <a class="btn btn-outline" href="/about/">
+        View Full CV &rarr;
+      </a>
       <a class="btn btn-outline" href="/projects/">
-        View Projects
+        Projects &amp; Systems
       </a>
-      <a class="btn btn-outline" href="/posts/">
-        Read Articles
-      </a>
-      <a class="btn btn-ghost" href="/about/">
-        About &amp; CV &rarr;
+      <a class="btn btn-ghost" href="/posts/">
+        Read Blog
       </a>
     </div>
   </div>

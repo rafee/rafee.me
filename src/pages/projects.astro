@@ -6,13 +6,13 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
 
 <BaseLayout
   title="Projects & Systems"
-  description="Curated technical projects, cloud architecture blueprints, forensics investigations, and engineering research by Mohammad Ishfaque Jahan Rafee."
+  description="Curated technical projects, cloud architecture blueprints, forensics investigations, and engineering research by Ishfaque Jahan Rafee."
   sideBarActiveItemID="projects"
 >
   <div class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">Projects &amp; Systems</h1>
     <p class="text-base sm:text-lg opacity-80 leading-relaxed max-w-2xl">
-      A curated overview of active systems engineering projects, cloud security blueprints, digital forensics tooling, and open-source contributions.
+      A curated overview of active systems engineering projects, cloud security blueprints, enterprise Zero-Trust architectures, and open-source contributions.
     </p>
   </div>
 
@@ -110,19 +110,35 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
 
   <div class="divider my-8"></div>
 
-  <!-- Other Engineering Projects -->
+  <!-- Enterprise Security & Cloud Defense Systems -->
   <section class="mb-8">
     <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
-      Cloud Defense &amp; Security Engineering Tooling
+      Enterprise Security Architecture &amp; Engineering Systems
     </h2>
 
     <div class="flex flex-col gap-4">
       <HorizontalCard
-        title="Multi-Cloud IAM Least-Privilege & Compliance Auditing"
-        desc="Automated policy assessment suite for AWS and OCI analyzing cross-account assume-role chains, unattached credential hygiene, and ephemeral token lifecycle validation."
+        title="Zero-Trust Network Access & SASE Architecture"
+        desc="Designed and implemented enterprise-wide SASE and ZTNA using Cloudflare One, paired with Microsoft Entra ID conditional access and phishing-resistant FIDO2 MFA for identity-centric perimeters."
         url="/about/"
-        badge="SECURITY"
-        tags={["AWS", "OCI", "Python", "Cloud Security", "Boto3"]}
+        badge="ZERO TRUST"
+        tags={["Cloudflare One", "ZTNA", "Entra ID", "SASE", "MFA"]}
+      />
+
+      <HorizontalCard
+        title="Competitive Platform Proof-of-Value (PoV) Program"
+        desc="Technical validation assessments benchmarking Palo Alto Networks, SentinelOne, and CrowdStrike across enterprise workloads, driving $200K CAD in annual savings and 45% budget efficiency."
+        url="/about/"
+        badge="PoV / ARCHITECTURE"
+        tags={["CrowdStrike", "SentinelOne", "Palo Alto", "EDR", "SIEM"]}
+      />
+
+      <HorizontalCard
+        title="Dynamic Application Security Testing (DAST) Program"
+        desc="Evaluated 7 DAST platforms and deployed Escape DAST with Jira automated remediation pipelines, transitioning to risk-based traffic scoring and eliminating 100% of WAF exceptions."
+        url="/about/"
+        badge="APPSEC"
+        tags={["DAST", "Escape", "AppSec", "WAF", "API Security"]}
       />
 
       <HorizontalCard
@@ -134,11 +150,11 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
       />
 
       <HorizontalCard
-        title="Declarative Infrastructure Provisioning with Terraform"
-        desc="Modular Terraform codebases for spinning up zero-trust cloud landing zones, automated backup vaults, and immutable audit logging buckets across multi-region VPC topologies."
+        title="Multi-Cloud Governance & Automated Change Management"
+        desc="Multi-cloud guardrails across AWS, Azure, and OCI leveraging AWS Control Tower for SOC2 and ISO 27001/42001 compliance, plus custom Python API automations cutting operational overhead by 70%."
         url="/posts/iac/"
-        badge="IaC"
-        tags={["Terraform", "Cloud Architecture", "OCI", "DevSecOps"]}
+        badge="AUTOMATION"
+        tags={["AWS Control Tower", "Python", "SOC2", "ISO 27001", "IaC"]}
       />
     </div>
   </section>
