@@ -1,254 +1,104 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PostCard from '../components/PostCard.astro';
-import SocialIcons from '../components/SocialIcons.astro';
+import HorizontalCard from '../components/HorizontalCard.astro';
+import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
+import { getPublishedPosts, getPostSlug, getReadingStats } from '../utils/posts';
 import { SITE } from '../consts';
-import { getPublishedPosts } from '../utils/posts';
 
-const allPosts = await getPublishedPosts();
-const recentPosts = allPosts.slice(0, 4);
+const posts = await getPublishedPosts();
+const latestPosts = posts.slice(0, 4);
 ---
 
-<BaseLayout>
-  <!-- Hero / Profile Section -->
-  <section class="hero-section">
-    <div class="avatar-wrapper">
-      <img
-        src={SITE.avatar}
-        alt={SITE.title}
-        width="150"
-        height="150"
-        class="profile-avatar"
-        loading="eager"
-      />
-    </div>
-
-    <div class="hero-content">
-      <div class="hero-badge-row">
-        <span class="badge badge-emerald">Available for Collaboration</span>
-        <span class="location-badge">📍 {SITE.location}</span>
-      </div>
-
-      <h1 class="hero-name">{SITE.title}</h1>
-      <p class="hero-role">{SITE.role} · {SITE.tagline}</p>
-      <p class="hero-bio">
-        Securing enterprise cloud infrastructure across <strong>AWS</strong> and <strong>OCI</strong>, building detection &amp; forensics pipelines, and architecting mindful systems like <strong>Unhurried</strong>.
+<BaseLayout sideBarActiveItemID="home">
+  <!-- Hero Section -->
+  <div class="pb-10 pt-2">
+    <div class="text-xl py-1 opacity-80">Hey there 👋</div>
+    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{SITE.title}</h1>
+    <h2 class="text-2xl sm:text-3xl py-3 font-bold text-primary">
+      {SITE.role} &amp; Cloud Security Builder
+    </h2>
+    <div class="py-2">
+      <p class="text-base sm:text-lg opacity-85 leading-relaxed max-w-2xl">
+        Specializing in multi-cloud security architecture (<strong>AWS &amp; OCI</strong>), incident response &amp; memory forensics (DFIR), and resilient distributed systems. Currently engineering <strong>Unhurried</strong> — an intentional, privacy-first career platform.
       </p>
-
-      <div class="hero-actions">
-        <a href="/about/" class="btn btn-primary">About Me</a>
-        <a href="/projects/" class="btn">Projects &amp; Systems</a>
-        <a href="/posts/" class="btn">Technical Blog</a>
-        <a href="/search/" class="btn">Search Site</a>
-      </div>
-
-      <div class="hero-socials">
-        <SocialIcons />
-      </div>
     </div>
-  </section>
-
-  <!-- Featured Spotlight: Unhurried -->
-  <section class="spotlight-section">
-    <div class="card spotlight-card">
-      <div class="spotlight-header">
-        <div>
-          <span class="spotlight-kicker">Featured Project</span>
-          <h2 class="spotlight-title">Unhurried — The Intentional Career Platform</h2>
-        </div>
-        <a
-          href="https://github.com/Unhurried-Careers"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="badge"
-        >
-          github.com/Unhurried-Careers ↗
-        </a>
-      </div>
-
-      <p class="spotlight-desc">
-        A cloud-native distributed platform designed to replace AI application spam with deliberate, research-driven outreach. Features a strict 5-role shortlist constraint, Google Cloud Run Go microservices, and React + TypeScript frontend.
-      </p>
-
-      <div class="spotlight-footer">
-        <div class="spotlight-tags">
-          <span class="badge">Go</span>
-          <span class="badge">Cloud Run</span>
-          <span class="badge">API Gateway</span>
-          <span class="badge">Firestore</span>
-          <span class="badge">Terraform</span>
-          <span class="badge">React + TS</span>
-        </div>
-        <a href="/projects/#unhurried" class="btn btn-primary btn-sm">
-          View Architecture Blueprint &rarr;
-        </a>
-      </div>
+    
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <a class="btn btn-primary" href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer">
+        Let's Connect
+      </a>
+      <a class="btn btn-outline" href="/projects/">
+        View Projects
+      </a>
+      <a class="btn btn-outline" href="/posts/">
+        Read Articles
+      </a>
+      <a class="btn btn-ghost" href="/about/">
+        About &amp; CV &rarr;
+      </a>
     </div>
-  </section>
+  </div>
 
-  <!-- Recent Writing -->
-  <section class="recent-section">
-    <div class="section-heading">
-      <h2>Recent Blog Posts &amp; Writeups</h2>
-      <a href="/posts/" class="btn btn-sm">View all ({allPosts.length}) &rarr;</a>
+  <div class="divider my-4"></div>
+
+  <!-- Featured Project Spotlight: Unhurried -->
+  <div class="my-6">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
+        Featured Project: Unhurried {"</>"}
+      </h2>
+      <a
+        href="https://github.com/Unhurried-Careers"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="badge badge-primary gap-1 py-3 px-3 hover:scale-105 transition-transform"
+      >
+        <span>GitHub Org</span>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+      </a>
     </div>
 
-    <div class="post-grid">
-      {recentPosts.map((post) => (
-        <PostCard post={post} />
-      ))}
+    <HorizontalCard
+      title="Unhurried: Intentional Career Navigation Platform"
+      img="/images/nuxt_amplify.png"
+      desc="A mindful, microservice-based career platform designed around privacy-first candidate telemetry, decoupled pub/sub job board indexing, and containerized Google Cloud workloads. Replaces high-volume spray-and-pray with deeply researched, curated opportunities."
+      url="/projects/#unhurried"
+      badge="FLAGSHIP"
+      tags={["GCP", "TypeScript", "React", "Cloud Run", "Terraform", "Firestore"]}
+    />
+
+    <div class="mt-6">
+      <UnhurriedArchitecture />
     </div>
-  </section>
+  </div>
+
+  <div class="divider my-8"></div>
+
+  <!-- Latest Blog Posts -->
+  <div class="my-6">
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
+        Latest Technical Writeups
+      </h2>
+      <a href="/posts/" class="text-sm font-semibold text-primary hover:underline">
+        View All ({posts.length}) &rarr;
+      </a>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      {latestPosts.map((post) => {
+        const stats = getReadingStats(post.body || '');
+        return (
+          <HorizontalCard
+            title={post.data.title}
+            desc={post.data.description || ''}
+            url={`/posts/${getPostSlug(post)}/`}
+            pubDate={post.data.date}
+            readingTime={stats.minutes}
+            tags={post.data.tags}
+          />
+        );
+      })}
+    </div>
+  </div>
 </BaseLayout>
-
-<style>
-  .hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.5rem 0 3rem;
-    gap: 1.5rem;
-  }
-
-  .profile-avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(14, 165, 233, 0.45);
-    box-shadow: var(--shadow-glow);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-  }
-
-  .profile-avatar:hover {
-    transform: scale(1.04);
-    border-color: var(--accent);
-  }
-
-  .hero-badge-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .location-badge {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .hero-name {
-    margin: 0;
-    font-size: clamp(2rem, 5vw, 2.75rem);
-    font-weight: 800;
-    letter-spacing: -0.035em;
-    line-height: 1.15;
-  }
-
-  .hero-role {
-    margin: 0.5rem 0 0;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  .hero-bio {
-    max-width: 38rem;
-    margin: 0.9rem auto 0;
-    color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.65;
-  }
-
-  .hero-actions {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-  }
-
-  .hero-socials {
-    margin-top: 1.25rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  /* Spotlight Card */
-  .spotlight-section {
-    margin: 2rem 0 3.5rem;
-  }
-
-  .spotlight-card {
-    border-left: 4px solid var(--accent);
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .spotlight-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .spotlight-kicker {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-  }
-
-  .spotlight-title {
-    margin: 0.2rem 0 0;
-    font-size: 1.35rem;
-    font-weight: 700;
-  }
-
-  .spotlight-desc {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 0.98rem;
-    line-height: 1.6;
-  }
-
-  .spotlight-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 0.35rem;
-  }
-
-  .spotlight-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-  }
-
-  .btn-sm {
-    padding: 0.4rem 0.85rem;
-    font-size: 0.84rem;
-  }
-
-  /* Recent Writing Grid */
-  .post-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 640px) {
-    .post-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-</style>

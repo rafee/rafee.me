@@ -20,27 +20,38 @@ const { minutes, words } = getReadingStats(post.body);
   title={post.data.title}
   description={post.data.description || post.data.title}
   article={true}
+  sideBarActiveItemID="posts"
 >
-  <article class="post-single">
-    <nav class="back-nav" aria-label="Breadcrumb">
-      <a href="/posts/" class="back-link">&larr; Back to all posts</a>
-    </nav>
+  <article class="max-w-none">
+    <!-- Back Navigation -->
+    <div class="mb-6">
+      <a href="/posts/" class="btn btn-ghost btn-sm gap-2 font-mono text-xs opacity-75 hover:opacity-100">
+        &larr; Back to all writeups
+      </a>
+    </div>
 
-    <header class="post-header">
-      <div class="post-meta-row">
+    <!-- Article Header -->
+    <header class="mb-8 pb-6 border-b border-base-200">
+      <div class="flex items-center gap-2 text-xs font-mono opacity-60 mb-2">
         <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-        <span aria-hidden="true">·</span>
+        <span>•</span>
         <span>{minutes} min read ({words.toLocaleString()} words)</span>
       </div>
 
-      <h1 class="post-title">{post.data.title}</h1>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-base-content">
+        {post.data.title}
+      </h1>
 
-      {post.data.description && <p class="post-lead">{post.data.description}</p>}
+      {post.data.description && (
+        <p class="text-lg opacity-85 leading-relaxed mb-4 italic">
+          {post.data.description}
+        </p>
+      )}
 
       {post.data.tags.length > 0 && (
-        <div class="post-tags-row">
+        <div class="flex flex-wrap gap-1.5 mt-3">
           {post.data.tags.map((tag) => (
-            <a href={`/tags/${slugifyTag(tag)}/`} class="badge">
+            <a href={`/tags/${slugifyTag(tag)}/`} class="badge badge-outline badge-sm hover:badge-primary transition-colors text-xs">
               #{tag}
             </a>
           ))}
@@ -48,87 +59,21 @@ const { minutes, words } = getReadingStats(post.body);
       )}
     </header>
 
-    <div class="prose">
+    <!-- Markdown / MDX Content rendered in DaisyUI / Tailwind Prose -->
+    <div class="prose lg:prose-lg max-w-none">
       <Content />
     </div>
 
-    <footer class="post-footer">
-      <div class="post-footer-actions">
-        <a href="/posts/" class="btn">&larr; Back to blog</a>
-        <a href="#top" class="btn">Back to top &uarr;</a>
-      </div>
-    </footer>
+    <!-- Bottom Navigation Footer -->
+    <div class="divider my-8"></div>
+
+    <div class="flex justify-between items-center flex-wrap gap-4 py-4">
+      <a href="/posts/" class="btn btn-outline btn-sm">
+        &larr; All Articles
+      </a>
+      <a href="/about/" class="btn btn-ghost btn-sm">
+        About the Author &rarr;
+      </a>
+    </div>
   </article>
 </BaseLayout>
-
-<style>
-  .post-single {
-    max-width: 48rem;
-    margin: 0 auto;
-  }
-
-  .back-nav {
-    margin-bottom: 1.5rem;
-  }
-
-  .back-link {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .back-link:hover {
-    color: var(--accent);
-  }
-
-  .post-header {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.75rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .post-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-  }
-
-  .post-title {
-    margin: 0;
-    font-size: clamp(2rem, 4.5vw, 2.6rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.2;
-  }
-
-  .post-lead {
-    margin: 0.85rem 0 0;
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  .post-tags-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 1.15rem;
-  }
-
-  .post-footer {
-    margin-top: 3.5rem;
-    padding-top: 1.75rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .post-footer-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-</style>

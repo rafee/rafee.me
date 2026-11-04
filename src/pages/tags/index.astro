@@ -23,45 +23,28 @@ const allTags = Array.from(tagMap.entries()).sort((a, b) => b[1].count - a[1].co
 <BaseLayout
   title="All Tags"
   description="Browse articles, security writeups, and projects by category and tag."
+  sideBarActiveItemID="tags"
 >
-  <header class="page-header">
-    <h1 class="page-title">Tags &amp; Topics</h1>
-    <p class="page-lead">Browse all technical articles and writeups by subject.</p>
-  </header>
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">Tags &amp; Topics</h1>
+    <p class="text-base sm:text-lg opacity-80 leading-relaxed max-w-2xl">
+      Browse all technical articles and writeups by category.
+    </p>
+  </div>
 
-  <div class="tags-directory">
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
     {allTags.map(([slug, { label, count }]) => (
-      <a href={`/tags/${slug}/`} class="card card-interactive tag-card">
-        <span class="tag-title">#{label}</span>
-        <span class="tag-posts-count">{count} {count === 1 ? 'post' : 'posts'}</span>
+      <a
+        href={`/tags/${slug}/`}
+        class="card bg-base-100 border border-base-200 p-4 rounded-xl hover:border-primary/50 hover:shadow-md transition-all hover:scale-[102%] group"
+      >
+        <span class="font-bold text-sm group-hover:text-primary transition-colors block truncate">
+          #{label}
+        </span>
+        <span class="text-xs opacity-60 font-mono mt-1 block">
+          {count} {count === 1 ? 'article' : 'articles'}
+        </span>
       </a>
     ))}
   </div>
 </BaseLayout>
-
-<style>
-  .tags-directory {
-    display: grid;
-    gap: 0.85rem;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-
-  .tag-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.95rem 1.15rem;
-    text-decoration: none;
-  }
-
-  .tag-title {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--accent);
-  }
-
-  .tag-posts-count {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-</style>

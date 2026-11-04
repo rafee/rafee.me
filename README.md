@@ -2,7 +2,7 @@
 
 Welcome to the source repository for **[rafee.me](https://rafee.me)**, the personal website and technical blog of **Mohammad Ishfaque Jahan Rafee** (Security Engineer).
 
-The site is built with **[Astro](https://astro.build/)** (v5) — leveraging zero-JS by default, strict content collections, Vite-powered builds, Shiki syntax highlighting, and responsive client-rendered Mermaid diagrams. It is continuously deployed to the global edge network via **[Cloudflare Pages](https://pages.cloudflare.com/)**.
+The site is built with **[Astro](https://astro.build/)** using the **[Astrofy](https://github.com/manuelernestog/astrofy)** theme — styled with **Tailwind CSS** and **daisyUI**, featuring automatic system theme synchronization (**Cupcake** for light mode, **Dark** for dark mode), strict content collections, Shiki syntax highlighting, and responsive client-rendered Mermaid diagrams. It is continuously deployed to the global edge network via **[Cloudflare Pages](https://pages.cloudflare.com/)**.
 
 ---
 
@@ -10,9 +10,11 @@ The site is built with **[Astro](https://astro.build/)** (v5) — leveraging zer
 
 | Component | Technology | Description |
 | :--- | :--- | :--- |
-| **Framework / SSG** | [Astro](https://astro.build/) (`v5`) | Island architecture with static HTML generation, zero client runtime by default. |
+| **Framework / SSG** | [Astro](https://astro.build/) | Island architecture with static HTML generation and zero client runtime by default. |
+| **Theme Design** | [Astrofy](https://github.com/manuelernestog/astrofy) | Clean drawer navigation, responsive sidebar, avatar spotlight, and card components. |
+| **Styling & UI** | Tailwind CSS + daisyUI | Modern CSS-first theming with automatic system color scheme detection. |
+| **Color Schemes** | `cupcake` (Light) & `dark` (Dark) | Soft pastel vanilla aesthetic for light mode; sleek modern theme for dark mode. |
 | **Content Engine** | Astro Content Collections (`glob` loader) | Strictly typed Markdown/MDX collections with Zod schema validation. |
-| **Styling & Theme** | Modern CSS Variables | Dark / Light theme system with instant anti-FOUC script and OS preference detection. |
 | **Diagrams** | Mermaid.js & SVG Components | Interactive system architecture diagrams for projects like **Unhurried**. |
 | **Search** | Client-Side Instant Search | Lightweight, dependency-free client search across titles, descriptions, and tags. |
 | **Feeds & SEO** | `@astrojs/rss` + `@astrojs/sitemap` | Auto-generated RSS 2.0 feed (`/rss.xml`) and XML sitemap (`/sitemap-index.xml`). |
@@ -50,9 +52,6 @@ Under **Settings** $\rightarrow$ **Environment variables**:
 - `NODE_VERSION`: `22` (or `20`)
 - `ASTRO_TELEMETRY_DISABLED`: `1`
 
-> [!NOTE]
-> Unlike previous Hugo setups, Astro has **no Git submodule requirements** (`themes/` is eliminated). All styling, components, and layouts reside directly within `src/`.
-
 ---
 
 ## Directory Structure
@@ -64,11 +63,13 @@ rafee.me/
 │   ├── favicon.svg         # SVG site favicon
 │   └── robots.txt          # Search engine crawl directives
 ├── src/
-│   ├── components/         # Reusable Astro components
-│   │   ├── Header.astro    # Navigation bar and theme switcher
-│   │   ├── Footer.astro    # Footer with copyright and social links
-│   │   ├── PostCard.astro  # Blog post preview card
-│   │   ├── SocialIcons.astro # GitHub, X/Twitter, LinkedIn, Email, RSS icons
+│   ├── components/         # Astrofy UI components
+│   │   ├── Header.astro    # Sticky header with mobile drawer toggle & theme button
+│   │   ├── SideBar.astro   # Drawer sidebar with avatar, profile, and navigation
+│   │   ├── SideBarMenu.astro # Sidebar active item link routing
+│   │   ├── SideBarFooter.astro # Social links & quick theme switcher
+│   │   ├── HorizontalCard.astro # Signature Astrofy horizontal post/project card
+│   │   ├── Footer.astro    # Site footer with theme attribution
 │   │   └── UnhurriedArchitecture.astro # Interactive SVG system architecture diagram
 │   ├── content/
 │   │   └── posts/          # Markdown blog posts and security write-ups
@@ -80,10 +81,10 @@ rafee.me/
 │   │       ├── programming.md
 │   │       └── zoning_bylaw.md
 │   ├── layouts/
-│   │   └── BaseLayout.astro # Base HTML shell, metadata, theme script & Mermaid runner
+│   │   └── BaseLayout.astro # Base drawer shell, metadata, theme anti-FOUC & Mermaid runner
 │   ├── pages/              # File-based routing
 │   │   ├── index.astro     # Homepage profile, Unhurried spotlight, recent articles
-│   │   ├── about.astro     # About Me: bio, career milestones, certifications
+│   │   ├── about.astro     # About & CV: bio, timeline, education, competencies
 │   │   ├── projects.astro  # Highlights: Unhurried, cloud security, forensics
 │   │   ├── archives.astro  # Chronological post timeline
 │   │   ├── search.astro    # Instant search interface
@@ -92,13 +93,13 @@ rafee.me/
 │   │   ├── posts/          # Blog post list and dynamic [...slug].astro post route
 │   │   └── tags/           # Tag directory and dynamic [tag].astro filtered views
 │   ├── styles/
-│   │   └── global.css      # Core design system, CSS variables, typography, dark/light theme
+│   │   └── global.css      # Tailwind v4, daisyUI 5 plugin, cupcake/dark themes
 │   ├── utils/              # Helper utilities
 │   │   ├── posts.ts        # Reading time calculation, sorting, and tag extraction
 │   │   └── remarkMermaid.mjs # Remark AST processor for Mermaid code fences
 │   ├── consts.ts           # Site-wide constants, social links, and author info
 │   └── content.config.ts   # Astro v5 Content Collection schema (Zod)
-├── astro.config.mjs        # Astro configuration (MDX, Sitemap, Shiki themes)
+├── astro.config.mjs        # Astro configuration (MDX, Sitemap, Tailwind Vite plugin)
 ├── build.sh                # Cloudflare Pages bootstrap script
 ├── package.json            # Node.js dependencies and build scripts
 ├── tsconfig.json           # Strict TypeScript configuration
@@ -134,39 +135,6 @@ Build the static site into `dist/` and preview it locally:
 npm run build
 npm run preview
 ```
-
----
-
-## Content Management
-
-### Adding a New Blog Post
-Create a Markdown (`.md`) or MDX (`.mdx`) file in `src/content/posts/`:
-
-```markdown
----
-title: "Securing Cloud Workloads with Ephemeral Credentials"
-description: "A deep dive into IAM role assumption, OIDC federation, and short-lived tokens in multi-cloud environments."
-pubDate: 2026-11-03
-tags: ["cloud-security", "aws", "iam", "automation"]
-draft: false
----
-
-Your markdown content goes here...
-```
-
-### Supported Markdown Features
-- **Code Highlighting**: Syntax highlighting powered by Shiki (dual light/dark theme).
-- **Mermaid Diagrams**: Fenced code blocks with ````mermaid` are automatically rendered into client-side diagrams.
-- **Reading Time**: Calculated dynamically at build time.
-- **Tags & Taxonomies**: Automatically aggregated under `/tags/` and `/tags/[tag]/`.
-
----
-
-## Unhurried Project Spotlight
-
-The website features **[Unhurried](https://github.com/Unhurried-Careers)**, an open-source, resilient career navigation and skills-matching platform designed around privacy-preserving microservices, event-driven queues, and containerized cloud workloads.
-
-You can explore the live architecture breakdown and interactive diagram on the [Projects Page](https://rafee.me/projects/) or directly on the homepage.
 
 ---
 

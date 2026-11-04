@@ -1,162 +1,144 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SocialIcons from '../components/SocialIcons.astro';
 import { SITE } from '../consts';
 ---
 
 <BaseLayout
-  title="About Me"
+  title="About & CV"
   description="Background, career journey, security competencies, and academic research of Mohammad Ishfaque Jahan Rafee."
+  sideBarActiveItemID="about"
 >
-  <header class="page-header">
-    <h1 class="page-title">About Me</h1>
-    <p class="page-lead">
-      Hi, I'm <strong>{SITE.title}</strong> — a <strong>{SITE.role}</strong> based in {SITE.location}. Most people know me as <strong>{SITE.shortName}</strong> or online as <a href={SITE.socials.twitter} target="_blank" rel="noopener noreferrer">{SITE.socials.twitterHandle}</a>.
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">About &amp; CV</h1>
+    <p class="text-base sm:text-lg opacity-80 leading-relaxed max-w-2xl">
+      Hi, I'm <strong>{SITE.title}</strong> — a <strong>{SITE.role}</strong> based in {SITE.location}. Online, I write and build as <a href={SITE.socials.twitter} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{SITE.socials.twitterHandle}</a>.
     </p>
-  </header>
+  </div>
 
-  <article class="prose">
+  <div class="prose lg:prose-lg max-w-none text-base-content">
     <p>
       I specialize in <strong>Cloud Security Architecture (AWS &amp; OCI)</strong>, <strong>Infrastructure Defense</strong>, <strong>Digital Forensics &amp; Incident Response (DFIR)</strong>, and <strong>Security Automation</strong>. My engineering philosophy centers on building pragmatic, robust defenses that empower development and operations rather than slowing them down.
     </p>
 
-    <h2>My Journey</h2>
-    <p>
-      My passion for engineering and mathematics began in Bangladesh, which led me to study Electrical and Electronic Engineering at the country's premier institution, the <strong>Bangladesh University of Engineering and Technology (BUET)</strong>.
-    </p>
+    <div class="divider my-6"></div>
 
-    <h3>Technical Pre-Sales &amp; Enterprise Telecom</h3>
-    <p>
-      Following graduation, I spent four formative years in telecommunications and enterprise solutions:
-    </p>
-    <ul>
-      <li>
-        <strong>Huawei Technologies — Solutions Engineer</strong>: Communicated across the entire organizational spectrum. I worked directly with seasoned technical teams on granular technical details while articulating business impact, ROI, and security postures to C-suite/CXO executives.
-      </li>
-      <li>
-        <strong>ZTE Corporation — Technical Account Manager / Pre-Sales</strong>: Led technical consulting and account management for large-scale telecommunications and government infrastructure projects, including a multi-vendor project valued near <strong>USD $200M</strong>. Managing such complex engagements honed my ability to anticipate risks, coordinate cross-functional teams, and ensure robust operational governance.
-      </li>
-    </ul>
+    <h2 class="text-2xl font-bold mb-4">Professional Experience</h2>
 
-    <h3>Graduate Studies &amp; Systems Security</h3>
-    <p>
-      Driven by an enduring enthusiasm for cloud systems, networks, and cybersecurity, I moved to Canada to pursue my graduate degree at <strong>Concordia University</strong> in Montreal. I earned my <strong>Master of Engineering (MEng) in Information Systems Security</strong>, while also working as a Graduate Research Assistant investigating computer vision, projective geometry, and distributed systems.
-    </p>
-
-    <h3>Security Engineering at CMiC</h3>
-    <p>
-      Today, I work as a <strong>Security Engineer at CMiC</strong>, where I safeguard enterprise ERP cloud environments across <strong>Amazon Web Services (AWS)</strong> and <strong>Oracle Cloud Infrastructure (OCI)</strong>:
-    </p>
-    <ul>
-      <li>Implementing continuous risk management, threat modeling, and proactive security guardrails.</li>
-      <li>Designing and implementing automated security auditing and compliance checks using <strong>Python</strong> and <strong>Go</strong>.</li>
-      <li>Analyzing SIEM telemetry, network flow logs, and infrastructure configurations to detect anomalies and strengthen defense-in-depth posture.</li>
-      <li>Championing <strong>Infrastructure as Code (IaC)</strong> with Terraform to ensure our cloud environments remain reproducible, auditable, and secure by default.</li>
-    </ul>
-
-    <h3>Systems Engineering &amp; Current Endeavors: Unhurried</h3>
-    <p>
-      Beyond enterprise cloud security, I am actively architecting <a href="https://github.com/Unhurried-Careers" target="_blank" rel="noopener noreferrer"><strong>Unhurried</strong></a> — a distributed, cloud-native platform on Google Cloud (built with Go microservices, Cloud Run, API Gateway, Firestore, and React) engineered to replace AI application spam with deliberate, curated career research and high-intent candidate outreach.
-    </p>
-
-    <hr />
-
-    <h2>Technical Toolkit &amp; Competencies</h2>
-    <div class="skills-grid not-prose">
-      <div class="card skill-card">
-        <h3>Cloud &amp; Defense</h3>
-        <p>Amazon Web Services (AWS), Oracle Cloud Infrastructure (OCI), Cloud Security Posture Management (CSPM), IAM, Zero-Trust Architecture, Linux/Unix, Docker.</p>
+    <div class="space-y-6 not-prose my-6">
+      <!-- CMiC -->
+      <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm">
+        <div class="flex items-start justify-between flex-wrap gap-2 mb-2">
+          <div>
+            <h3 class="text-lg font-bold">Security Engineer</h3>
+            <p class="text-sm font-semibold text-primary">CMiC &bull; Cloud ERP Security</p>
+          </div>
+          <span class="badge badge-outline text-xs font-mono">Present</span>
+        </div>
+        <p class="text-sm opacity-80 mb-3">
+          Safeguarding enterprise ERP cloud environments across <strong>Amazon Web Services (AWS)</strong> and <strong>Oracle Cloud Infrastructure (OCI)</strong>:
+        </p>
+        <ul class="list-disc pl-5 text-sm opacity-80 space-y-1">
+          <li><strong>Cloud Security Architecture</strong>: Designed multi-account isolation, landing zones, transit network segmentation, and IAM least-privilege boundary policies.</li>
+          <li><strong>Detection Engineering &amp; Incident Response</strong>: Spearheaded security telemetry pipelines aggregating VPC Flow Logs, CloudTrail, GuardDuty, and audit trails into automated alerting.</li>
+          <li><strong>DevSecOps &amp; Infrastructure as Code</strong>: Embedded security guardrails into Terraform IaC pipelines, enforcing drift detection and pre-deployment policy checks.</li>
+        </ul>
       </div>
-      <div class="card skill-card">
-        <h3>DFIR &amp; Threat Analysis</h3>
-        <p>Digital Forensics &amp; Incident Response, Memory Forensics (Volatility 2 &amp; 3), SIEM Log Ingestion, Network Traffic Inspection, Vulnerability Assessment.</p>
+
+      <!-- ZTE -->
+      <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm">
+        <div class="flex items-start justify-between flex-wrap gap-2 mb-2">
+          <div>
+            <h3 class="text-lg font-bold">Technical Account Manager / Pre-Sales</h3>
+            <p class="text-sm font-semibold text-primary">ZTE Corporation</p>
+          </div>
+          <span class="badge badge-outline text-xs font-mono">2017 – 2019</span>
+        </div>
+        <p class="text-sm opacity-80 mb-3">
+          Led technical consulting and account management for high-stakes telecommunications and government infrastructure projects, including a multi-vendor project valued near <strong>USD $200M</strong>.
+        </p>
+        <ul class="list-disc pl-5 text-sm opacity-80 space-y-1">
+          <li>Coordinated multi-stakeholder security governance and compliance reviews.</li>
+          <li>Bridged engineering teams and C-suite leadership on mission-critical system migrations.</li>
+        </ul>
       </div>
-      <div class="card skill-card">
-        <h3>Automation &amp; Scripting</h3>
-        <p>Python, Go, Bash, REST APIs, automated security auditing and remediation scripts, CI/CD pipeline verification.</p>
-      </div>
-      <div class="card skill-card">
-        <h3>IaC &amp; Engineering</h3>
-        <p>Terraform, CloudFormation, GitOps workflows, Algorithmic problem solving in Go, Python, Java, C++ (300+ LeetCode solved).</p>
+
+      <!-- Huawei -->
+      <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm">
+        <div class="flex items-start justify-between flex-wrap gap-2 mb-2">
+          <div>
+            <h3 class="text-lg font-bold">Solutions Engineer</h3>
+            <p class="text-sm font-semibold text-primary">Huawei Technologies</p>
+          </div>
+          <span class="badge badge-outline text-xs font-mono">2015 – 2017</span>
+        </div>
+        <p class="text-sm opacity-80 mb-3">
+          Communicated across the entire organizational spectrum, collaborating with seasoned technical teams on granular technical details while articulating business impact, ROI, and risk posture to CXO executives.
+        </p>
       </div>
     </div>
 
-    <hr />
+    <div class="divider my-6"></div>
 
-    <h2>Academic Publications &amp; Research</h2>
-    <ol>
-      <li>
-        <strong>Self-localization of a mobile robot using monocular vision of a chessboard pattern</strong><br />
-        <em>IEEE Conference Publication</em><br />
-        <em>Co-authors: Parvez Ahmmed, Zabir Ahmed, Sajid Muhaimin Choudhury, Mohammad Rafee</em><br />
-        Focus: Mobile robotics, computer vision, projective geometry, and autonomous indoor localization.
-      </li>
-      <li>
-        <strong>Modeling and simulation of a Microcontroller based power factor correction converter</strong><br />
-        <em>IEEE Conference Publication</em><br />
-        <em>Co-authors: Parvez Ahmmed, Shammya Shananda Saha, S M Nahian Al Sunny, Mohammad Rafee</em><br />
-        Focus: Power electronics, microcontroller control loops, and efficiency optimization.
-      </li>
-    </ol>
+    <h2 class="text-2xl font-bold mb-4">Education</h2>
 
-    <hr />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose my-6">
+      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
+        <span class="badge badge-primary badge-sm font-mono mb-2">Graduate Degree</span>
+        <h3 class="text-base font-bold">Master of Engineering (MEng)</h3>
+        <p class="text-sm text-primary font-medium">Information Systems Security</p>
+        <p class="text-xs opacity-75 mt-1">Concordia University &bull; Montreal, Canada</p>
+        <p class="text-xs opacity-60 mt-2">Specialization: Network Security, Cryptography, Distributed Systems, Software Verification.</p>
+      </div>
 
-    <h2>Beyond the Terminal</h2>
-    <ul>
-      <li>
-        <strong>Distance Running</strong>: An avid runner training for marathons and half-marathons, frequently participating in local road races across Alberta and Canada.
-      </li>
-      <li>
-        <strong>Urban Planning &amp; Zoning Advocacy</strong>: Passionate about sustainable urbanism, walkable communities, and housing accessibility — actively engaging with local municipal discussions and civic initiatives in Edmonton.
-      </li>
-      <li>
-        <strong>Security Challenges &amp; Hacking</strong>: Sharpening forensic and offensive defense skills through <strong>Hack The Box</strong> Sherlocks and CTFs.
-      </li>
-    </ul>
-
-    <hr />
-
-    <h2>Let's Connect</h2>
-    <p>
-      I am always keen to exchange ideas with fellow security practitioners, cloud architects, developers, and runners.
-    </p>
-    <ul>
-      <li><strong>LinkedIn</strong>: <a href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer">linkedin.com/in/rafee-sec</a></li>
-      <li><strong>GitHub</strong>: <a href={SITE.socials.github} target="_blank" rel="noopener noreferrer">github.com/rafee</a></li>
-      <li><strong>X / Twitter</strong>: <a href={SITE.socials.twitter} target="_blank" rel="noopener noreferrer">{SITE.socials.twitterHandle}</a></li>
-      <li><strong>Email</strong>: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-    </ul>
-
-    <div class="not-prose" style="margin-top: 1.5rem;">
-      <SocialIcons />
+      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
+        <span class="badge badge-secondary badge-sm font-mono mb-2">Undergraduate</span>
+        <h3 class="text-base font-bold">Bachelor of Science (BSc)</h3>
+        <p class="text-sm text-primary font-medium">Electrical &amp; Electronic Engineering</p>
+        <p class="text-xs opacity-75 mt-1">Bangladesh University of Engineering and Technology (BUET)</p>
+        <p class="text-xs opacity-60 mt-2">Rigorous foundational engineering, signal processing, mathematics, and embedded systems.</p>
+      </div>
     </div>
-  </article>
+
+    <div class="divider my-6"></div>
+
+    <h2 class="text-2xl font-bold mb-4">Core Competencies</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose my-6">
+      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl">
+        <h4 class="font-bold text-sm mb-2 text-primary font-mono">Cloud Security &amp; Defense</h4>
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-sm badge-ghost">AWS</span>
+          <span class="badge badge-sm badge-ghost">OCI</span>
+          <span class="badge badge-sm badge-ghost">IAM / Least-Privilege</span>
+          <span class="badge badge-sm badge-ghost">CloudTrail / GuardDuty</span>
+          <span class="badge badge-sm badge-ghost">KMS</span>
+          <span class="badge badge-sm badge-ghost">Zero Trust</span>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl">
+        <h4 class="font-bold text-sm mb-2 text-primary font-mono">DFIR &amp; SecOps</h4>
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-sm badge-ghost">Volatility 2 &amp; 3</span>
+          <span class="badge badge-sm badge-ghost">Memory Forensics</span>
+          <span class="badge badge-sm badge-ghost">Malware Triage</span>
+          <span class="badge badge-sm badge-ghost">Incident Response</span>
+          <span class="badge badge-sm badge-ghost">Linux Auditing</span>
+          <span class="badge badge-sm badge-ghost">SIEM</span>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 border border-base-200 p-4 rounded-xl">
+        <h4 class="font-bold text-sm mb-2 text-primary font-mono">DevSecOps &amp; Code</h4>
+        <div class="flex flex-wrap gap-1">
+          <span class="badge badge-sm badge-ghost">Python</span>
+          <span class="badge badge-sm badge-ghost">Go</span>
+          <span class="badge badge-sm badge-ghost">Terraform (IaC)</span>
+          <span class="badge badge-sm badge-ghost">CI/CD Security</span>
+          <span class="badge badge-sm badge-ghost">Docker</span>
+          <span class="badge badge-sm badge-ghost">Bash</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
-
-<style>
-  .skills-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-    margin: 1.5rem 0 2rem;
-  }
-
-  @media (min-width: 640px) {
-    .skills-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .skill-card h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.05rem;
-    color: var(--accent);
-  }
-
-  .skill-card p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.55;
-  }
-</style>

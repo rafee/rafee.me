@@ -1,190 +1,145 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HorizontalCard from '../components/HorizontalCard.astro';
 import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
 ---
 
 <BaseLayout
   title="Projects & Systems"
   description="Curated technical projects, cloud architecture blueprints, forensics investigations, and engineering research by Mohammad Ishfaque Jahan Rafee."
+  sideBarActiveItemID="projects"
 >
-  <header class="page-header">
-    <h1 class="page-title">Projects &amp; Systems</h1>
-    <p class="page-lead">
-      A curated overview of my active systems engineering endeavors, cloud defense tooling, digital forensics investigations, and academic research.
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">Projects &amp; Systems</h1>
+    <p class="text-base sm:text-lg opacity-80 leading-relaxed max-w-2xl">
+      A curated overview of active systems engineering projects, cloud security blueprints, digital forensics tooling, and open-source contributions.
     </p>
-  </header>
+  </div>
 
-  <!-- Featured Project: Unhurried -->
-  <section id="unhurried" class="project-block">
-    <div class="project-header">
-      <div class="project-title-group">
-        <span class="project-kicker">Flagship Systems Project</span>
-        <h2 class="project-title">Unhurried — The Intentional Career Platform</h2>
+  <!-- Flagship Section: Unhurried -->
+  <section id="unhurried" class="mb-12">
+    <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+      <div>
+        <span class="badge badge-primary badge-outline text-xs uppercase font-mono tracking-wider mb-1">
+          Flagship Systems Project
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
+          Unhurried — The Intentional Career Platform
+        </h2>
       </div>
+      <a
+        href="https://github.com/Unhurried-Careers"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="badge badge-primary gap-1 py-3 px-3 hover:scale-105 transition-transform"
+      >
+        <span>GitHub Organization</span>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+      </a>
+    </div>
 
-      <div class="project-meta-links">
-        <a
-          href="https://github.com/Unhurried-Careers"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="badge"
-        >
-          GitHub Organization ↗
-        </a>
+    <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm mb-6">
+      <div class="prose max-w-none text-base">
+        <p>
+          AI auto-apply bots have flooded recruitment pipelines, creating noise for hiring teams and fatigue for job seekers. <strong>Unhurried</strong> takes the opposite approach: leveraging AI not as a spam cannon, but as a <strong>personal researcher</strong> that enables candidates to pursue a small, curated set of opportunities with genuine intent and tailored fit.
+        </p>
+
+        <h3 class="text-xl font-bold mt-4 mb-2">Core Design Principles</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li><strong>Company Watchlists</strong>: Track specific companies with documented rationale before roles are broadly published, actively reading Greenhouse, Lever, and Ashby job boards.</li>
+          <li><strong>Strict Shortlist Limit</strong>: Candidates are hard-capped at a maximum of <strong>5 active roles</strong> at any time. Moving a role to the shortlist requires written answers for <em>"Why this company?"</em> and <em>"Why this role?"</em>.</li>
+          <li><strong>Intentional Outreach Kit</strong>: Generates personalized 300-character notes aimed at curious, peer-to-peer conversations rather than transactional referral requests.</li>
+          <li><strong>Resume Studio</strong>: Deeply tailors a Google Doc resume to one shortlisted role based on selected skill focus areas.</li>
+        </ul>
       </div>
     </div>
 
-    <div class="prose">
-      <p>
-        AI auto-apply bots have flooded recruitment pipelines, creating noise for hiring teams and fatigue for job seekers. <strong>Unhurried</strong> takes the opposite approach: leveraging AI not as a spam cannon, but as a <strong>personal researcher</strong> that enables candidates to pursue a small, curated set of opportunities with genuine intent and tailored fit.
-      </p>
-
-      <h3>Core Design Principles</h3>
-      <ul>
-        <li><strong>Company Watchlists</strong>: Track specific companies with documented rationale before roles are broadly published, actively reading Greenhouse, Lever, and Ashby job boards.</li>
-        <li><strong>Strict Shortlist Limit</strong>: Candidates are hard-capped at a maximum of <strong>5 active roles</strong> at any time. Moving a role to the shortlist requires written answers for <em>"Why this company?"</em> and <em>"Why this role?"</em>.</li>
-        <li><strong>Intentional Outreach Kit</strong>: Generates personalized 300-character notes aimed at curious, peer-to-peer conversations rather than transactional referral requests.</li>
-        <li><strong>Resume Studio</strong>: Deeply tailors a Google Doc resume to one shortlisted role based on selected skill focus areas.</li>
-      </ul>
+    <!-- Live Architecture Diagram -->
+    <div class="mb-8">
+      <UnhurriedArchitecture />
     </div>
 
-    <!-- Interactive Architecture Diagram -->
-    <UnhurriedArchitecture />
+    <!-- Repository Breakdown Cards -->
+    <h3 class="text-xl font-bold mb-4">Architecture Microservices Breakdown</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-mono font-bold text-primary">unhurried-web</span>
+          <span class="badge badge-ghost badge-sm font-mono">React / TS</span>
+        </div>
+        <p class="text-sm opacity-80 mb-3">
+          Responsive dashboard frontend hosted on Firebase Global CDN. Implements shortlist management, company research views, and prompt-driven outreach.
+        </p>
+        <div class="text-xs font-mono opacity-60">Firebase Hosting · Vite · Tailwind</div>
+      </div>
 
-    <div class="prose">
-      <h3>Key Architecture Components</h3>
+      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-mono font-bold text-primary">unhurried-core</span>
+          <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
+        </div>
+        <p class="text-sm opacity-80 mb-3">
+          Central business logic API enforcing the 5-role shortlist ceiling, resume tailoring, and profile telemetry.
+        </p>
+        <div class="text-xs font-mono opacity-60">Google Cloud Run · Firestore · OIDC</div>
+      </div>
 
-      <h4>1. Frontend Tier (<code>unhurried-web</code> &amp; <code>unhurried-extension</code>)</h4>
-      <p>
-        A Single Page Application built with <strong>React</strong> and <strong>TypeScript</strong>, hosted on <strong>Firebase Hosting</strong> for global low-latency CDN distribution. Accompanied by a dedicated <strong>Chrome Extension (Manifest V3)</strong> that integrates directly with job application portals to pull context and assist intentional submissions without mindless autofill.
-      </p>
+      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-mono font-bold text-primary">board-sync</span>
+          <span class="badge badge-ghost badge-sm font-mono">Python / Async</span>
+        </div>
+        <p class="text-sm opacity-80 mb-3">
+          Scheduled ingestion service querying ATS APIs (Greenhouse, Lever, Ashby, Workday) with differential state caching.
+        </p>
+        <div class="text-xs font-mono opacity-60">Cloud Scheduler · Pub/Sub · Firestore</div>
+      </div>
 
-      <h4>2. Backend Microservices (<code>Go</code> on Google Cloud Run)</h4>
-      <p>Five decoupled, single-responsibility services packaged in separate Git repositories:</p>
-      <ul>
-        <li><strong><code>unhurried-job-search</code></strong>: Polls and monitors external ATS boards (Greenhouse, Lever, Ashby) against user watchlists.</li>
-        <li><strong><code>unhurried-applications</code></strong>: Enforces shortlist quotas (&le; 5), manages the outreach kit, and tracks conversation notes.</li>
-        <li><strong><code>unhurried-resume</code></strong>: Tailoring service integrating Google Docs APIs.</li>
-        <li><strong><code>unhurried-inbox</code></strong>: Read-only Gmail integration parsing incoming interview invites and proposing calendar slots.</li>
-        <li><strong><code>unhurried-notifications</code></strong>: Asynchronous notification dispatch via email.</li>
-      </ul>
-      <p>
-        <strong><code>unhurried-common</code></strong> provides a shared Go foundational module standardizing HTTP hardening, token validation, logging, and common data models.
-      </p>
-
-      <h4>3. Zero-Trust Security &amp; Identity</h4>
-      <p>
-        <strong>Dual-Layer Authentication</strong> via Google Identity Platform and Firebase Auth. Google Cloud API Gateway validates incoming JWT ID tokens and API keys; downstream Go services cryptographically re-verify tokens, validate Firebase App Check attestations, and enforce tenant allowlists (<code>allowed_emails</code>).
-      </p>
-
-      <h4>4. Infrastructure as Code &amp; CI/CD (<code>unhurried-infra</code>)</h4>
-      <p>
-        100% codified using <strong>Terraform</strong> managing all Cloud Run instances, API Gateways, IAM bindings, and Firestore instances. A two-stage pipeline uses <strong>GitHub Actions</strong> for credential-free hermetic CI (linting, tests), while <strong>Google Cloud Build</strong> and <strong>Google Cloud Deploy</strong> handle staging and production rollouts with verified SLSA provenance into Artifact Registry.
-      </p>
+      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-mono font-bold text-primary">infra</span>
+          <span class="badge badge-ghost badge-sm font-mono">Terraform IaC</span>
+        </div>
+        <p class="text-sm opacity-80 mb-3">
+          Complete declarative infrastructure definitions for GCP resources, IAM least privilege bindings, and CI/CD triggers.
+        </p>
+        <div class="text-xs font-mono opacity-60">Terraform · GCP · Artifact Registry</div>
+      </div>
     </div>
   </section>
 
-  <hr class="section-divider" />
+  <div class="divider my-8"></div>
 
-  <!-- Cloud Security & Automation -->
-  <section class="project-block">
-    <div class="project-header">
-      <div class="project-title-group">
-        <span class="project-kicker">Cloud Security &amp; Defense</span>
-        <h2 class="project-title">Enterprise Multi-Cloud Security Auditing &amp; IaC</h2>
-      </div>
-    </div>
+  <!-- Other Engineering Projects -->
+  <section class="mb-8">
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
+      Cloud Defense &amp; Security Engineering Tooling
+    </h2>
 
-    <div class="prose">
-      <p>
-        Developed custom audit and verification tooling to enforce Cloud Security Posture Management (CSPM) and least-privilege Identity and Access Management (IAM) across hybrid enterprise cloud tenants spanning <strong>AWS</strong> and <strong>Oracle Cloud Infrastructure (OCI)</strong>. Automated the extraction and parsing of security configuration baselines using Python and Go, generating actionable remediation reports.
-      </p>
-      <p>
-        Architected modular <strong>Terraform</strong> configurations to replace manual console deployments. Ensured disaster recovery environments and cloud workloads can be reliably recreated from declarative, version-controlled definitions with integrated security baselines.
-      </p>
-    </div>
-  </section>
+    <div class="flex flex-col gap-4">
+      <HorizontalCard
+        title="Multi-Cloud IAM Least-Privilege & Compliance Auditing"
+        desc="Automated policy assessment suite for AWS and OCI analyzing cross-account assume-role chains, unattached credential hygiene, and ephemeral token lifecycle validation."
+        url="/about/"
+        badge="SECURITY"
+        tags={["AWS", "OCI", "Python", "Cloud Security", "Boto3"]}
+      />
 
-  <hr class="section-divider" />
+      <HorizontalCard
+        title="DFIR Memory Forensics Automation Pipeline"
+        desc="Reproducible incident response workflows built on top of Volatility 3 and custom python parsers for identifying process injection, unlinked DLLs, and rogue C2 beacons in memory dumps."
+        url="/posts/htb_recollection/"
+        badge="FORENSICS"
+        tags={["DFIR", "Volatility3", "Memory Forensics", "Incident Response"]}
+      />
 
-  <!-- DFIR & Malware Analysis -->
-  <section class="project-block">
-    <div class="project-header">
-      <div class="project-title-group">
-        <span class="project-kicker">Digital Forensics &amp; Threat Intelligence</span>
-        <h2 class="project-title">DFIR Memory Forensics &amp; Vulnerability Research</h2>
-      </div>
-    </div>
-
-    <div class="prose">
-      <p>
-        Authored in-depth forensic writeups and investigation walkthroughs for <strong>Hack The Box Sherlocks</strong> (including <em>Recollection</em>, <em>RogueOne</em>, and <em>Meerkat</em>) using Volatility 2 and Volatility 3:
-      </p>
-      <ul>
-        <li>Extracted injected DLLs, anomalous process hierarchies, dumped credentials, and command-and-control (C2) persistence mechanisms from full raw memory dumps.</li>
-        <li>Traced network attack vectors, Suricata/Snort alert interpretation, and exploit payload tracing.</li>
-        <li>Published technical analyses on zero-day, zero-click exploit chains (such as the 2023–2024 Apple iMessage hardware/software vulnerability chain documented by Kaspersky).</li>
-      </ul>
-    </div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- Academic Robotics -->
-  <section class="project-block">
-    <div class="project-header">
-      <div class="project-title-group">
-        <span class="project-kicker">Academic Research</span>
-        <h2 class="project-title">Autonomous Robotics &amp; Power Electronics</h2>
-      </div>
-    </div>
-
-    <div class="prose">
-      <p>Co-authored peer-reviewed research papers published in IEEE Conference Proceedings:</p>
-      <ul>
-        <li>
-          <strong>Self-localization of a mobile robot using monocular vision of a chessboard pattern</strong>: Implemented a real-time self-localization framework for autonomous mobile robots using monocular camera input tracking planar chessboard pattern markers and perspective-n-point algorithms.
-        </li>
-        <li>
-          <strong>Modeling and simulation of a Microcontroller based power factor correction converter</strong>: Modeled and simulated a closed-loop digital control converter to optimize electrical efficiency and minimize harmonic distortion.
-        </li>
-      </ul>
+      <HorizontalCard
+        title="Declarative Infrastructure Provisioning with Terraform"
+        desc="Modular Terraform codebases for spinning up zero-trust cloud landing zones, automated backup vaults, and immutable audit logging buckets across multi-region VPC topologies."
+        url="/posts/iac/"
+        badge="IaC"
+        tags={["Terraform", "Cloud Architecture", "OCI", "DevSecOps"]}
+      />
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .project-block {
-    margin: 2rem 0;
-  }
-
-  .project-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-  }
-
-  .project-kicker {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-  }
-
-  .project-title {
-    margin: 0.25rem 0 0;
-    font-size: 1.65rem;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-  }
-
-  .section-divider {
-    border: 0;
-    border-top: 1px solid var(--border);
-    margin: 3rem 0;
-  }
-</style>

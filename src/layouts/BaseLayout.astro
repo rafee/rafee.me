@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SideBar from '../components/SideBar.astro';
 import { SITE } from '../consts';
 import '../styles/global.css';
 
@@ -9,6 +10,7 @@ interface Props {
   description?: string;
   image?: string;
   article?: boolean;
+  sideBarActiveItemID?: string;
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   description = SITE.description,
   image = '/images/me.jpg',
   article = false,
+  sideBarActiveItemID = 'home',
 } = Astro.props;
 
 const pageTitle = title === SITE.title ? title : `${title} · ${SITE.title}`;
@@ -24,7 +27,7 @@ const socialImageURL = new URL(image, canonicalURL);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -50,106 +53,184 @@ const socialImageURL = new URL(image, canonicalURL);
     <meta property="twitter:title" content={pageTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
-    <meta property="twitter:creator" content={SITE.socials.twitterHandle} />
+    <meta name="twitter:creator" content={SITE.socials.twitterHandle} />
 
-    <!-- Anti-FOUC Theme Initialization -->
+    <!-- System Theme & Cupcake/Dark Anti-FOUC Script -->
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('theme');
-        if (stored === 'light' || stored === 'dark') {
-          document.documentElement.setAttribute('data-theme', stored);
-        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          document.documentElement.setAttribute('data-theme', 'light');
-        } else {
-          document.documentElement.setAttribute('data-theme', 'dark');
+        function getInitialTheme() {
+          const stored = localStorage.getItem('theme');
+          if (stored === 'dark' || stored === 'cupcake') {
+            return stored;
+          }
+          // Default: match system preference (dark for dark mode, cupcake for light mode)
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'cupcake';
         }
+
+        const theme = getInitialTheme();
+        document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
   </head>
+  <body class="bg-base-100 text-base-content min-h-screen">
+    <div class="bg-base-100 drawer lg:drawer-open min-h-screen">
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content bg-base-100 flex flex-col min-h-screen">
+        <Header title={title} />
+        <div class="md:flex md:justify-center flex-1">
+          <main class="p-6 pt-10 lg:max-w-[960px] max-w-[100vw] w-full">
+            <slot />
+          </main>
+        </div>
+        <Footer />
+      </div>
+      <SideBar sideBarActiveItemID={sideBarActiveItemID} />
+    </div>
 
-  <body>
-    <Header />
-    <main class="container">
-      <slot />
-    </main>
-    <Footer />
-
-    <!-- Global Client Scripts: Theme Toggle, Code Block Copy, Dynamic Mermaid -->
+    <!-- Theme Controller & Interactive Enhancements -->
     <script>
-      // 1. Theme Toggle
-      const toggle = document.getElementById('theme-toggle');
-      if (toggle) {
-        toggle.addEventListener('click', () => {
-          const current = document.documentElement.getAttribute('data-theme') || 'dark';
-          const next = current === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
-          window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: next } }));
+      import mermaid from 'mermaid';
+
+      function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'cupcake';
+      }
+
+      function updateThemeUI(theme: string) {
+        // Update all theme toggle buttons and labels
+        document.querySelectorAll('.theme-icon-cupcake').forEach((el) => {
+          if (theme === 'cupcake') {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        });
+        document.querySelectorAll('.theme-icon-dark').forEach((el) => {
+          if (theme === 'dark') {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        });
+        document.querySelectorAll('.theme-label-text').forEach((el) => {
+          const isManual = localStorage.getItem('theme_manual') === 'true';
+          el.textContent = isManual ? (theme === 'dark' ? 'Dark' : 'Cupcake') : 'Auto';
         });
       }
 
-      // 2. Code Block Copy Buttons
+      function applyTheme(newTheme: string, isManual = false) {
+        document.documentElement.setAttribute('data-theme', newTheme);
+        if (isManual) {
+          localStorage.setItem('theme', newTheme);
+          localStorage.setItem('theme_manual', 'true');
+        }
+        updateThemeUI(newTheme);
+        renderMermaidDiagrams(newTheme);
+      }
+
+      // Toggle between cupcake and dark
+      function toggleTheme() {
+        const current = getCurrentTheme();
+        const next = current === 'dark' ? 'cupcake' : 'dark';
+        applyTheme(next, true);
+      }
+
+      // Attach click events to all toggle buttons
+      document.querySelectorAll('.theme-toggle-btn').forEach((btn) => {
+        btn.addEventListener('click', toggleTheme);
+      });
+
+      // Listen for system theme changes
+      const systemMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      systemMediaQuery.addEventListener('change', (e) => {
+        const isManual = localStorage.getItem('theme_manual') === 'true';
+        if (!isManual) {
+          const systemTheme = e.matches ? 'dark' : 'cupcake';
+          applyTheme(systemTheme, false);
+        }
+      });
+
+      // Initialize UI icons
+      updateThemeUI(getCurrentTheme());
+
+      // Code Block Copy Buttons
       document.querySelectorAll('pre').forEach((pre) => {
-        if (pre.classList.contains('mermaid')) return;
+        if (pre.classList.contains('mermaid') || pre.parentElement?.classList.contains('mermaid-diagram')) return;
+
         const wrapper = document.createElement('div');
-        wrapper.className = 'code-block-wrapper';
+        wrapper.className = 'code-wrapper relative my-4';
         pre.parentNode?.insertBefore(wrapper, pre);
         wrapper.appendChild(pre);
 
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'copy-code-btn';
-        btn.innerText = 'Copy';
-        wrapper.appendChild(btn);
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.type = 'button';
+        button.innerText = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
 
-        btn.addEventListener('click', async () => {
+        button.addEventListener('click', async () => {
           const code = pre.querySelector('code')?.innerText || pre.innerText;
           try {
             await navigator.clipboard.writeText(code);
-            btn.innerText = 'Copied!';
-            setTimeout(() => (btn.innerText = 'Copy'), 2000);
-          } catch (e) {
-            btn.innerText = 'Failed';
+            button.innerText = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(() => {
+              button.innerText = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          } catch {
+            button.innerText = 'Failed';
           }
         });
+
+        wrapper.appendChild(button);
       });
 
-      // 3. Dynamic Mermaid Initialization
-      async function renderMermaidDiagrams() {
-        const diagrams = document.querySelectorAll('pre.mermaid, .mermaid');
-        if (!diagrams.length) return;
+      // Mermaid Rendering
+      async function renderMermaidDiagrams(theme: string) {
+        const diagrams = document.querySelectorAll<HTMLElement>('.mermaid');
+        if (diagrams.length === 0) return;
 
-        try {
-          const { default: mermaid } = await import('mermaid');
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const isDark = theme === 'dark';
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: isDark ? 'dark' : 'default',
+          securityLevel: 'loose',
+          fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+          themeVariables: isDark
+            ? {
+                primaryColor: '#38bdf8',
+                primaryTextColor: '#f1f5f9',
+                primaryBorderColor: '#0284c7',
+                lineColor: '#94a3b8',
+                secondaryColor: '#1e293b',
+                tertiaryColor: '#0f172a',
+              }
+            : {
+                primaryColor: '#65c3c8',
+                primaryTextColor: '#291334',
+                primaryBorderColor: '#ef9fbc',
+                lineColor: '#291334',
+                secondaryColor: '#faf7f5',
+                tertiaryColor: '#efeae6',
+              },
+        });
 
-          mermaid.initialize({
-            startOnLoad: false,
-            theme: isDark ? 'dark' : 'neutral',
-            securityLevel: 'loose',
-            fontFamily: 'Inter, -apple-system, sans-serif',
-          });
-
-          diagrams.forEach((el) => {
-            const src = el.getAttribute('data-mermaid-src');
-            if (src) {
-              el.innerHTML = src;
-              el.removeAttribute('data-processed');
-            }
-          });
-
-          await mermaid.run({
-            querySelector: 'pre.mermaid, .mermaid',
-          });
-        } catch (err) {
-          console.error('Mermaid render error:', err);
+        let counter = 0;
+        for (const el of diagrams) {
+          const code = el.getAttribute('data-mermaid-src') || el.textContent || '';
+          if (!code.trim()) continue;
+          const id = `mermaid-svg-${Date.now()}-${counter++}`;
+          try {
+            const { svg } = await mermaid.render(id, code.trim());
+            el.innerHTML = svg;
+          } catch (err) {
+            console.error('Mermaid render error:', err);
+          }
         }
       }
 
-      renderMermaidDiagrams();
-      window.addEventListener('theme-changed', () => {
-        renderMermaidDiagrams();
-      });
+      // Initial mermaid render
+      renderMermaidDiagrams(getCurrentTheme());
     </script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { getPublishedPosts, slugifyTag } from '../../utils/posts';
+import HorizontalCard from '../../components/HorizontalCard.astro';
+import { getPublishedPosts, getPostSlug, getReadingStats, slugifyTag } from '../../utils/posts';
 
 const posts = await getPublishedPosts();
 
@@ -19,76 +19,48 @@ const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1]);
 <BaseLayout
   title="Technical Blog"
   description="Security writeups, DFIR walkthroughs, cloud defense notes, and automation experiments by Mohammad Ishfaque Jahan Rafee."
+  sideBarActiveItemID="posts"
 >
-  <header class="page-header">
-    <h1 class="page-title">Technical Blog &amp; Writeups</h1>
-    <p class="page-lead">
+  <div class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">Technical Blog &amp; Writeups</h1>
+    <p class="text-base sm:text-lg opacity-80 leading-relaxed max-w-2xl">
       Deep-dive investigations into memory forensics, incident response, zero-day threat analysis, cloud defense, and programming automation.
     </p>
-  </header>
+  </div>
 
+  <!-- Tag Filter Chips -->
   {sortedTags.length > 0 && (
-    <div class="tags-filter-bar">
-      <span class="tags-filter-label">Filter by Tag:</span>
-      <div class="tags-filter-list">
+    <div class="mb-8 p-4 bg-base-200/60 rounded-xl border border-base-300/60">
+      <div class="text-xs font-mono uppercase tracking-wider opacity-70 mb-2 font-semibold">
+        Filter by Topic:
+      </div>
+      <div class="flex flex-wrap gap-1.5">
         {sortedTags.map(([tag, count]) => (
-          <a href={`/tags/${slugifyTag(tag)}/`} class="badge">
-            #{tag} <span class="tag-count">({count})</span>
+          <a
+            href={`/tags/${slugifyTag(tag)}/`}
+            class="badge badge-outline hover:badge-primary transition-colors text-xs py-2.5 px-3"
+          >
+            #{tag} <span class="opacity-60 ml-1">({count})</span>
           </a>
         ))}
       </div>
     </div>
   )}
 
-  <div class="post-grid">
-    {posts.map((post) => (
-      <PostCard post={post} />
-    ))}
+  <!-- Post List with Astrofy Horizontal Cards -->
+  <div class="flex flex-col gap-4">
+    {posts.map((post) => {
+      const stats = getReadingStats(post.body || '');
+      return (
+        <HorizontalCard
+          title={post.data.title}
+          desc={post.data.description || ''}
+          url={`/posts/${getPostSlug(post)}/`}
+          pubDate={post.data.date}
+          readingTime={stats.minutes}
+          tags={post.data.tags}
+        />
+      );
+    })}
   </div>
 </BaseLayout>
-
-<style>
-  .tags-filter-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    padding: 1rem 1.15rem;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-  }
-
-  .tags-filter-label {
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-  }
-
-  .tags-filter-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .tag-count {
-    opacity: 0.75;
-    font-size: 0.72rem;
-    margin-left: 0.15rem;
-  }
-
-  .post-grid {
-    display: grid;
-    gap: 1.15rem;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 640px) {
-    .post-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-</style>

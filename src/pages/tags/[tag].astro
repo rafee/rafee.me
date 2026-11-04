@@ -1,79 +1,67 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { getPublishedPosts, slugifyTag, type PostEntry } from '../../utils/posts';
+import HorizontalCard from '../../components/HorizontalCard.astro';
+import { getPublishedPosts, getPostSlug, getReadingStats, slugifyTag } from '../../utils/posts';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
-  const tagMap = new Map<string, { label: string; posts: PostEntry[] }>();
+  const allTags = new Set<string>();
 
   posts.forEach((post) => {
     post.data.tags.forEach((tag) => {
-      const slug = slugifyTag(tag);
-      const existing = tagMap.get(slug);
-      if (existing) {
-        existing.posts.push(post);
-      } else {
-        tagMap.set(slug, { label: tag, posts: [post] });
-      }
+      allTags.add(tag);
     });
   });
 
-  return Array.from(tagMap.entries()).map(([slug, { label, posts }]) => ({
-    params: { tag: slug },
-    props: { label, posts },
-  }));
+  return Array.from(allTags).map((tag) => {
+    const slug = slugifyTag(tag);
+    const filteredPosts = posts.filter((p) =>
+      p.data.tags.some((t) => slugifyTag(t) === slug)
+    );
+
+    return {
+      params: { tag: slug },
+      props: { tag, posts: filteredPosts },
+    };
+  });
 }
 
-const { label, posts } = Astro.props;
+const { tag, posts } = Astro.props;
 ---
 
 <BaseLayout
-  title={`Posts tagged #${label}`}
-  description={`Articles, tutorials, and security writeups tagged with #${label}.`}
+  title={`Tag: #${tag}`}
+  description={`All articles and writeups tagged with #${tag}`}
+  sideBarActiveItemID="tags"
 >
-  <nav class="back-nav" aria-label="Breadcrumb">
-    <a href="/tags/" class="back-link">&larr; All tags</a>
-  </nav>
+  <div class="mb-8">
+    <div class="mb-4">
+      <a href="/tags/" class="btn btn-ghost btn-sm gap-2 font-mono text-xs opacity-75 hover:opacity-100">
+        &larr; Back to all tags
+      </a>
+    </div>
 
-  <header class="page-header">
-    <h1 class="page-title">Tag: #{label}</h1>
-    <p class="page-lead">
-      Showing {posts.length} {posts.length === 1 ? 'post' : 'posts'} filed under #{label}.
-    </p>
-  </header>
+    <div class="flex items-center gap-3">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">#{tag}</h1>
+      <span class="badge badge-primary badge-lg font-mono">
+        {posts.length} {posts.length === 1 ? 'article' : 'articles'}
+      </span>
+    </div>
+  </div>
 
-  <div class="post-grid">
-    {posts.map((post) => (
-      <PostCard post={post} />
-    ))}
+  <div class="flex flex-col gap-4">
+    {posts.map((post) => {
+      const stats = getReadingStats(post.body || '');
+      return (
+        <HorizontalCard
+          title={post.data.title}
+          desc={post.data.description || ''}
+          url={`/posts/${getPostSlug(post)}/`}
+          pubDate={post.data.date}
+          readingTime={stats.minutes}
+          tags={post.data.tags}
+        />
+      );
+    })}
   </div>
 </BaseLayout>
-
-<style>
-  .back-nav {
-    margin-bottom: 1.25rem;
-  }
-
-  .back-link {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .back-link:hover {
-    color: var(--accent);
-  }
-
-  .post-grid {
-    display: grid;
-    gap: 1.15rem;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 640px) {
-    .post-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-</style>
