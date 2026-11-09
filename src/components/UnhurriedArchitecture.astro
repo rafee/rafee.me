@@ -3,24 +3,27 @@
 
 <figure class="arch-diagram" aria-label="Unhurried Cloud-Native System Architecture Diagram">
   <div class="arch-header">
-    <span class="arch-kicker">System Architecture Blueprint</span>
-    <span class="arch-meta">Google Cloud Platform · Multi-Repo Microservices · Terraform IaC</span>
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="arch-kicker">System Architecture Blueprint</span>
+      <span class="badge badge-primary badge-outline text-xs font-mono">10 Repositories &bull; 5 Go Services</span>
+    </div>
+    <span class="arch-meta">Google Cloud Platform · Cloud Run · API Gateway · Terraform IaC</span>
   </div>
 
   <!-- Tier 1: Client -->
   <div class="arch-tier">
     <div class="tier-label">
       <span class="tier-num">01</span>
-      <span>Client Tier</span>
+      <span>Client Tier &bull; Intentional Interaction</span>
     </div>
     <div class="tier-grid two-col">
       <div class="arch-node node-client">
         <div class="node-title">unhurried-web</div>
-        <div class="node-sub">React + TypeScript SPA · Firebase Hosting Global CDN</div>
+        <div class="node-sub">React 18 + TypeScript SPA &bull; Vite &bull; Firebase Hosting Global CDN (<code>unhurried-careers.com</code>)</div>
       </div>
       <div class="arch-node node-client">
         <div class="node-title">unhurried-extension</div>
-        <div class="node-sub">Chrome Extension (Manifest V3) · Intentional Apply Assistant</div>
+        <div class="node-sub">Chrome Manifest V3 Apply Assistant &bull; ATS Detection (Greenhouse, Lever, Ashby, Workday) &bull; Zero tokens, <code>window.postMessage</code> relay</div>
       </div>
     </div>
   </div>
@@ -30,18 +33,41 @@
     <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
       <path d="M12 2v20m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <span class="connector-pill">HTTPS · Firebase ID Token + App Check + API Key</span>
+    <span class="connector-pill">HTTPS &bull; Firebase ID Token (Google OAuth) + App Check (reCAPTCHA Enterprise) + Restricted API Key</span>
   </div>
 
-  <!-- Tier 2: API Gateway -->
+  <!-- Tier 2: Ingress & Gateways -->
   <div class="arch-tier">
     <div class="tier-label">
       <span class="tier-num">02</span>
-      <span>Edge &amp; Security Gateway Tier</span>
+      <span>Edge &amp; Ingress Tier &bull; 5 Managed API Gateways</span>
     </div>
-    <div class="arch-node node-gateway">
-      <div class="node-title">Google Cloud API Gateway</div>
-      <div class="node-sub">Per-Service OpenAPI 2.0 Specs · JWT Verification · Per-Minute Quotas &amp; Rate Limiting</div>
+    <div class="tier-grid five-col">
+      <div class="arch-node node-gateway">
+        <div class="node-badge">Gateway</div>
+        <div class="node-title">job-search-gw</div>
+        <div class="node-sub">300 req/min quota &bull; RS256 token verification</div>
+      </div>
+      <div class="arch-node node-gateway">
+        <div class="node-badge">Gateway</div>
+        <div class="node-title">applications-gw</div>
+        <div class="node-sub">300 req/min quota &bull; Pipeline &amp; gates routing</div>
+      </div>
+      <div class="arch-node node-gateway">
+        <div class="node-badge">Gateway</div>
+        <div class="node-title">resume-gw</div>
+        <div class="node-sub">300 req/min quota &bull; Resume Studio ingress</div>
+      </div>
+      <div class="arch-node node-gateway">
+        <div class="node-badge">Gateway</div>
+        <div class="node-title">inbox-gw</div>
+        <div class="node-sub">300 req/min quota &bull; Calendar sync ingress</div>
+      </div>
+      <div class="arch-node node-gateway">
+        <div class="node-badge">Gateway</div>
+        <div class="node-title">notifications-gw</div>
+        <div class="node-sub">300 req/min quota &bull; User alerts ingress</div>
+      </div>
     </div>
   </div>
 
@@ -50,40 +76,40 @@
     <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
       <path d="M12 2v20m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <span class="connector-pill">Zero-Trust Re-Verification · <code>unhurried-common</code> Go Hardening Middleware</span>
+    <span class="connector-pill">Fail-Closed Defense &bull; <code>unhurried-common</code> Go Middleware (ID Re-Verification, App Check, Email Allowlist)</span>
   </div>
 
-  <!-- Tier 3: Go Microservices -->
+  <!-- Tier 3: Compute (5 Go Cloud Run Services) -->
   <div class="arch-tier">
     <div class="tier-label">
       <span class="tier-num">03</span>
-      <span>Backend Microservices Tier (Go on Google Cloud Run)</span>
+      <span>Compute Tier &bull; Go 1.27 on Cloud Run (Distroless Non-Root, Scale-to-Zero)</span>
     </div>
     <div class="tier-grid services-grid">
       <div class="arch-node node-service">
         <div class="node-badge">Go Service</div>
         <div class="node-title">job-search</div>
-        <div class="node-sub">Company watchlists &amp; Greenhouse / Lever / Ashby polling</div>
+        <div class="node-sub">Direction &amp; written criteria &bull; Grounded research via Gemini 3.5 Flash &bull; Greenhouse, Lever, Ashby, Adzuna discovery</div>
       </div>
       <div class="arch-node node-service">
         <div class="node-badge">Go Service</div>
         <div class="node-title">applications</div>
-        <div class="node-sub">Strict ≤5 shortlist cap, outreach kits &amp; conversation tracker</div>
+        <div class="node-sub">Stage gates (&ge;30 char rationale) &bull; Strict &le;5 active shortlist ceiling &bull; Outreach Kits &bull; Conversations &amp; rounds</div>
       </div>
       <div class="arch-node node-service">
         <div class="node-badge">Go Service</div>
         <div class="node-title">resume</div>
-        <div class="node-sub">Resume Studio tailoring Google Docs to shortlisted role focus</div>
+        <div class="node-sub">Google Docs Workspace (<code>drive.file</code> scope) &bull; Gemini 3.5 Flash tailored resume copy &bull; Cloud KMS token sealing</div>
       </div>
       <div class="arch-node node-service">
         <div class="node-badge">Go Service</div>
         <div class="node-title">inbox</div>
-        <div class="node-sub">Read-only Gmail classification &amp; interview slot proposals</div>
+        <div class="node-sub">Google Calendar API (<code>calendar.events.readonly</code>) &bull; KMS decryption &bull; Interview heuristics &amp; free slot calculation</div>
       </div>
       <div class="arch-node node-service">
         <div class="node-badge">Go Service</div>
         <div class="node-title">notifications</div>
-        <div class="node-sub">Event-driven email &amp; SMS match alerts</div>
+        <div class="node-sub">Scheduled 07:00 Central scan alerts &bull; Daily job discovery email digests via Resend SMTP relay</div>
       </div>
     </div>
   </div>
@@ -93,27 +119,31 @@
     <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
       <path d="M12 2v20m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <span class="connector-pill">Least-Privilege GCP IAM · Provisioned via <code>unhurried-infra</code> (Terraform)</span>
+    <span class="connector-pill">Internal Service Mesh &bull; Google-Signed OIDC Bearer Tokens on <code>/internal/*</code> + Least-Privilege IAM</span>
   </div>
 
-  <!-- Tier 4: Data & Platform -->
+  <!-- Tier 4: Managed Data, AI & Supply Chain -->
   <div class="arch-tier">
     <div class="tier-label">
       <span class="tier-num">04</span>
-      <span>Data, Messaging &amp; Delivery Tier</span>
+      <span>Platform, Data &amp; Security Tier &bull; Serverless &amp; Cryptographically Enforced</span>
     </div>
-    <div class="tier-grid three-col">
+    <div class="tier-grid four-col">
       <div class="arch-node node-data">
         <div class="node-title">Cloud Firestore</div>
-        <div class="node-sub">Native Mode NoSQL document persistence (<code>STORE=memory</code> offline parity)</div>
+        <div class="node-sub">Native Mode NoSQL document persistence (<code>us-central1</code>) &bull; Strict caller user-ID scoping (404 on cross-user reads)</div>
       </div>
       <div class="arch-node node-data">
-        <div class="node-title">Pub/Sub &amp; Scheduler</div>
-        <div class="node-sub">Decoupled async event bus &amp; scheduled ATS board sync</div>
+        <div class="node-title">Cloud KMS &amp; Secret Mgr</div>
+        <div class="node-sub">Key Ring: <code>unhurried</code> for envelope encryption of OAuth refresh tokens &bull; Secret Manager for OAuth &amp; SMTP secrets</div>
       </div>
       <div class="arch-node node-data">
-        <div class="node-title">Cloud Build &amp; Deploy</div>
-        <div class="node-sub">Artifact Registry containers w/ verified SLSA provenance</div>
+        <div class="node-title">Vertex AI (Gemini 3.5 Flash)</div>
+        <div class="node-sub">Grounded research summaries with Google Search citations &bull; Contextual, structured resume tailoring</div>
+      </div>
+      <div class="arch-node node-data">
+        <div class="node-title">CI/CD &amp; Provenance</div>
+        <div class="node-sub">GitHub Actions (zero GCP access) &bull; Cloud Build + Cloud Deploy with SLSA verified container provenance &amp; 1-click rollback</div>
       </div>
     </div>
   </div>
@@ -151,7 +181,7 @@
   .arch-meta {
     font-size: 0.8rem;
     color: var(--text-muted);
-    font-family: "JetBrains Mono", Consolas, monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
   .arch-tier {
@@ -182,7 +212,7 @@
     background: var(--accent-soft);
     color: var(--accent);
     border: 1px solid var(--accent-border);
-    font-family: "JetBrains Mono", Consolas, monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.72rem;
   }
 
@@ -199,16 +229,24 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
+  .four-col {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+
+  .five-col {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
   .services-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 
   .arch-node {
     padding: 0.85rem 0.95rem;
-    border-radius: var(--radius-sm);
+    background: var(--bg-subtle);
     border: 1px solid var(--border);
-    background: var(--bg);
-    transition: border-color 0.18s ease, transform 0.18s ease;
+    border-radius: var(--radius-sm);
+    transition: border-color 0.18s, transform 0.18s;
   }
 
   .arch-node:hover {
@@ -216,17 +254,17 @@
     transform: translateY(-1px);
   }
 
-  .node-gateway {
+  .node-client {
     border-left: 3px solid var(--accent);
+  }
+
+  .node-gateway {
+    border-top: 3px solid var(--accent);
     text-align: center;
   }
 
   .node-service {
-    border-top: 2px solid var(--emerald);
-  }
-
-  .node-client {
-    border-left: 3px solid var(--accent);
+    border-top: 3px solid var(--emerald);
   }
 
   .node-data {
@@ -234,7 +272,6 @@
   }
 
   .node-badge {
-    display: inline-block;
     font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -245,14 +282,14 @@
 
   .node-title {
     font-weight: 700;
-    font-size: 0.94rem;
+    font-size: 0.92rem;
     color: var(--text);
-    font-family: "JetBrains Mono", Consolas, monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     margin-bottom: 0.25rem;
   }
 
   .node-sub {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     line-height: 1.45;
     color: var(--text-secondary);
   }
@@ -268,18 +305,19 @@
   }
 
   .connector-pill {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: var(--text-secondary);
     background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 0.15rem 0.7rem;
+    padding: 0.18rem 0.75rem;
     text-align: center;
+    max-width: 95%;
   }
 
   .connector-pill code {
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 0.73rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
     color: var(--accent);
   }
 

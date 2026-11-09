@@ -27,83 +27,247 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
           Unhurried — The Intentional Career Platform
         </h2>
       </div>
-      <a
-        href="https://github.com/Unhurried-Careers"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="badge badge-primary gap-1 py-3 px-3 hover:scale-105 transition-transform"
-      >
-        <span>GitHub Organization</span>
-        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
-      </a>
+      <div class="flex items-center gap-2">
+        <a
+          href="https://unhurried-careers.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="badge badge-ghost gap-1 py-3 px-3 hover:scale-105 transition-transform font-mono"
+        >
+          <span>Live Web App</span>
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+        </a>
+        <a
+          href="https://github.com/Unhurried-Careers"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="badge badge-primary gap-1 py-3 px-3 hover:scale-105 transition-transform font-mono"
+        >
+          <span>GitHub Org</span>
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+        </a>
+      </div>
     </div>
 
-    <div class="card bg-base-100 border border-base-200 p-6 rounded-xl shadow-sm mb-6">
+    <!-- Product Motivation & Philosophy -->
+    <div class="card bg-base-100 border border-base-200 p-6 sm:p-8 rounded-2xl shadow-sm mb-6">
       <div class="prose max-w-none text-base">
+        <h3 class="text-xl font-bold text-base-content mt-0 mb-3">Breaking the AI Auto-Apply Noise Loop</h3>
         <p>
-          AI auto-apply bots have flooded recruitment pipelines, creating noise for hiring teams and fatigue for job seekers. <strong>Unhurried</strong> takes the opposite approach: leveraging AI not as a spam cannon, but as a <strong>personal researcher</strong> that enables candidates to pursue a small, curated set of opportunities with genuine intent and tailored fit.
+          AI-driven auto-apply tools have created an absurd loop across modern hiring: AI writes the job descriptions, AI mass-applies with customized resumes, AI screens submissions, and AI rejects candidates before any human ever reviews the application. Job seekers are forced to "spray and pray" across dozens of boards, while hiring teams are overwhelmed by thousands of low-signal submissions.
+        </p>
+        <p>
+          <strong>Unhurried</strong> fundamentally slows down the process. Instead of treating AI as a spam cannon, Unhurried treats AI as a <strong>diligent personal researcher</strong>. It enforces deliberate decision-making: candidates specify target companies, roles, and dealbreaker requirements with documented written rationale before discovering matching postings.
         </p>
 
-        <h3 class="text-xl font-bold mt-4 mb-2">Core Design Principles</h3>
-        <ul class="list-disc pl-5 space-y-1">
-          <li><strong>Company Watchlists</strong>: Track specific companies with documented rationale before roles are broadly published, actively reading Greenhouse, Lever, and Ashby job boards.</li>
-          <li><strong>Strict Shortlist Limit</strong>: Candidates are hard-capped at a maximum of <strong>5 active roles</strong> at any time. Moving a role to the shortlist requires written answers for <em>"Why this company?"</em> and <em>"Why this role?"</em>.</li>
-          <li><strong>Intentional Outreach Kit</strong>: Generates personalized 300-character notes aimed at curious, peer-to-peer conversations rather than transactional referral requests.</li>
-          <li><strong>Resume Studio</strong>: Deeply tailors a Google Doc resume to one shortlisted role based on selected skill focus areas.</li>
+        <h3 class="text-xl font-bold text-base-content mt-6 mb-3">Core Operating Principles &amp; Hard Gates</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>
+            <strong>Direction Before Postings:</strong> Users establish target companies and target roles—each with a mandatory written reason—plus must-haves and dealbreaker requirements evaluated against evidence before deciding to apply.
+          </li>
+          <li>
+            <strong>Strict $\le 5$ Active Shortlist Ceiling:</strong> The pipeline enforces a server-side hard ceiling of at most <strong>5 active opportunities</strong> across the <code>decided</code> and <code>tailored</code> stages. Every stage transition (<em>Considering &rarr; Researching &rarr; Decided &rarr; Tailored &rarr; Applied</em>) requires a written rationale (&ge; 30 characters) to pass the gate.
+          </li>
+          <li>
+            <strong>Intentional Outreach Kit:</strong> Rather than transactional referral requests, the system generates targeted LinkedIn search links, thoughtful connection notes (&le; 300 characters), follow-ups, and interview inquiry questions geared toward curious, peer-to-peer conversations.
+          </li>
+          <li>
+            <strong>Resume Studio (Google Docs Workspace):</strong> Seamlessly links with Google Drive via the <code>drive.file</code> scope using Google Picker, creating and tailoring Google Doc resumes to shortlisted role criteria via <strong>Vertex AI (Gemini 3.5 Flash)</strong>.
+          </li>
+          <li>
+            <strong>Apply Assistant, Never an Automaton:</strong> A companion Chrome Manifest V3 extension talks strictly via <code>window.postMessage</code> relay to the authenticated web app. It pre-fills ATS forms (Greenhouse, Lever, Ashby, Workday) but strictly requires the user's manual review and confirmation (<code>confirmed: true</code>)—it <strong>never</strong> auto-submits.
+          </li>
+          <li>
+            <strong>Calendar &amp; Interview Intelligence:</strong> Integrates with the Google Calendar API (<code>calendar.events.readonly</code> scope), using deterministic heuristics to detect interview rounds and calculate free availability slots without persistently storing user calendar events.
+          </li>
         </ul>
       </div>
     </div>
 
-    <!-- Live Architecture Diagram -->
+    <!-- Live Architecture Blueprint -->
     <div class="mb-8">
       <UnhurriedArchitecture />
     </div>
 
-    <!-- Repository Breakdown Cards -->
-    <h3 class="text-xl font-bold mb-4">Architecture Microservices Breakdown</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
-        <div class="flex items-center justify-between mb-2">
-          <span class="font-mono font-bold text-primary">unhurried-web</span>
-          <span class="badge badge-ghost badge-sm font-mono">React / TS</span>
-        </div>
-        <p class="text-sm opacity-80 mb-3">
-          Responsive dashboard frontend hosted on Firebase Global CDN. Implements shortlist management, company research views, and prompt-driven outreach.
-        </p>
-        <div class="text-xs font-mono opacity-60">Firebase Hosting · Vite · Tailwind</div>
-      </div>
+    <!-- 10 Repositories Microservices Architecture Breakdown -->
+    <div class="mb-10">
+      <h3 class="text-2xl font-bold tracking-tight mb-2">Microservices &amp; Multi-Repository Breakdown</h3>
+      <p class="text-sm opacity-80 mb-6 max-w-3xl">
+        The system is partitioned into 10 purpose-built repositories within the <a href="https://github.com/Unhurried-Careers" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Unhurried-Careers</a> GitHub organization. Go backend services run containerized on Google Cloud Run (Go 1.27, Distroless nonroot), scaling to zero when idle.
+      </p>
 
-      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
-        <div class="flex items-center justify-between mb-2">
-          <span class="font-mono font-bold text-primary">unhurried-core</span>
-          <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- unhurried-web -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-web</span>
+            <span class="badge badge-ghost badge-sm font-mono">React 18 / TypeScript</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Single-page app deployed on Firebase Hosting Global CDN (<code>unhurried-careers.com</code>). Features a step-by-step pipeline stepper, Direction &amp; Research dashboard, Google Picker integration, and conversation timelines.
+          </p>
+          <div class="text-xs font-mono opacity-60">Vite &bull; Tailwind CSS &bull; Firebase Auth &bull; App Check</div>
         </div>
-        <p class="text-sm opacity-80 mb-3">
-          Central business logic API enforcing the 5-role shortlist ceiling, resume tailoring, and profile telemetry.
-        </p>
-        <div class="text-xs font-mono opacity-60">Google Cloud Run · Firestore · OIDC</div>
-      </div>
 
-      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
-        <div class="flex items-center justify-between mb-2">
-          <span class="font-mono font-bold text-primary">board-sync</span>
-          <span class="badge badge-ghost badge-sm font-mono">Python / Async</span>
+        <!-- unhurried-extension -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-extension</span>
+            <span class="badge badge-ghost badge-sm font-mono">Chrome MV3</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Client-side apply assistant communicating solely through <code>window.postMessage</code> with the signed-in web tab. Detects ATS form fields (Greenhouse, Lever, Ashby, Workday), pre-fills applicant data, and holds zero tokens.
+          </p>
+          <div class="text-xs font-mono opacity-60">Manifest V3 &bull; Content Script &bull; Zero Credentials</div>
         </div>
-        <p class="text-sm opacity-80 mb-3">
-          Scheduled ingestion service querying ATS APIs (Greenhouse, Lever, Ashby, Workday) with differential state caching.
-        </p>
-        <div class="text-xs font-mono opacity-60">Cloud Scheduler · Pub/Sub · Firestore</div>
-      </div>
 
-      <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm">
-        <div class="flex items-center justify-between mb-2">
-          <span class="font-mono font-bold text-primary">infra</span>
-          <span class="badge badge-ghost badge-sm font-mono">Terraform IaC</span>
+        <!-- unhurried-common -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-common</span>
+            <span class="badge badge-ghost badge-sm font-mono">Go Shared Library</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Core hardening library imported across all Go services. Implements hand-rolled RS256 token verification, App Check validation, Google OIDC internal token verification, HTTP recovery, request timeouts, and domain models.
+          </p>
+          <div class="text-xs font-mono opacity-60">RS256 JWT &bull; App Check &bull; Allowlist &bull; Field Validation</div>
         </div>
-        <p class="text-sm opacity-80 mb-3">
-          Complete declarative infrastructure definitions for GCP resources, IAM least privilege bindings, and CI/CD triggers.
-        </p>
-        <div class="text-xs font-mono opacity-60">Terraform · GCP · Artifact Registry</div>
+
+        <!-- unhurried-job-search -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-job-search</span>
+            <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Manages Direction criteria, company lookups (Clearbit autocomplete + Wikidata), grounded research summaries with Google Search sources via <strong>Vertex AI (Gemini 3.5 Flash)</strong>, and job board discovery (Greenhouse, Lever, Ashby, Adzuna).
+          </p>
+          <div class="text-xs font-mono opacity-60">Cloud Run &bull; Vertex AI Gemini &bull; Board APIs &bull; Anti-SSRF</div>
+        </div>
+
+        <!-- unhurried-applications -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-applications</span>
+            <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Enforces the stage gate machine (Reason &ge; 30 chars), the hard &le; 5 shortlist limit across <code>decided</code>/<code>tailored</code>, generates personalized Outreach Kits (LinkedIn search queries, &le; 300-char notes), and tracks conversations and rounds.
+          </p>
+          <div class="text-xs font-mono opacity-60">Cloud Run &bull; Stage Gate Machine &bull; Outreach Generator</div>
+        </div>
+
+        <!-- unhurried-resume -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-resume</span>
+            <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Integrates with Google Docs &amp; Drive (<code>drive.file</code> scope) to duplicate master resumes into per-opportunity tailored documents using Gemini 3.5 Flash. Decrypts OAuth refresh tokens sealed in Cloud KMS.
+          </p>
+          <div class="text-xs font-mono opacity-60">Google Drive API &bull; Vertex AI &bull; Cloud KMS Encryption</div>
+        </div>
+
+        <!-- unhurried-inbox -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-inbox</span>
+            <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Queries Google Calendar (<code>calendar.events.readonly</code> scope) to discover interview invitations using heuristic pattern matching. Computes free calendar slots for interview scheduling without storing raw events.
+          </p>
+          <div class="text-xs font-mono opacity-60">Google Calendar API &bull; KMS Decryption &bull; Slot Heuristics</div>
+        </div>
+
+        <!-- unhurried-notifications -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-notifications</span>
+            <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Triggered by Cloud Scheduler and internal job-search scans to generate and dispatch daily job discovery digests matching the user's direction via Resend SMTP relay.
+          </p>
+          <div class="text-xs font-mono opacity-60">Resend SMTP &bull; Cloud Scheduler &bull; OIDC Internal Auth</div>
+        </div>
+
+        <!-- unhurried-infra -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-infra</span>
+            <span class="badge badge-ghost badge-sm font-mono">Terraform IaC</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Complete declarative infrastructure for GCP: 5 Google API Gateways with OpenAPI 2.0 specs, Cloud Run services, Cloud KMS key rings, Secret Manager secrets, and fine-grained IAM service accounts.
+          </p>
+          <div class="text-xs font-mono opacity-60">Terraform &bull; GCP API Gateway &bull; KMS &bull; Cloud Run</div>
+        </div>
+
+        <!-- unhurried-product -->
+        <div class="card bg-base-100 border border-base-200 p-5 rounded-xl shadow-sm hover:border-primary/40 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono font-bold text-primary">unhurried-product</span>
+            <span class="badge badge-ghost badge-sm font-mono">Documentation</span>
+          </div>
+          <p class="text-sm opacity-85 mb-3">
+            Comprehensive product reasoning, architectural diagrams, threat model, security controls matrix, CI/CD operational runbooks, and implementation status documentation.
+          </p>
+          <div class="text-xs font-mono opacity-60">Markdown &bull; Threat Model &bull; Architecture Specs</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Architecture & Fail-Closed Defense -->
+    <div class="card bg-base-100 border border-base-200 p-6 sm:p-8 rounded-2xl shadow-sm mb-6">
+      <h3 class="text-xl font-bold text-base-content mb-3">Multi-Layered Fail-Closed Security Architecture</h3>
+      <p class="text-sm opacity-85 leading-relaxed mb-4">
+        As a security engineer, Unhurried was architected with defense-in-depth where every tier fails closed and validates inputs independently:
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="p-4 bg-base-200/50 rounded-xl border border-base-300/60">
+          <div class="font-bold font-mono text-primary mb-1">1. Edge &amp; API Gateway Defense</div>
+          <p class="opacity-80 text-xs leading-relaxed">
+            API Keys restricted to website referrers, per-minute rate-limit quotas (300 req/min per service), App Check attestation via reCAPTCHA Enterprise, and RS256 Firebase ID token signature validation at the gateway edge.
+          </p>
+        </div>
+
+        <div class="p-4 bg-base-200/50 rounded-xl border border-base-300/60">
+          <div class="font-bold font-mono text-primary mb-1">2. Zero-Trust Go Middleware Re-Verification</div>
+          <p class="opacity-80 text-xs leading-relaxed">
+            <code>unhurried-common</code> never blindly trusts edge proxies. It re-verifies RS256 token signatures against Google public keys, enforces a strict email allowlist (<code>ALLOWED_EMAILS</code>), and validates strict body limits (1 MiB max).
+          </p>
+        </div>
+
+        <div class="p-4 bg-base-200/50 rounded-xl border border-base-300/60">
+          <div class="font-bold font-mono text-primary mb-1">3. Cryptographic Token Sealing (Cloud KMS)</div>
+          <p class="opacity-80 text-xs leading-relaxed">
+            Sensitive third-party OAuth refresh tokens (Google Calendar and Google Drive) are envelope-encrypted using Cloud KMS key ring <code>unhurried</code> before writing to Cloud Firestore. Raw tokens are never stored in plaintext.
+          </p>
+        </div>
+
+        <div class="p-4 bg-base-200/50 rounded-xl border border-base-300/60">
+          <div class="font-bold font-mono text-primary mb-1">4. Anti-SSRF Socket Protections</div>
+          <p class="opacity-80 text-xs leading-relaxed">
+            Link fetching in <code>job-search</code> strictly validates resolved socket addresses post-DNS resolution, rejecting loopback, private, link-local (GCP metadata server <code>169.254.169.254</code>), and shared/reserved IP ranges with zero proxy fallback.
+          </p>
+        </div>
+
+        <div class="p-4 bg-base-200/50 rounded-xl border border-base-300/60">
+          <div class="font-bold font-mono text-primary mb-1">5. Internal Service-to-Service OIDC Mesh</div>
+          <p class="opacity-80 text-xs leading-relaxed">
+            Inter-service calls on <code>/internal/*</code> are never published on API Gateway. They require Google-signed OIDC bearer tokens with audience <code>unhurried-internal</code> and an explicit caller service account whitelist.
+          </p>
+        </div>
+
+        <div class="p-4 bg-base-200/50 rounded-xl border border-base-300/60">
+          <div class="font-bold font-mono text-primary mb-1">6. Zero-GCP CI &amp; SLSA Verified CD Pipeline</div>
+          <p class="opacity-80 text-xs leading-relaxed">
+            GitHub Actions runs strictly read-only CI without GCP keys. Google Cloud Build and Cloud Deploy build Distroless non-root containers with SLSA-verified container provenance in Artifact Registry, supporting one-click rollbacks.
+          </p>
+        </div>
       </div>
     </div>
   </section>

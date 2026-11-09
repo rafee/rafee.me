@@ -54,24 +54,35 @@ const latestPosts = posts.slice(0, 4);
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
         Featured Project: Unhurried {"</>"}
       </h2>
-      <a
-        href="https://github.com/Unhurried-Careers"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="badge badge-primary gap-1 py-3 px-3 hover:scale-105 transition-transform"
-      >
-        <span>GitHub Org</span>
-        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
-      </a>
+      <div class="flex items-center gap-2">
+        <a
+          href="https://unhurried-careers.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="badge badge-ghost gap-1 py-3 px-3 hover:scale-105 transition-transform font-mono"
+        >
+          <span>Live App</span>
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+        </a>
+        <a
+          href="https://github.com/Unhurried-Careers"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="badge badge-primary gap-1 py-3 px-3 hover:scale-105 transition-transform font-mono"
+        >
+          <span>GitHub Org</span>
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+        </a>
+      </div>
     </div>
 
     <HorizontalCard
       title="Unhurried: Intentional Career Navigation Platform"
       img="/images/nuxt_amplify.png"
-      desc="A mindful, microservice-based career platform designed around privacy-first candidate telemetry, decoupled pub/sub job board indexing, and containerized Google Cloud workloads. Replaces high-volume spray-and-pray with deeply researched, curated opportunities."
+      desc="A deliberate, privacy-first career platform built on Google Cloud serverless architecture (5 Go microservices on Cloud Run, 5 API Gateways, React 18 SPA on Firebase Hosting). Replaces AI auto-apply spam with grounded Gemini 3.5 Flash research, strict ≤5 active shortlist gates, envelope-encrypted Google Docs/Calendar integrations, and a non-submitting Chrome MV3 assistant."
       url="/projects/#unhurried"
       badge="FLAGSHIP"
-      tags={["GCP", "TypeScript", "React", "Cloud Run", "Terraform", "Firestore"]}
+      tags={["Google Cloud", "Go 1.27", "Cloud Run", "React 18", "Terraform", "Vertex AI", "KMS"]}
     />
 
     <div class="mt-6">
