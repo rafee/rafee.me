@@ -140,7 +140,7 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
             <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
           </div>
           <p class="text-sm opacity-85 mb-3">
-            Manages Direction criteria, company lookups (Clearbit autocomplete + Wikidata), grounded research summaries with Google Search sources via <strong>Vertex AI (Gemini 3.5 Flash)</strong>, and job board discovery (Greenhouse, Lever, Ashby, Adzuna).
+            Two entry pathways: search open roles across Greenhouse, Lever, Ashby, and Adzuna, or paste a posting URL (anti-SSRF safe fetcher). Company lookups (Clearbit autocomplete + Wikidata), roles (ESCO + Wikidata), and grounded research summaries with Google Search citations via <strong>Vertex AI (Gemini 3.5 Flash)</strong>.
           </p>
           <div class="text-xs font-mono opacity-60">Cloud Run &bull; Vertex AI Gemini &bull; Board APIs &bull; Anti-SSRF</div>
         </div>
@@ -152,7 +152,7 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
             <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
           </div>
           <p class="text-sm opacity-85 mb-3">
-            Enforces the stage gate machine (Reason &ge; 30 chars), the hard &le; 5 shortlist limit across <code>decided</code>/<code>tailored</code>, generates personalized Outreach Kits (LinkedIn search queries, &le; 300-char notes), and tracks conversations and rounds.
+            Enforces the 5-stage gate pipeline (Reason &ge; 30 chars, evidence &ge; 10 chars), the hard &le; 5 shortlist ceiling across <code>decided</code>/<code>tailored</code>, generates personalized Outreach Kits (&le; 300-char notes, LinkedIn search links), and tracks interview rounds.
           </p>
           <div class="text-xs font-mono opacity-60">Cloud Run &bull; Stage Gate Machine &bull; Outreach Generator</div>
         </div>
@@ -164,7 +164,7 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
             <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
           </div>
           <p class="text-sm opacity-85 mb-3">
-            Integrates with Google Docs &amp; Drive (<code>drive.file</code> scope) to duplicate master resumes into per-opportunity tailored documents using Gemini 3.5 Flash. Decrypts OAuth refresh tokens sealed in Cloud KMS.
+            Integrates with Google Docs &amp; Drive (<code>drive.file</code> scope). Master resumes picked via Google Picker are copied into the "Unhurried resumes" folder (original untouched). Generates per-opportunity copies tailored via Gemini 3.5 Flash under strict Honesty Rules, applying atomic text replacements.
           </p>
           <div class="text-xs font-mono opacity-60">Google Drive API &bull; Vertex AI &bull; Cloud KMS Encryption</div>
         </div>
@@ -176,9 +176,9 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
             <span class="badge badge-ghost badge-sm font-mono">Go / Cloud Run</span>
           </div>
           <p class="text-sm opacity-85 mb-3">
-            Queries Google Calendar (<code>calendar.events.readonly</code> scope) to discover interview invitations using heuristic pattern matching. Computes free calendar slots for interview scheduling without storing raw events.
+            Queries Google Calendar (<code>calendar.events.readonly</code> scope) live (past/next 60 days) to match likely interviews against applied rounds without storing calendar events in Firestore. Outreach booking pages are user-provided via Google Calendar appointment links (verified clipboard integration).
           </p>
-          <div class="text-xs font-mono opacity-60">Google Calendar API &bull; KMS Decryption &bull; Slot Heuristics</div>
+          <div class="text-xs font-mono opacity-60">Google Calendar API &bull; KMS Decryption &bull; Live Event Heuristics</div>
         </div>
 
         <!-- unhurried-notifications -->
@@ -265,7 +265,7 @@ import UnhurriedArchitecture from '../components/UnhurriedArchitecture.astro';
         <div class="p-4 bg-base-200/50 rounded-xl border border-base-300/60">
           <div class="font-bold font-mono text-primary mb-1">6. Zero-GCP CI &amp; SLSA Verified CD Pipeline</div>
           <p class="opacity-80 text-xs leading-relaxed">
-            GitHub Actions runs strictly read-only CI without GCP keys. Google Cloud Build and Cloud Deploy build Distroless non-root containers with SLSA-verified container provenance in Artifact Registry, supporting one-click rollbacks.
+            Work flows <code>dev &rarr; staging &rarr; main</code> across all 10 repositories. GitHub Actions executes pure read-only CI without cloud credentials (gofmt, race tests, govulncheck binary scanning, and Vitest). Google Cloud Build and Cloud Deploy create immutable releases with custom target type <code>cloud-run-image</code> and SLSA-verified provenance in Artifact Registry, supporting one-click rollbacks.
           </p>
         </div>
       </div>
